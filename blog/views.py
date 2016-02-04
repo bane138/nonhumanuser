@@ -35,4 +35,3 @@ class ArticleView(View):
 	def get(self, request, *args, **kwargs):
 		article = Entry.objects.get(slug=self.kwargs['slug'])
 		return render(request, self.template, {'article': article})
-
