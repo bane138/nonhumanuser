@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Non Human User Blog{% endblock %}
+{% block description %}Stories and opinions about Cthulhu Mythos related subjects and the Call of Cthulhu role playing game{% endblock %}
+
+{% block content %}
+{% for post in blog %}
+	<h2>{{ post.title }}</h2>
+	<p>{{ post.body }}</p>
+	<p>{{ post.publish_date }}
+{% endfor %}
+{% endblock %}

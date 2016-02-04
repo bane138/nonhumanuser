@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+{% block description %}{{ category.description }}{% endblock %}
+
+{% block content %}
+{% for story in stories %}
+	<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
+	<p>{{ story.description }}</p>
+	<p><small>{{ story.publish_date }}</small></p>
+{% endfor %}
+{% endblock %}

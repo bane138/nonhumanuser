@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ story.title }}{% endblock %}
+{% block description %}{{ story.description }}{% endblock %}
+
+{% block content %}
+	<h2>{{ story.title }}</h2>
+	<p>{{ story.body }}</p>
+	<p><small>{{ story.publish_date }}</small></p>
+{% endblock %}
