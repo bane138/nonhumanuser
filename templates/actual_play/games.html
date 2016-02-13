@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ group.name }}{% endblock %}
+{% block description %}{{ group.game_type }}{% endblock %}
+
+{% block content %}
+{% for game in games %}
+<h2><a href="{{ game.slug }}">{{ game.name }}</a></h2>
+<p>{{ game.created_date }}</p>
+{% endfor %}
+{% endblock %}

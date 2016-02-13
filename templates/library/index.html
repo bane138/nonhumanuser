@@ -4,10 +4,9 @@
 {% block description %}The cornerstone of any good investication is research, and where better to research than the library.{% endblock %}
 
 {% block content %}
-{% for item in items %}
-<h2>{{ item.name }}</h2>
-<p>{{ item.item_type }}</p>
-<p>{{ item.description }}</p>
-<p>{{ item.created_date }}</p>
+{% for stack in stacks %}
+<h2><a href="{{ stack.slug }}">{{ stack.name }}</a></h2>
+<p>{{ stack.tagline }}</p>
+<p>{{ stack.created_date }}</p>
 {% endfor %}
 {% endblock %}

@@ -5,8 +5,12 @@
 
 {% block content %}
 {% for entry in blog %}
-	<h2>{{ entry.title }}</h2>
-	<p>{{ entry.body }}</p>
-	<p>{{ entry.publish_date }}
+	<article class="row{{ forloop.counter }}">
+		<div>
+			<h2>{{ entry.title }}</h2>
+			<p>{{ entry.body }}</p>
+			<p>{{ entry.publish_date }}</p>
+		</div>
+	</article>
 {% endfor %}
 {% endblock %}

@@ -8,7 +8,13 @@ class Stack(models.Model):
 	active = models.BooleanField(default=False)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
+	slug = models.SlugField(blank=True, null=True)
 
+	def save(self):
+		if not self.id:
+			self.slug = slugify(self.name)
+
+		super(Stack, self).save()
 
 	def __str__(self):
 		return self.name

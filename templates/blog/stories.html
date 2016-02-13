@@ -5,8 +5,12 @@
 
 {% block content %}
 {% for story in stories %}
-	<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
-	<p>{{ story.description }}</p>
-	<p><small>{{ story.publish_date }}</small></p>
+	<article class="row{{ forloop.counter }}">
+		<div>
+			<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
+			<p>{{ story.description }}</p>
+			<p><small>{{ story.publish_date }}</small></p>
+		</div>
+	</article>
 {% endfor %}
 {% endblock %}

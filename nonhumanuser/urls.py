@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^articles/$', ArticlesView.as_view(), name="articles"),
     url(r'^articles/(?P<slug>[\w-]+)/$', ArticleView.as_view(), name="article"),
     url(r'^library/', include('library.urls')),
+    url(r'^actual_play/', include('actual_play.urls')),
 ]

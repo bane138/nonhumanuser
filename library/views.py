@@ -1,9 +1,26 @@
 from django.shortcuts import render
 from django.views.generic import View
-from library.models import Item
+from library.models import Item, Stack
 
 # Create your views here.
 class IndexView(View):
 	def get(self, request):
-		items = Item.objects.all()
-		return render(request, 'library/index.html', {'items': items})
+		stacks = Stack.objects.all()
+		return render(request, 'library/index.html', {'stacks': stacks})
+
+
+class ItemsView(View):
+	template = 'library/items.html'
+
+	def get(self, request, *args, **kwargs):
+		stack = Stack.objects.get(slug=self.kwargs['slug'])
+		items = Item.objects.filter(stack__exact=stack.id)
+		return render(request, self.template, {'items': items, 'stack': stack})
+
+
+class ItemView(View):
+	template = 'library/item.html'
+
+	def get(self, request, *args, **kwargs):
+		item = Item.objects.get(slug=self.kwargs['slug'])
+		return render(request, self.template, {'item': item})
