@@ -6,7 +6,8 @@ from actual_play.models import GameGroup, Game, Player
 class IndexView(View):
 	def get(self, request):
 		groups = GameGroup.objects.all()
-		return render(request, 'actual_play/index.html', {'groups': groups})
+		return render(request, 'actual_play/index.html', {'section': {'name': 'Actual Plays'}, 
+			'groups': groups})
 
 
 class GameGroupView(View):
@@ -15,7 +16,8 @@ class GameGroupView(View):
 	def get(self, request, *args, **kwargs):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
 		games = Game.objects.filter(group__exact=group.id)
-		return render(request, self.template, {'group': group, 'games': games})
+		return render(request, self.template, {'section': {'name': 'Actual Plays'},
+			'group': group, 'games': games})
 
 
 class GameView(View):
@@ -23,4 +25,5 @@ class GameView(View):
 
 	def get(self, request, *args, **kwargs):
 		game = Game.objects.get(slug=self.kwargs['slug'])
-		return render(request, self.template, {'game': game})
+		return render(request, self.template, {'section': {'name': 'Actual Plays'},
+			'game': game})

@@ -4,11 +4,15 @@
 {% block description %}{{ article.description }}{% endblock %}
 
 {% block content %}
-	<article class="row1">
-	<div>
-		<h2>{{ article.title }}</h2>
-		<p>{{ article.body }}</p>
-		<p><small>{{ article.publish_date }}</small></p>
-	</div>
-	</article>
+<div id="grid">
+	<section class="content">
+		<article class="row1">
+			<div class="center">
+				<h2>{{ article.title }}</h2>
+				<p>{{ article.body }}</p>
+				<p><small>{{ article.publish_date }}</small></p>
+			</div>
+		</article>
+	</section>
+</div>
 {% endblock %}

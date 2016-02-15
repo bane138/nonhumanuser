@@ -4,7 +4,13 @@
 {% block description %}{{ game.description }}{% endblock %}
 
 {% block content %}
-<h2>{{ game.name }}</h2>
-<p>{{ game.description }}</p>
-<p>{{ game.create_date }}</p>
+<section class="content">
+	<article class="row1">
+		<div class="center">
+			<h2>{{ game.name }}</h2>
+			<p>{{ game.description }}</p>
+			<p>{{ game.create_date }}</p>
+		</div>
+	</article>
+</section>
 {% endblock %}

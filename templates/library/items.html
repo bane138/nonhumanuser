@@ -4,8 +4,14 @@
 {% block description %}{{ stack.tagline }}{% endblock %}
 
 {% block content %}
+<section class="content">
 {% for item in items %}
-<h2><a href="{{ item.slug }}">{{ item.name }}</a></h2>
-<p>{{ item.created_date }}</p>
+	<article class="{{ forloop.counter }}">
+		<div class="center">
+			<h2><a href="{{ item.slug }}">{{ item.name }}</a></h2>
+			<p>{{ item.created_date }}</p>
+		</div>
+	</article>
 {% endfor %}
+</section>
 {% endblock %}

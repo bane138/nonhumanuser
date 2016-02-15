@@ -5,6 +5,8 @@ from django.template.defaultfilters import slugify
 class Blog(models.Model):
 	name = models.CharField(max_length=250)
 	tagline = models.TextField()
+	created_date = models.DateTimeField('created date')
+	active = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.name
@@ -16,7 +18,7 @@ class Entry(models.Model):
 	slug = models.SlugField(editable=False)
 	description = models.TextField(blank=True, null=True)
 	active =  models.BooleanField(default=False)
-	publish_date = models.DateTimeField('published date')
+	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
 	category = models.ForeignKey('Category', 
 		on_delete=models.PROTECT, 
@@ -36,8 +38,8 @@ class Entry(models.Model):
 class Category(models.Model):
 	name = models.CharField(max_length=100)
 	description = models.TextField(blank=True, null=True)
-	created = models.DateTimeField('created date')
-	active = models.BooleanField(default=True)
+	created_date = models.DateTimeField('created date')
+	active = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name

@@ -4,9 +4,15 @@
 {% block description %}The cornerstone of any good investication is research, and where better to research than the library.{% endblock %}
 
 {% block content %}
+<section class="content">
 {% for stack in stacks %}
-<h2><a href="{{ stack.slug }}">{{ stack.name }}</a></h2>
-<p>{{ stack.tagline }}</p>
-<p>{{ stack.created_date }}</p>
+	<article class="row{{ forloop.counter }}">
+		<div class="center">
+			<h2><a href="{{ stack.slug }}">{{ stack.name }}</a></h2>
+			<p>{{ stack.tagline }}</p>
+			<p>{{ stack.created_date }}</p>
+		</div>
+	</article>
 {% endfor %}
+</section>
 {% endblock %}
