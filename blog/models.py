@@ -25,12 +25,22 @@ class Entry(models.Model):
 		blank=True, 
 		null=True)
 	number_comments = models.IntegerField(default=0)
+	image = models.FileField(upload_to=self.get_category_name() + '/%Y/%m/%d')
 
 	def save(self):
 		if not self.id:
 			self.slug = slugify(self.title)
 
 		super(Entry, self).save()
+
+	def get_category_name(self):
+		name = 'blog'
+		if self.category:
+			category = Category.objects.get(pk=self.category)
+			name = category.name
+
+		return name
+
 
 	def __str__(self):
 		return self.title
