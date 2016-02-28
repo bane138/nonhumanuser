@@ -9,6 +9,7 @@ class IndexView(View):
 		return render(request, 'blog/index.html', {'section': {'name': 'Blog'}, 
 			'entries': entries})
 
+
 class StoriesView(View):
 	template = 'blog/stories.html'
 
@@ -16,6 +17,7 @@ class StoriesView(View):
 		stories = Entry.objects.filter(blog__exact=1)
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'stories': stories})
+
 
 class StoryView(View):
 	template = 'blog/story.html'
@@ -25,6 +27,7 @@ class StoryView(View):
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'story': story})
 
+
 class ArticlesView(View):
 	template = 'blog/articles.html'
 
@@ -32,6 +35,7 @@ class ArticlesView(View):
 		articles = Entry.objects.filter(blog__exact=2)
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
 			'articles': articles})
+
 
 class ArticleView(View):
 	template = 'blog/article.html'

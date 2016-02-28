@@ -33,6 +33,8 @@ class Game(models.Model):
 	slug = models.SlugField(blank=True, null=True)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
+	audio = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
+	video = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
 
 	def save(self):
 		if not self.id:

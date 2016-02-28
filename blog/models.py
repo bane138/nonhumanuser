@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Blog(models.Model):
@@ -25,7 +26,7 @@ class Entry(models.Model):
 		blank=True, 
 		null=True)
 	number_comments = models.IntegerField(default=0)
-	image = models.FileField(upload_to=self.get_category_name() + '/%Y/%m/%d')
+	image = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
 
 	def save(self):
 		if not self.id:
@@ -40,6 +41,9 @@ class Entry(models.Model):
 			name = category.name
 
 		return name
+
+	def get_absolute_url(self):
+		return reverse(self.get_category_name(), kwargs={'slug': self.slug})
 
 
 	def __str__(self):
