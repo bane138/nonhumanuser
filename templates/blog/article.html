@@ -9,6 +9,9 @@
 		<article class="row1">
 			<div class="center">
 				<h2>{{ article.title }}</h2>
+				{% if article.image %}
+					<p><img src="{{ article.image.path }}" /></p>
+				{% endif %}
 				<p>{{ article.body }}</p>
 				<p><small>{{ article.publish_date }}</small></p>
 			</div>

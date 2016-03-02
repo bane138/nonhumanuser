@@ -8,6 +8,9 @@
 	<article class="row1">
 		<div class="center">
 			<h2>{{ game.name }}</h2>
+			{% if game.image %}
+				<p><img src="{{ game.image.path }}" /></p>
+			{% endif %}
 			<p>{{ game.description }}</p>
 			<p>{{ game.create_date }}</p>
 		</div>

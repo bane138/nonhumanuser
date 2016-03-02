@@ -27,12 +27,12 @@ class Game(models.Model):
 		on_delete=models.PROTECT,
 		blank=True,
 		null=True)
-	source_destination = models.CharField(max_length=255)
 	description = models.TextField()
 	active = models.BooleanField(default=False)
 	slug = models.SlugField(blank=True, null=True)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
+	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d', blank=True, null=True)
 	audio = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
 	video = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
 
@@ -54,6 +54,7 @@ class Player(models.Model):
 	group = models.ManyToManyField(GameGroup)
 	active = models.BooleanField(default=True)
 	created_date = models.DateTimeField('created date')
+	image = models.ImageField(upload_to='actual_play/player/%Y/%m/%d', blank=True, null=True)
 
 
 	def __str__(self):
