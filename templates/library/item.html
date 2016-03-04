@@ -10,7 +10,7 @@
 			<h2>{{ item.name }}</h2>
 			<P>{{ item.description }}</P>
 			{% if item.resource %}
-				<p><a href="{{ item.resource.path }}">{{ item.resource.name }}</a></p>
+				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
 			{% endif %}
 			<p>{{ item.created_date }}</p>
 		</div>
