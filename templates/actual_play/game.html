@@ -12,6 +12,20 @@
 				<p><img src="{{ game.image.path }}" /></p>
 			{% endif %}
 			<p>{{ game.description }}</p>
+			<p>
+				<div>Audio</div>
+				<audio controls>
+					<source src="media/{{ game.audio.name }}" type="audio/ogg" />
+					<source src="media/{{ game.audio.name }}" type="audio/mpeg" />
+				</audio>
+			</p>
+			<p>
+				<div>Video</div>
+				<video width="320" height="240" controls>
+					<source src="media/{{ game.video.name }}" type="video/mp4" />
+					<source src="media/{{ game.video.name }}" type="video/ogg" />
+				</video>
+			</p>
 			<p>{{ game.create_date }}</p>
 		</div>
 	</article>

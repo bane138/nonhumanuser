@@ -37,7 +37,8 @@ class ItemView(View):
 
 class ItemResourceView(View):
 	def get(self, request, *args, **kwargs):
-		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + '/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + self.kwargs['filename']
+		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + \
+		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + self.kwargs['filename']
 		file_wrapper = FileWrapper(open(file_path, 'rb'))
 		file_mimetype = mimetypes.guess_type(file_path)
 		response = HttpResponse(file_wrapper, content_type=file_mimetype)
