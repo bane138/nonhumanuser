@@ -1,15 +1,18 @@
 {% load staticfiles %}
-<nav>
-	<a href="#" class="menu-icon"></a>
-	<ul>
-		<li><a href="/stories">Stories</a></li>
-		<li><a href="/articles">Articles</a></li>
-		<li><a href="/library">Library</a></li>
-		<li><a href="/actual_play">Actual Play</a></li>
-	</ul>
-</nav>
 <header>
-	<div class="center">
+	<a href="#" id="logo"></a>
+	<nav>
+		<a href="#" class="menu-icon"></a>
+		<ul>
+			<li><a href="/stories">Stories</a></li>
+			<li><a href="/articles">Articles</a></li>
+			<li><a href="/library">Library</a></li>
+			<li><a href="/actual_play">Actual Play</a></li>
+		</ul>
+	</nav>
+</header>
+<div>
+	<div class="section-heading">
 		<img src="{% static "images/" %}{{ section.name }}.png" />
 	</div>
-</header>
+</div>
