@@ -1,3 +1,4 @@
+    margin: 0 auto 15px;
 /*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
@@ -153,11 +154,11 @@ nav {
     padding: 20px;
 }
 
-#menu-icon {
+.menu-icon {
     display: hidden;
     width: 40px;
     height: 40px;
-    background: #4c8fec url(../images/menu-icon.svg) center;
+    background: #666 url(../images/menu-icon.svg) center;
 }
 
 a:hover#menu-icon {
@@ -171,35 +172,7 @@ ul {
 
 li {
     display: inline-block;
-    float: left;
     padding: 10px;
-}
-
-.nav-center {
-    width: 66.6666666667%;
-    margin: 0 auto;
-}
-
-.footer-nav {
-    width: 50%;
-    margin: 15px auto;
-    padding: 0;
-}
-
-.footer-nav ul {
-    width: 100%;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.footer-nav ul li {
-    width: 23%;
-    display: inline-block;
-    padding: 0;
-    font-size: .8em;
-    border-right: 0;
-    text-align: center;
 }
 
 /* ==========================================================================
@@ -258,7 +231,24 @@ footer {
     border: 1px solid #efefef;
 }
 
-footer p {
+.nav-center {
+    position: relative;
+    width: 600px;
+    margin: 0 auto 15px;
+}
+
+.footer-nav {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav li {
+    width: 21%;
+    text-align: center;
+}
+
+.copyright {
     text-align: center;
     padding: 15px;
 }
@@ -327,6 +317,61 @@ footer p {
     width: 6.866%;
 }
 
+@media only screen and (max-width: 850px) {
+    nav {
+
+    }
+    .nav-center {
+        width: 400px;
+    }
+
+    .footer-nav li {
+        width: 21%;
+        text-align: center;
+        font-size: .8em;
+        padding: 5px;
+    }
+
+    .copyright {
+        font-size: .8em;
+    }
+
+    nav ul, nav:active ul { 
+
+        display: none;
+        position: absolute;
+        padding: 20px 0;
+        background: #fff;
+        right: 0px;
+        top: 62px;
+        width: 30%;
+        border-radius: 4px 0 4px 4px;
+
+    }
+
+    nav li {
+
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 2px solid #333;
+
+    }
+
+    nav:hover ul {
+
+        display: block;
+
+    }
+
+    .menu-icon {
+
+        display:inline-block;
+
+    }
+}
+
 @media only screen and (max-width : 640px) {
 
     header {
@@ -345,12 +390,11 @@ footer p {
 
         display: none;
         position: absolute;
-        padding: 20px;
+        padding: 20px 0;
         background: #fff;
-        border: 5px solid #444;
-        right: 20px;
-        top: 60px;
-        width: 50%;
+        right: 0px;
+        top: 62px;
+        width: 30%;
         border-radius: 4px 0 4px 4px;
 
     }
@@ -361,6 +405,7 @@ footer p {
         width: 100%;
         padding: 10px 0;
         margin: 0;
+        border-bottom: 2px solid #333;
 
     }
 
@@ -369,6 +414,7 @@ footer p {
         display: block;
 
     }
+}
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
 @media only screen and (max-width: 480px) {

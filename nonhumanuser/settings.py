@@ -80,10 +80,11 @@ WSGI_APPLICATION = 'nonhumanuser.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nonhumanuser',
-        'HOST': 'localhost',
-        'USER': 'dpitzel',
+        'HOST': '',
+        'PORT': '',
+        'USER': 'postgres',
         'PASSWORD': 'NHU#lanfear138',
     }
  }
