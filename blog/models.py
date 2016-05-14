@@ -21,11 +21,13 @@ class Entry(models.Model):
 	active =  models.BooleanField(default=False)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
+	publish_date = models.DateTimeField(null=True, blank=True, default=None)
 	category = models.ForeignKey('Category', 
 		on_delete=models.PROTECT, 
 		blank=True, 
 		null=True)
 	number_comments = models.IntegerField(default=0)
+	thumbnail = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
 	image = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
 
 	def save(self):
