@@ -4,13 +4,13 @@
 {% block description %}{{ story.description }}{% endblock %}
 
 {% block content %}
-<section class="content">
-	<article class="row1">
+<div class="content">
+	<article>
 		<div class="center">
 			<h2>{{ story.title }}</h2>
 			<p>{{ story.body }}</p>
 			<div>{{ story.publish_date }}</div>
 		</div>
 	</article>
-</section>	
+</div>
 {% endblock %}

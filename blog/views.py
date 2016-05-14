@@ -16,7 +16,7 @@ class StoriesView(View):
 
 	def get(self, request):
 		stories = Entry.objects.filter(category__exact=2, 
-			publish_date__lte=datetime.dtatetime.now())[0:5]
+			publish_date__lte=datetime.datetime.now())[0:5]
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'stories': stories})
 

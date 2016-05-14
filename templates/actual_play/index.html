@@ -4,15 +4,17 @@
 {% block description %}Live roleplaying sessions{% endblock %}
 
 {% block content %}
-<section class="content">
-<h1>Game Groups</h1>
-{% for group in groups %}
-	<article class="row{{ forloop.counter }}">
-		<div class="center">
-			<h2><a href="{{ group.slug }}">{{ group.name }}</a></h2>
-			<p>{{ group.created_date }}</p>
-		</div>
-	</article>
-{% endfor %}
-</section>
+<div class="content">
+	<h1>Game Groups</h1>
+	<ul class="content-list">
+	{% for group in groups %}
+		<li class="content-list-item">
+			<div class="center">
+				<h2><a href="{{ group.slug }}">{{ group.name }}</a></h2>
+				<p>{{ group.created_date }}</p>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
 {% endblock %}

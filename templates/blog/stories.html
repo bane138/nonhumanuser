@@ -5,14 +5,14 @@
 
 {% block content %}
 {% for story in stories %}
-<section class="content">
-	<article class="row{{ forloop.counter }}">
+<div class="content">
+	<article>
 		<div class="center">
 			<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
 			<p>{{ story.description }}</p>
 			<p><small>{{ story.publish_date }}</small></p>
 		</div>
 	</article>
-</section>
+</div>
 {% endfor %}
 {% endblock %}

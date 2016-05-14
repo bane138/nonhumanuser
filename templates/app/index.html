@@ -4,44 +4,49 @@
 {% block description %}{{ site.description }}{% endblock %}
 
 {% block content %}
-<div class="content">
-	<ul class="content-list">
-		<li class="content-list-item">
-			<div class="content-box">
-				<h1>Stories</h1>
-				<h2><a href="stories/{{ story.slug }}">{{ story.title }}</a></h2>
-				<a href="stories/{{ story.slug }}"><img src="" alt="{{ story.title }}"/></a>
-				<p>{{ story.body }}</p>
-				<p class="date">{{ story.created_date }}</p>
-			</div>
-		</li>		
-		<li class="content-list-item">
-			<div class="content-box">
-				<h1>Actual Plays</h1>
-				<h2><a href="actual_play/{{ game_group.slug }}/{{ game.slug }}">{{ game.name }}</a></h2>
-				<a href="actual_play/{{ game_group.slug }}/{{ game.slug }}"><img src="" alt="{{ game.name }}"/></a>
-				<p>{{ game.description }}</p>
-				<p class="date">{{ game.created_date }}</p>
-			</div>
-		</li>		
-		<li class="content-list-item">
-			<div class="content-box">
-				<h1>Articles</h1>
-				<h2><a href="articles/{{ article.slug }}">{{ article.title }}</a></h2>
-				<a href="articles/{{ article.slug }}"><img src="" alt="{{ article.title }}"/></a>
-				<p>{{ article.body }}</p>
-				<p class="date">{{ article.created_date }}</p>
-			</div>
-		</li>		
-		<li class="content-list-item">
-			<div class="content-box">
-				<h1>Library</h1>
-				<h2><a href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.name }}</a></h2>
-				<a href="library/{{ library_item.item_type }}/{{ library_item.slug }}"><img src="" alt="{{ library_item.name }}"/></a>
-				<p>{{ library_item.description }}</p>
-				<p class="date">{{ library_item.created_date }}</p>
-			</div>
-		</li>
-	</ul>
+<div class="page">
+	<div class="content">
+		<ul class="content-list">
+			<li class="content-list-item">
+				<div class="content-box">
+					<h1>Stories</h1>
+					<h2><a href="stories/{{ story.slug }}">{{ story.title }}</a></h2>
+					<a href="stories/{{ story.slug }}"><img src="" alt="{{ story.title }}"/></a>
+					<p>{{ story.body }}</p>
+					<p class="date">{{ story.created_date }}</p>
+				</div>
+			</li>		
+			<li class="content-list-item">
+				<div class="content-box">
+					<h1>Actual Plays</h1>
+					<h2><a href="actual_play/{{ game_group.slug }}/{{ game.slug }}">{{ game.name }}</a></h2>
+					<a href="actual_play/{{ game_group.slug }}/{{ game.slug }}"><img src="" alt="{{ game.name }}"/></a>
+					<p>{{ game.description }}</p>
+					<p class="date">{{ game.created_date }}</p>
+				</div>
+			</li>		
+			<li class="content-list-item">
+				<div class="content-box">
+					<h1>Articles</h1>
+					<h2><a href="articles/{{ article.slug }}">{{ article.title }}</a></h2>
+					<a href="articles/{{ article.slug }}"><img src="" alt="{{ article.title }}"/></a>
+					<p>{{ article.body }}</p>
+					<p class="date">{{ article.created_date }}</p>
+				</div>
+			</li>		
+			<li class="content-list-item">
+				<div class="content-box">
+					<h1>Library</h1>
+					<h2><a href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.name }}</a></h2>
+					<a href="library/{{ library_item.item_type }}/{{ library_item.slug }}"><img src="" alt="{{ library_item.name }}"/></a>
+					<p>{{ library_item.description }}</p>
+					<p class="date">{{ library_item.created_date }}</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="sidebar">
+		{% block sidebar %}{% endblock %}
+	</div>
 </div>
 {% endblock %}

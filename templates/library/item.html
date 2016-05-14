@@ -4,8 +4,8 @@
 {% block description %}{{ item.descdription }}{% endblock %}
 
 {% block content %}
-<section class="content">
-	<article class="row1">
+<div class="content">
+	<article>
 		<div class="center">
 			<h2>{{ item.name }}</h2>
 			<P>{{ item.description }}</P>
@@ -15,5 +15,5 @@
 			<p>{{ item.created_date }}</p>
 		</div>
 	</article>
-</section>
+</div>
 {% endblock %}
