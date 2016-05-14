@@ -4,39 +4,40 @@
 {% block description %}{{ site.description }}{% endblock %}
 
 {% block content %}
-<section class="group">
-	<div class="col span_6_of_12">
-		<div class="content-box">
-			<h1>Stories</h1>
-			<h2>{{ story.name }}</h2>
-			<p>{{ story.description }}</p>
-			<p class="date">{{ story.created_date }}</p>
-		</div>
-	</div>				
-	<div class="col span_6_of_12">
-		<div class="content-box">
-			<h1>Actual Plays</h1>
-			<h2>{{ game.name }}</h2>
-			<p>{{ game.description }}</p>
-			<p class="date">{{ game.created_date }}</p>
-		</div>
-c</section>
-<section class="group">
-	<div class="col span_6_of_12">
-		<div class="content-box">
-			<h1>Articles</h1>
-			<h2>{{ article.name }}</h2>
-			<p>{{ article.descrition }}</p>
-			<p class="date">{{ article.created_date }}</p>
-		</div>
-	</div>
-	<div class="col span_6_of_12">
-		<div class="content-box">
-			<h1>Library</h1>
-			<h2>{{ item.name }}</h2>
-			<p>{{ item.descriton }}</p>
-			<p class="date">{{ item.created_date }}</p>
-		</div>
-	</div>
-</section>
+<div class="content">
+	<ul class="content-list">
+		<li class="content-list-item">
+			<div class="content-box">
+				<h1>Stories</h1>
+				<h2>{{ story.title }}</h2>
+				<p>{{ story.body }}</p>
+				<p class="date">{{ story.created_date }}</p>
+			</div>
+		</li>		
+		<li class="content-list-item">
+			<div class="content-box">
+				<h1>Actual Plays</h1>
+				<h2>{{ game.name }}</h2>
+				<p>{{ game.description }}</p>
+				<p class="date">{{ game.created_date }}</p>
+			</div>
+		</li>		
+		<li class="content-list-item">
+			<div class="content-box">
+				<h1>Articles</h1>
+				<h2>{{ article.title }}</h2>
+				<p>{{ article.body }}</p>
+				<p class="date">{{ article.created_date }}</p>
+			</div>
+		</li>		
+		<li class="content-list-item">
+			<div class="content-box">
+				<h1>Library</h1>
+				<h2>{{ library_item.name }}</h2>
+				<p>{{ library_item.description }}</p>
+				<p class="date">{{ library_item.created_date }}</p>
+			</div>
+		</li>
+	</ul>
+</div>
 {% endblock %}

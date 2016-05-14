@@ -6,10 +6,10 @@ from library.models import Stack, Item
 
 # Create your views here.
 def index(request):
-	story = Entry.objects.filter(created_date__gte=datetime.date.today())
-	article= Entry.objects.filter(created_date__gte=datetime.date.today())
-	library_item = Item.objects.filter(created_date__gte=datetime.date.today())
-	game = Game.objects.filter(created_date__gte=datetime.date.today())
+	story = Entry.objects.last()
+	article= Entry.objects.last()
+	library_item = Item.objects.last()
+	game = Game.objects.last()
 	context = {
 		"site": { 
 			"title": "Non Human User",
@@ -17,7 +17,7 @@ def index(request):
 		},
 		"story": story,
 		"article": article,
-		"library_item0": library_item,
+		"library_item": library_item,
 		"game": game
 	}
 	return render(request, 'app/index.html', context)
