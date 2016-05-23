@@ -21,9 +21,10 @@ class ItemsView(View):
 
 	def get(self, request, *args, **kwargs):
 		stack = Stack.objects.get(slug=self.kwargs['slug'])
+		stacks = Stack.objects.all()
 		items = Item.objects.filter(stack__exact=stack.id)
-		return render(request, self.template, {'section': {'name': 'Library'}, 
-			'items': items, 'stack': stack})
+		return render(request, self.template, {'section': {'name': stack.name}, 
+			'items': items, 'stacks': stacks})
 
 
 class ItemView(View):
@@ -31,8 +32,10 @@ class ItemView(View):
 
 	def get(self, request, *args, **kwargs):
 		item = Item.objects.get(slug=self.kwargs['slug'])
-		return render(request, self.template, {'section': {'name': 'Library'}, 
-			'item': item})
+		stack = Stack.objects.get(pk=item.stack_id)
+		stacks = Stack.objects.all()
+		return render(request, self.template, {'section': {'name': stack.name}, 
+			'item': item, 'stacks': stacks})
 
 
 class ItemResourceView(View):

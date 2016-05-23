@@ -1,10 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% block title %}{{ site.title }}{% endblock %}
 {% block description %}{{ site.description }}{% endblock %}
 
 {% block content %}
 <div class="page">
+	<div class="section-heading">
+		<img src="{% static "images/" %}{{ section.name }}.png" />
+	</div>
 	<div class="content">
 		<ul class="content-list">
 			<li class="content-list-item">
@@ -46,7 +50,7 @@
 		</ul>
 	</div>
 	<div class="sidebar">
-		{% block sidebar %}{% endblock %}
+		{% include 'sidebar.html' %}
 	</div>
 </div>
 {% endblock %}

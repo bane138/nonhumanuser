@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}{{ stack.name }}{% endblock %}
 {% block description %}{{ stack.tagline }}{% endblock %}
 
 {% block content %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
 <div class="content">
-	<h1>{{ stack.name }}</h1>
+	{% for stack in stacks %}
+		<span class="library-stacks"><a href="/library/{{ stack.name|lower }}">{{ stack.name }}</a></span>
+	{% endfor %}
 	{% for item in items %}
 		<article>
 			<div class="center">

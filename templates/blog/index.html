@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-
+{% load staticfiles %}
 {% block title %}Non Human User Blog{% endblock %}
 {% block description %}Stories and opinions about Cthulhu Mythos related subjects and the Call of Cthulhu role playing game{% endblock %}
 
 {% block content %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
 {% for entry in blog %}
 <div class="content">
 	<article>

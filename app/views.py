@@ -11,6 +11,12 @@ def index(request):
 	library_item = Item.objects.last()
 	game = Game.objects.last()
 	game_group = GameGroup.objects.get(name=game.group)
+	"""
+	entry_recent = Entry.objects.all().order_by('date_created')[0:5]
+	library_recent = Item.objects.all().order_by('date_created')[0:5]
+	games_recent = Game.objects.all().order_by('date_created')[0:5]
+	items_recent = entry_recent + library_recent + games_recent
+	"""
 	context = {
 		"site": { 
 			"title": "Non Human User",
@@ -21,5 +27,6 @@ def index(request):
 		"library_item": library_item,
 		"game": game,
 		"game_group": game_group,
+		#"items_recent": items_recent[0:5]
 	}
 	return render(request, 'app/index.html', context)

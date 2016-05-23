@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}Actual Plays{% endblock %}
 {% block description %}Live roleplaying sessions{% endblock %}
 
 {% block content %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
 <div class="content">
 	<h1>Game Groups</h1>
 	<ul class="content-list">

@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}{{ game.name }}{% endblock %}
 {% block description %}{{ game.description }}{% endblock %}
 
 {% block content %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
 <section class="content">
 	<article class="row1">
 		<div class="center">

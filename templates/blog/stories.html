@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block title %}{{ category.name }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
 
 {% block content %}
 {% for story in stories %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
 <div class="content">
 	<article>
 		<div class="center">
