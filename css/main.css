@@ -142,7 +142,7 @@ header {
 section {
     position: relative;
     margin: 0 auto 40px;
-    max-width: 980px;
+    max-width: 1020px;
     padding: 20px;
 }
 
@@ -199,14 +199,16 @@ li {
 .section-header {
     font-size: 52px;
     font-weight: bold;
+    vertical-align: top;
 }
 
 /* ==========================================================================
     Content
    ========================================================================== */
 .content {
-    width: 100%;
+    width: 75%;
     padding: 10px;
+    display: inline-block;
 }
 
 .content-list {
@@ -217,9 +219,26 @@ li {
 
 .content-list-item {
     display: inline-block;
-    width: 462px;
+    width: 45%;
     background: #fff;
     vertical-align: top;
+}
+
+.library-stacks {
+    padding: 3px 10px;
+    border-right: 1px solid #000;
+    line-height: 12px;
+}
+
+.sidebar {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
 }
 
 /* ==========================================================================
