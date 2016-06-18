@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
+from django.core import timezone
 
 # Create your models here.
 class Blog(models.Model):
@@ -26,6 +27,7 @@ class Entry(models.Model):
 		on_delete=models.PROTECT, 
 		blank=True, 
 		null=True)
+	number_views = models.IntegerField(default=0)
 	number_comments = models.IntegerField(default=0)
 	thumbnail = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
 	image = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
@@ -50,6 +52,21 @@ class Entry(models.Model):
 
 	def __str__(self):
 		return self.title
+
+class EntryComment(models.Model):
+	entry = models.ForeignKey(Entry, related_name='comments')
+	body = models.TextField()
+	author = models.CharField(max_length=200)
+	created_date = models.DateTimeField(default=timezone.now())
+	approved = models.BooleanField(default=False)
+
+	def approve(self):
+		self.approved = True
+		self.save()
+
+	def __str__(self):
+		return self.text
+
 
 class Category(models.Model):
 	name = models.CharField(max_length=100)

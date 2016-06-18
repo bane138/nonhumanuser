@@ -26,6 +26,6 @@ def index(request):
 		"library_item": library_item,
 		"game": game,
 		"game_group": game_group,
-		"items_recent": games_recent #items_recent[0:5]
+		"items_recent": items_recent[0:5]
 	}
 	return render(request, 'app/index.html', context)
