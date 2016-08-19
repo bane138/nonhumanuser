@@ -49,3 +49,8 @@ class ItemResourceView(View):
 		response['Content-Length'] = os.stat(file_path).st_size
 		response['Content-Diposition'] = 'attachment; filename=%s' % smart_str(self.kwargs['filename'])
 		return response
+
+
+class ItemCommentView(View):
+	def post(self, request, *args, **kwargs):
+		pass

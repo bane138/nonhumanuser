@@ -7,7 +7,7 @@
 {% block content %}
 <div class="page">
 	<div class="section-heading">
-		<img src="{% static "images/" %}{{ section.name }}.png" />
+		<img src="{% static "images/" %}{{ section.title }}.png" />
 	</div>
 	<div class="content">
 		<ul class="content-list">
@@ -37,12 +37,12 @@
 					<p>{{ article.body }}</p>
 					<p class="date">{{ article.created_date }}</p>
 				</div>
-			</li>		
+			</li>
 			<li class="content-list-item">
 				<div class="content-box">
 					<h1>Library</h1>
-					<h2><a href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.name }}</a></h2>
-					<a href="library/{{ library_item.item_type }}/{{ library_item.slug }}"><img src="" alt="{{ library_item.name }}"/></a>
+					<h2><a href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.title }}</a></h2>
+					<a href="library/{{ library_item.item_type }}/{{ library_item.slug }}"><img src="" alt="{{ library_item.title }}"/></a>
 					<p>{{ library_item.description }}</p>
 					<p class="date">{{ library_item.created_date }}</p>
 				</div>

@@ -19,7 +19,7 @@ from app import views
 from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
 
 urlpatterns = [
-	url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^stories/$', StoriesView.as_view(), name="stories"),

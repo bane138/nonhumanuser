@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from library.views import IndexView, ItemsView, ItemView, ItemResourceView
+from library.views import IndexView, ItemsView, ItemView, ItemResourceView, ItemCommentView
 
 urlpatterns = [
 	url(r'^$', IndexView.as_view(), name='index'),
@@ -7,4 +7,5 @@ urlpatterns = [
 	url(r'^(?P<stack>[\w-]+)/(?P<slug>[\w-]+)/$', ItemView.as_view(), name='item'),
 	url(r'^item/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<filename>[\w_\.]+)$', 
 		ItemResourceView.as_view(), name='resource'),
+	url(r'^comment/$', ItemCommentView.as_view(), name='comment'),
 ]

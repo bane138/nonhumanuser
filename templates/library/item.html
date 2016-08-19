@@ -14,14 +14,37 @@
 	{% endfor %}
 	<article>
 		<div class="center">
-			<h2>{{ item.name }}</h2>
-			<P>{{ item.description }}</P>
+			<h2>{{ item.title }}</h2>
+			<P>{{ item.body }}</P>
 			{% if item.resource %}
 				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
 			{% endif %}
 			<p>{{ item.created_date }}</p>
 		</div>
 	</article>
+	<div class="comment-block">
+		Comments: {{ item.comments.count }}
+		{% for comment in item.itemcomment.all %}
+		<div class="comment">
+			<h3 class="comment-author">{{ comment.author }}</h3>
+			<p>{{ comment.body }}</p>
+			<p><small>{{ comment.create_date }}</small></p>
+		</div>
+		{% empty %}
+		<p>No comments yet...</p>
+		<div class="comment-form">
+			<form method='POST' action='/comment'>
+				<filedset>
+					<label>Comment</label><br />
+					<textarea name="body"></textarea><br />
+					<label>Name</label><br />
+					<input type="text" name="author" /><br />
+					<input type="submit" name="submit" value="Save" />
+				</filedset>
+			</form>
+		</div>
+		{% endfor %}
+	</div>
 </div>
 <div class="sidebar">
 	{% include 'sidebar.html' %}

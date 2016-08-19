@@ -19,6 +19,24 @@
 			<p><small>{{ article.publish_date }}</small></p>
 		</div>
 	</article>
+	<div class="comment-block">
+		<div class="comment-form">
+			<form method='POST' action='/comment'>
+				<label>Comment</label>
+				<textarea name="body"></textarea><br />
+				<label>Name</label>
+				<input type="text" name="author" /><br />
+				<input type="submit" name="submit" value="Save" />
+			</form>
+		</div>
+		{% for comment in comments %}
+		<div class="comment">
+			<h3 class="comment-author">{{ comment.author }}</h3>
+			<p>{{ comment.body }}</p>
+			<p><small>{{ comment.create_date }}</small></p>
+		</div>
+		{% endfor %}
+	</div>
 </div>
 <div class="sidebar">
 	{% include 'sidebar.html' %}
