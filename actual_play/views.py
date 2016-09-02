@@ -6,8 +6,11 @@ from actual_play.models import GameGroup, Game, Player
 class IndexView(View):
 	def get(self, request):
 		groups = GameGroup.objects.all()
-		return render(request, 'actual_play/index.html', {'section': {'name': 'Actual Play'}, 
-			'groups': groups})
+		items_recent = Game.objects.all().order_by('-created_date')
+		items_popular = Game.objects.all().order_by('-number_comments')
+		return render(request, 'actual_play/index.html', {'section': 
+			{'name': 'Actual Play'}, 'groups': groups, 'items_recent': items_recent, 
+			'items_popular': items_popular})
 
 
 class GameGroupView(View):
