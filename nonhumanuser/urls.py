@@ -18,6 +18,8 @@ from django.contrib import admin
 from app import views
 from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
 
+from nonhumanuser import settings
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
@@ -29,4 +31,10 @@ urlpatterns = [
     url(r'^library/', include('library.urls')),
     url(r'^media/library/', include('library.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
+    url(r'^markdown/', include('django_markdown.urls')),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, 
+        document_root=settings.STATIC_ROOT)

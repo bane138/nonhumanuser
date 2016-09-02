@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'app',
     'blog',
     'library',
-    'actual_play'
+    'actual_play',
+    'django_markdown'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -135,3 +136,6 @@ STATICFILES_DIRS = [
 # Media files (images, videosd, PDFs)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Markdown
+MARKDOWN_EDITOR_SKIN = 'simple'

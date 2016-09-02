@@ -1,11 +1,12 @@
 from django.contrib import admin
+from django_markdown.admin import MarkdownModelAdmin
 from blog.models import Blog, Entry, EntryComment, Category
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
 	pass
 
-class EntryAdmin(admin.ModelAdmin):
+class EntryAdmin(MarkdownModelAdmin):
 	pass
 
 class EntryCommentAdmin(admin.ModelAdmin):
