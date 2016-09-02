@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils import timezone
 
 # Create your models here.
 class GameGroup(models.Model):
@@ -22,13 +23,15 @@ class GameGroup(models.Model):
 
 
 class Game(models.Model):
-	name = models.CharField(max_length=255)
+	title = models.CharField(max_length=255)
 	group = models.ForeignKey('GameGroup', 
 		on_delete=models.PROTECT,
 		blank=True,
 		null=True)
 	description = models.TextField()
 	active = models.BooleanField(default=False)
+	number_views = models.IntegerField(default=0)
+	number_comments = models.IntegerField(default=0)
 	slug = models.SlugField(blank=True, null=True)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
@@ -38,12 +41,27 @@ class Game(models.Model):
 
 	def save(self):
 		if not self.id:
-			self.slug = slugify(self.name)
+			self.slug = slugify(self.title)
 
 		super(Game, self).save()
 
 	def __str__(self):
-		return self.name
+		return self.title
+
+
+class GameComment(models.Model):
+	game = models.ForeignKey(Game, related_name='comments')
+	body = models.TextField()
+	author = models.CharField(max_length=200)
+	created_date = models.DateTimeField(default=timezone.now())
+	approved = models.BooleanField(default=False)
+
+	def approve(self):
+		self.approved = True
+		self.save()
+
+	def __str__(self):
+		return self.text
 
 
 class Player(models.Model):

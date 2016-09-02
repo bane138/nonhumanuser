@@ -1,0 +1,26 @@
+  <div class="sidebar-block">
+    <h2>Recent</h2>
+    <ul class="sidebar-list">
+    {% for item in items_recent %}
+      <li class="sidebar-list-item">
+        <a href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+    </ul>   
+    <h2>Popular</h2>
+    <ul class="sidebar-list"> 
+    {% for item in items_popular %}
+      <li class="sidebar-list-item">
+        <a href="{{ item.get_url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+    <h2>Links</h2>
+    <ul class="sidebar-list">
+    {% for link in links %}
+      <li class="sidebar-list-item">
+        <a href="{{ link.get_url }}">{{ link.title }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>

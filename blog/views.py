@@ -15,10 +15,16 @@ class StoriesView(View):
 	template = 'blog/stories.html'
 
 	def get(self, request):
-		stories = Entry.objects.filter(category__exact=2, 
+		catetory = 1
+		stories = Entry.objects.filter(category=catetory, active=True, 
 			publish_date__lte=datetime.datetime.now())[0:5]
+		items_recent = Entry.objects.filter(category=catetory, active=True)\
+		.order_by('-created_date')
+		items_popular = Entry.objects.filter(category=catetory, active=True)\
+		.order_by('-number_comments')
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
-			'stories': stories})
+			'stories': stories, 'items_recent': items_recent, 
+			'items_popular': items_popular})
 
 
 class StoryView(View):
@@ -34,8 +40,13 @@ class ArticlesView(View):
 	template = 'blog/articles.html'
 
 	def get(self, request):
-		articles = Entry.objects.filter(category__exact=1, 
+		catetory = 2
+		articles = Entry.objects.filter(category__exact=catetory, active=True, 
 			publish_date__lte=datetime.datetime.now())[0:5]
+		items_recent = Entry.objects.filter(category=catetory, active=True)\
+		.order_by('-created_date')
+		items_popular = Entry.objects.filter(category=catetory, active=True)\
+		.order_by('-number_comments')
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
 			'articles': articles})
 

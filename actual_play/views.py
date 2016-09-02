@@ -15,9 +15,12 @@ class GameGroupView(View):
 
 	def get(self, request, *args, **kwargs):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
-		games = Game.objects.filter(group__exact=group.id)
+		games = Game.objects.filter(group=group.pk)
+		items_recent = Game.objects.all().order_by('-created_date')
+		items_popular = Game.objects.all().order_by('-number_comments')
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
-			'group': group, 'games': games})
+			'group': group, 'games': games, 'items_recent': items_recent, 
+			'items_popular': items_popular})
 
 
 class GameView(View):

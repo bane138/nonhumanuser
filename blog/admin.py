@@ -16,6 +16,6 @@ class CategoryAdmin(admin.ModelAdmin):
 	pass
 
 admin.site.register(Blog, BlogAdmin)
-admin.site.register(Entry, EntryAdmin)
+admin.site.register(Entry, MarkdownModelAdmin)
 admin.site.register(EntryComment, EntryCommentAdmin)
 admin.site.register(Category, CategoryAdmin)
