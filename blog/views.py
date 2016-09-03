@@ -15,7 +15,7 @@ class StoriesView(View):
 	template = 'blog/stories.html'
 
 	def get(self, request):
-		stories = Entry.objects.filter(category__exact=2, 
+		stories = Entry.objects.filter(category=2,
 			publish_date__lte=datetime.datetime.now())[0:5]
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'stories': stories})
@@ -26,8 +26,9 @@ class StoryView(View):
 
 	def get(self, request, *args, **kwargs):
 		story = Entry.objects.get(slug=self.kwargs['slug'])
+		comments = story.comments_set.all()
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
-			'story': story})
+			'story': story, 'comments': comments})
 
 
 class ArticlesView(View):
@@ -45,5 +46,6 @@ class ArticleView(View):
 
 	def get(self, request, *args, **kwargs):
 		article = Entry.objects.get(slug=self.kwargs['slug'])
+		comments = article.comments_set.all()
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
-			'article': article})
+			'article': article, 'comments': comments})
