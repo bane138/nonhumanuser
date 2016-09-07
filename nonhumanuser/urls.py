@@ -20,6 +20,8 @@ from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
 
 from nonhumanuser import settings
 
+from django_markdown import flatpages
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
