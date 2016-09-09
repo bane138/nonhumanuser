@@ -12,7 +12,7 @@
 	<article>
 		<div class="center">
 			<h2>{{ story.title }}</h2>
-			<p>{{ story.body|markdown }}</p>
+			<p>{{ story.body|markdownify|safe }}</p>
 			<div>{{ story.publish_date }}</div>
 		</div>
 	</article>
