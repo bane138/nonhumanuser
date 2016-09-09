@@ -11,7 +11,7 @@
 <div class="content">
 	<article class="row1">
 		<div class="center">
-			<h2>{{ game.name }}</h2>
+			<h2>{{ game.title }}</h2>
 			{% if game.image %}
 				<p><img src="{{ game.image.path }}" /></p>
 			{% endif %}
@@ -35,6 +35,6 @@
 	</article>
 </div>
 <div class="sidebar">
-	{% include 'actual_play/sidebar.html' %}
+	{% include 'sidebar.html' %}
 </div>
 {% endblock %}
