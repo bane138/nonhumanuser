@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load md2 %}
 
 {% block title %}{{ story.title }}{% endblock %}
 {% block description %}{{ story.description }}{% endblock %}
@@ -29,7 +30,7 @@
 		{% for comment in comments %}
 		<div class="comment">
 			<h3 class="comment-author">{{ comment.author }}</h3>
-			<p>{{ comment.body }}</p>
+			<p>{{ comment.body|markdown }}</p>
 			<p><small>{{ comment.create_date }}</small></p>
 		</div>
 		{% endfor %}

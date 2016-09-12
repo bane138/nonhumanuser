@@ -26,9 +26,14 @@ def index(request):
 
 	context = {
 		"site": { 
-			"title": "NonHumanUser",
-			"description": "Stories, articles resources and supplements for Call of Cthulhu and related genre games." 
+			'title': 'NonHumanUser',
+			'description': 'Stories, articles resources and supplements for Call of Cthulhu and related genre games.',
 		},
+		'og_type': 'webpage',
+		'og_url': 'http://www.nonhumanuser.com',
+		'og_title': 'NonHumanUser',
+		'og_description': 'Stories, articles resources and supplements for Call of Cthulhu and related genre games.',
+		'og_image': 'http://www.nonhumanuser.com/images/logo.png',
 		'story': story,
 		'article': article,
 		'library_item': library_item,
