@@ -47,7 +47,7 @@ class Item(models.Model):
 
 	def save(self):
 		if not self.id:
-			self.slug = slugify(self.name)
+			self.slug = slugify(self.title)
 
 		super(Item, self).save()
 

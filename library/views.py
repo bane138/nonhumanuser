@@ -7,13 +7,18 @@ import mimetypes
 from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
+from nonhumanuser.utils import *
 
 # Create your views here.
 class IndexView(View):
 	def get(self, request):
 		stacks = Stack.objects.all()
+		items_recent = Item.objects.all().order_by('-created_date')[0:5]
+		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
+		links = get_main_links()
 		return render(request, 'library/index.html', {'section': {'name': 'Library'}, 
-			'stacks': stacks})
+			'stacks': stacks, 'items_recent': items_recent, 
+			'items_popular': items_popular, 'links': links})
 
 
 class ItemsView(View):
@@ -23,8 +28,12 @@ class ItemsView(View):
 		stack = Stack.objects.get(slug=self.kwargs['slug'])
 		stacks = Stack.objects.all()
 		items = Item.objects.filter(stack__exact=stack.id)
+		items_recent = Item.objects.all().order_by('-created_date')[0:5]
+		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
+		links = get_main_links()
 		return render(request, self.template, {'section': {'name': stack.name}, 
-			'items': items, 'stacks': stacks})
+			'items': items, 'stacks': stacks, 'items_recent': items_recent, 
+			'items_popular': items_popular, 'links': links})
 
 
 class ItemView(View):
@@ -34,8 +43,12 @@ class ItemView(View):
 		item = Item.objects.get(slug=self.kwargs['slug'])
 		stack = Stack.objects.get(pk=item.stack_id)
 		stacks = Stack.objects.all()
+		items_recent = Item.objects.all().order_by('-created_date')[0:5]
+		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
+		links = get_main_links()
 		return render(request, self.template, {'section': {'name': stack.name}, 
-			'item': item, 'stacks': stacks})
+			'item': item, 'stacks': stacks, 'items_recent': items_recent, 
+			'items_popular': items_popular, 'links': links})
 
 
 class ItemResourceView(View):
