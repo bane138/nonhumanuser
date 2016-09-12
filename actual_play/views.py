@@ -33,8 +33,7 @@ class GameView(View):
 	template = 'actual_play/game.html'
 
 	def get(self, request, *args, **kwargs):
-		print(kwargs)
-		game = Game.objects.filter(slug=self.kwargs['slug'])
+		game = Game.objects.filter(slug=self.kwargs['slug']).first()
 		items_recent = Game.objects.all().order_by('-created_date')[0:5]
 		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()

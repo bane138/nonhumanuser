@@ -4,6 +4,8 @@ from actual_play.models import GameGroup, Game, Player
 from blog.models import Blog, Entry, Category
 from library.models import Stack, Item
 from itertools import chain
+from nonhumanuser.utils import *
+
 
 # Create your views here.
 def index(request):
@@ -20,6 +22,7 @@ def index(request):
 	library_popular = Item.objects.filter(active=True).order_by('-number_comments')
 	games_popular = Game.objects.filter(active=True).order_by('-number_comments')
 	items_popular = list(chain(entry_popular, library_popular, games_popular))
+	links = get_main_links()
 
 	context = {
 		"site": { 
@@ -34,5 +37,6 @@ def index(request):
 		'items_recent': items_recent[0:5],
 		'items_popular': items_popular[0:5],
 		'section': 'main',
+		'links': links,
 	}
 	return render(request, 'app/index.html', context)

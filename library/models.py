@@ -70,7 +70,7 @@ class ItemComment(models.Model):
 	comment = models.ForeignKey(Item, related_name='comments')
 	body = models.TextField()
 	author = models.CharField(max_length=200)
-	created_date = models.DateTimeField(default=timezone.now())
+	created_date = models.DateTimeField(auto_now=True)
 	approved = models.BooleanField(default=False)
 
 	def approve(self):
