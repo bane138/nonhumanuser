@@ -128,5 +128,5 @@ def login(request):
 			print("Invalid login details: {0}, {1}".format(username, password))
 			return HttpResponse('Invalid login details supplied.')
 	else:
-		return render_to_response('/login', {'section': {'title': 'Login'}}, context)
+		return render_to_response('app/login.html', {'section': {'title': 'Login'}}, context)
 
