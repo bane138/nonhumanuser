@@ -8,7 +8,12 @@
 			<li><a href="/articles">Articles</a></li>
 			<li><a href="/library">Library</a></li>
 			<li><a href="/actual_play">Actual Play</a></li>
+			{% if user.is_authenticated %}
+			<li><a href="/profile/{{ user.pk }}">{{ user.username }}</a></li>
+			{% else %}
 			<li><a href="/login">Login</a></li>
+			{% endif %}
+			<li><a href="/register">Register</a></li>
 		</ul>
 	</nav>
 </header>
