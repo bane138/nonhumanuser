@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^media/library/', include('library.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
+    url(r'^register/', views.register, name='register'),
 ]
 
 if settings.DEBUG:

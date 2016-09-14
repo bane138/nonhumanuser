@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 import datetime
+from app.forms import UserForm, UserProfileForm
 from actual_play.models import GameGroup, Game, Player
 from blog.models import Blog, Entry, Category
 from library.models import Stack, Item
@@ -45,3 +47,53 @@ def index(request):
 		'links': links,
 	}
 	return render(request, 'app/index.html', context)
+
+
+def register(request):
+	"""
+	Register a user for the site
+	"""
+	context = RequestContext(request)
+
+	# Boolean for weather the registration was successful or not
+	registered = False
+
+	# If POST we are handling form data
+	if request.method == 'POST':
+		# Grab information from the raw form
+		user_form = UserForm(data=request.POST)
+		profile_form = UserProfileForm(data=request.POST)
+
+		# If forms are valid
+		if user_form.is_valid() and profile_form.is_valid():
+			user = user_form.save()
+
+			# Hash password and save user
+			user.set_password(user.password)
+			user.save()
+
+			# Since we need to set the user attribute ourselves, we set commit=False.
+			# This delays saving the model until we're ready to avoid integrity problems.
+			profile = profile_form.save(commit=False)
+			profile.user = user
+
+			# Do we have a profile picture?
+			if 'avatar' in request.FILES:
+				profile.avatar = request.FILES['avatar']
+
+			profile.save()
+
+			registered = True
+
+		else:
+			print(user_form.errors, profile_form.errors)
+
+	else:
+		user_form = UserForm()
+		profile_form = UserProfileForm()
+
+	return render_to_response(
+		'app/register.html',
+		{'user_form': user_form, 'profile_form': profile_form, 
+		'registered': registered, 'section': {'title': 'Register'}},
+		context)
