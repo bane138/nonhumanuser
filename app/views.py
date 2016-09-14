@@ -1,5 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 import datetime
 from app.forms import UserForm, UserProfileForm
 from actual_play.models import GameGroup, Game, Player
@@ -97,3 +99,34 @@ def register(request):
 		{'user_form': user_form, 'profile_form': profile_form, 
 		'registered': registered, 'section': {'title': 'Register'}},
 		context)
+
+
+def login(request):
+	"""
+	Log user into site
+	"""
+	context = RequestContext(request)
+
+	if request.method == 'POST':
+		# Gather info
+		username = request.POST['username']
+		password = request.POST['password']
+
+		# Authenticate
+		user = authenticate(username=username, password=password)
+
+		if user:
+			# active?
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect('/')
+			else:
+				# You are inactive, no soup for you
+				return HttpResponse('Your account is disabled.')
+		else:
+			# Bad login
+			print("Invalid login details: {0}, {1}".format(username, password))
+			return HttpResponse('Invalid login details supplied.')
+	else:
+		return render_to_response('/login', {'section': {'title': 'Login'}}, context)
+
