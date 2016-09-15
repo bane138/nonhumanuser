@@ -36,8 +36,10 @@ class Game(models.Model):
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
 	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d', blank=True, null=True)
-	audio = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
-	video = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
+	audio_mp3 = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
+	video_ogg = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
 
 	def save(self):
 		if not self.id:
