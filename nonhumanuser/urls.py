@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^articles/(?P<slug>[\w-]+)/$', ArticleView.as_view(), name="article"),
     url(r'^library/', include('library.urls')),
     url(r'^media/library/', include('library.urls')),
+    url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^register/', views.register, name='register'),
