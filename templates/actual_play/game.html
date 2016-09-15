@@ -23,6 +23,7 @@
 					<source src="media/{{ game.audio.name }}" type="audio/mpeg" />
 				</audio>
 			</p>
+			{% if game.video %}
 			<p>
 				<div>Video</div>
 				<video width="320" height="240" controls>
@@ -30,6 +31,7 @@
 					<source src="media/{{ game.video.name }}" type="video/ogg" />
 				</video>
 			</p>
+			{% endif %}
 			<p>{{ game.create_date }}</p>
 		</div>
 	</article>

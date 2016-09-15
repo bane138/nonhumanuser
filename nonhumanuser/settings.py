@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'library',
     'actual_play',
     'django_markdown',
+    'django_markdown2',
     'django_extensions',
 ]
 
