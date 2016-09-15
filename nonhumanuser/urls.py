@@ -35,7 +35,8 @@ urlpatterns = [
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^register/', views.register, name='register'),
-    url(r'^login/', views.login, name='login'),
+    url(r'^login/', views.user_login, name='login'),
+    url(r'^logout/', views.user_logout, name='logout'),
 ]
 
 if settings.DEBUG:

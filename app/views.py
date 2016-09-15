@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 import datetime
 from app.forms import UserForm, UserProfileForm
@@ -101,7 +102,7 @@ def register(request):
 		context)
 
 
-def login(request):
+def user_login(request):
 	"""
 	Log user into site
 	"""
@@ -130,3 +131,11 @@ def login(request):
 	else:
 		return render_to_response('app/login.html', {'section': {'title': 'Login'}}, context)
 
+
+@login_required
+def user_logout(request):
+	# Log the user out
+	logout(request)
+
+	# Redirect to homepage
+	return HttpResponseRedirect('/')
