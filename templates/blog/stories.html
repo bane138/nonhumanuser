@@ -14,7 +14,7 @@
 	<article>
 		<div class="center">
 			<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
-			<p>{{ story.description|markdown }}</p>
+			<p>{{ story.description|safe }}</p>
 			<p><small>{{ story.publish_date }}</small></p>
 		</div>
 	</article>

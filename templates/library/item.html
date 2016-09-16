@@ -15,7 +15,7 @@
 	<article>
 		<div class="center">
 			<h2>{{ item.title }}</h2>
-			<P>{{ item.body }}</P>
+			<P>{{ item.body|safe }}</P>
 			{% if item.resource %}
 				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
 			{% endif %}

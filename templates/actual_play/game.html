@@ -15,7 +15,7 @@
 			{% if game.image %}
 				<p><img src="{{ game.image.path }}" /></p>
 			{% endif %}
-			<p>{{ game.description }}</p>
+			<p>{{ game.description|safe }}</p>
 			<p>
 				<div>Audio</div>
 				<audio controls>
