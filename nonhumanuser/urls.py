@@ -20,8 +20,6 @@ from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
 
 from nonhumanuser import settings
 
-from django_markdown import flatpages
-
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
@@ -34,10 +32,10 @@ urlpatterns = [
     url(r'^media/library/', include('library.urls')),
     url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
-    url(r'^markdown/', include('django_markdown.urls')),
     url(r'^register/', views.register, name='register'),
     url(r'^login/', views.user_login, name='login'),
     url(r'^logout/', views.user_logout, name='logout'),
+    url(r'^markdown/', include('django_markdown.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,14 +1,16 @@
 from django.contrib import admin
-from django_markdown.models import MarkdownField
-from django_markdown.admin import MarkdownModelAdmin, AdminMarkdownWidget
 from blog.models import Blog, Entry, EntryComment, Category
+from django_markdown.admin import MarkdownModelAdmin
+from django_markdown.widgets import AdminMarkdownWidget
+from django.db.models import TextField
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
 	pass
 
-class EntryAdmin(admin.ModelAdmin):
-	formfield_overrides = {MarkdownField: {'widget': AdminMarkdownWidget}}
+class EntryAdmin(MarkdownModelAdmin):
+  formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
+  pass
 
 class EntryCommentAdmin(admin.ModelAdmin):
 	pass
