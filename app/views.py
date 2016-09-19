@@ -151,9 +151,8 @@ class ProfileView(View):
 	"""
 	Display user profile
 	"""
-	@login_required
 	def get(self, request, *args, **kwargs):
 		context = RequestContext(request)
-		print(request)
+		print(context)
 		return render_to_response('app/profile.html', {'user': request.user}, 
 			context)
