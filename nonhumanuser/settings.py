@@ -145,3 +145,9 @@ MEDIA_URL = '/media/'
 
 # Markdown
 MARKDOWN_EDITOR_SKIN = 'simple'
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 30
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

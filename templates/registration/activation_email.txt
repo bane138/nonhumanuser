@@ -1,0 +1,9 @@
+Hello {{ user.username }},
+
+Your account has been created. Please verify your account creation by visiting 
+http://www.nonhumanuser.com within {{ expiration_days }}.
+
+Your activation key is http://www.nonhumanuser.com/accounts/activate/{{ activation_key }}
+
+thanks,
+nonhumanuser.com

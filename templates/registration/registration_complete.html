@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ site.title }}{% endblock %}
+{% block description %}{{ site.description }}{% endblock %}
+
+{% block content %}
+<div class="page">
+  <div class="section-heading">
+    <img src="{% static "images/" %}{{ section.title }}.png" />
+  </div>
+  <div class="content">
+    <h1>Success!</h1>
+      <div>Thanks, for registering at nonhumanuser.com. Enjoy!<br />
+      <a href="/">Return to homepage</a></div>
+  </div>
+</div>
+{% endblock %}
