@@ -32,12 +32,18 @@ urlpatterns = [
     url(r'^media/library/', include('library.urls')),
     url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
-    #url(r'^register/', views.register, name='register'),
     url(r'^members/', include('django.contrib.auth.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/profile', ProfileView.as_view(), name='profile')
+    url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
+        name='update_user'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += patterns('', 
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT
+            }))
 
 if settings.DEBUG:
     from django.conf.urls.static import static

@@ -15,6 +15,9 @@
 	<article>
 		<div class="center">
 			<h2>{{ item.title }}</h2>
+			{% if item.image %}
+				<p><img src="{{ item.image.url }}" /></p>
+			{% endif %}
 			<P>{{ item.body|safe }}</P>
 			{% if item.resource %}
 				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>

@@ -13,7 +13,7 @@
     <h1>nonhumanuser.com Login</h1>
       <div>
         <div>Login Here</div>
-        <form id="user_form" method="post" action="/members/login/" 
+        <form id="user_form" method="post" action="/members/login/?next=/" 
           enctype="multipart/form-data">
           {% csrf_token %}
           {{ form.as_p }}

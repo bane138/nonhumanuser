@@ -20,7 +20,8 @@ class GameGroupView(View):
 
 	def get(self, request, *args, **kwargs):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
-		games = Game.objects.filter(group=group.pk)
+		games = Game.objects.filter(group=group.pk, active=True, 
+			publish_date__lte=datetime.datetime.now())[0:5]
 		items_recent = Game.objects.all().order_by('-created_date')[0:5]
 		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()

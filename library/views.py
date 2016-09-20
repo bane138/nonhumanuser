@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
 from nonhumanuser.utils import *
+import datetime
 
 # Create your views here.
 class IndexView(View):
@@ -27,7 +28,8 @@ class ItemsView(View):
 	def get(self, request, *args, **kwargs):
 		stack = Stack.objects.get(slug=self.kwargs['slug'])
 		stacks = Stack.objects.all()
-		items = Item.objects.filter(stack__exact=stack.id)
+		items = Item.objects.filter(stack__exact=stack.id, active=True, 
+			publish_date__lte=datetime.datetime.now())[0:5]
 		items_recent = Item.objects.all().order_by('-created_date')[0:5]
 		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
