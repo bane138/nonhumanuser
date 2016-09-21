@@ -14,7 +14,7 @@
 		<div class="center">
 			<h2>{{ story.title }}</h2>
 			{% if story.image %}
-				<p><img src="{{ story.image.url }}" /></p>
+				<p><img src="{{ story.image.url }}" alt="{{ story.title }}" width="760" /></p>
 			{% endif %}
 			<p>{{ story.body|safe }}</p>
 			<div>{{ story.publish_date }}</div>

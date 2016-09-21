@@ -13,7 +13,7 @@
 		<div class="center">
 			<h2>{{ article.title }}</h2>
 			{% if article.image %}
-				<p><img src="{{ article.image.url }}" /></p>
+				<p><img src="{{ article.image.url }}" alt="{{ story.title }}" width="760" /></p>
 			{% endif %}
 			<p>{{ article.body|safe }}</p>
 			<p><small>{{ article.publish_date }}</small></p>
