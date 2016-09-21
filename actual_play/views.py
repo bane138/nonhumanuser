@@ -1,7 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import View
+from django.http import HttpResponse
 from actual_play.models import GameGroup, Game, Player
 from nonhumanuser.utils import *
+from nonhumanuser import settings
+from wsgiref.util import FileWrapper
+from django.utils.encoding import smart_str
+import mimetypes
+import datetime
+import os
 
 # Create your views here.
 class IndexView(View):
@@ -36,6 +43,7 @@ class GameView(View):
 	def get(self, request, *args, **kwargs):
 		game = Game.objects.filter(slug=self.kwargs['slug']).first()
 		items_recent = Game.objects.all().order_by('-created_date')[0:5]
+		print(items_recent)
 		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
@@ -45,7 +53,12 @@ class GameView(View):
 
 class GameResourceView(View):
 	def get(self, request, *args, **kwargs):
-		file_path = settings.MEDIA_ROOT + '/game/' + self.kwargs['type'] + '/' \
+		if 'mp3' in self.kwargs['filename'] or 'ogg' in self.kwargs['filename']:
+			_type = 'audio/'
+		else:
+			_type = 'video/'
+
+		file_path = settings.MEDIA_ROOT + '/actual_play/' + _type + '/' \
 		+ self.kwargs['year'] + '/' + self.kwargs['month'] + '/' + self.kwargs['day'] + \
 		'/' + self.kwargs['filename']
 		file_wrapper = FileWrapper(open(file_path, 'rb'))

@@ -19,16 +19,16 @@
 			<p>
 				<div>Audio</div>
 				<audio controls>
-					<source src="media/{{ game.audio_ogg.name }}" type="audio/ogg" />
-					<source src="media/{{ game.audio_mp3.name }}" type="audio/mpeg" />
+					<source src="{{ game.audio_ogg.url }}" type="audio/ogg" />
+					<source src="{{ game.audio_mp3.url }}" type="audio/mpeg" />
 				</audio>
 			</p>
 			{% if game.video %}
 			<p>
 				<div>Video</div>
 				<video width="320" height="240" controls>
-					<source src="media/{{ game.video_ogg.name }}" type="video/mp4" />
-					<source src="media/{{ game.video_mp4.name }}" type="video/ogg" />
+					<source src="{{ game.video_ogg.url }}" type="video/mp4" />
+					<source src="{{ game.video_mp4.url }}" type="video/ogg" />
 				</video>
 			</p>
 			{% endif %}
