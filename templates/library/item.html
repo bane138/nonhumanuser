@@ -32,6 +32,7 @@
 		</div>
 		{% empty %}
 		<p>No comments yet...</p>
+		{% if user.is_authenticated %}
 		<div class="comment-form">
 			<form method='POST' action='/comment'>
 				<filedset>
@@ -43,6 +44,7 @@
 				</filedset>
 			</form>
 		</div>
+		{% endif %}
 		{% endfor %}
 	</div>
 </div>

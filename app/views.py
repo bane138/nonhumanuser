@@ -101,7 +101,7 @@ def register(request):
 		context)
 
 
-def login(request):
+def user_login(request):
 	"""
 	Log user into site
 	"""
