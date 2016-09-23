@@ -29,8 +29,10 @@ class GameGroupView(View):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
 		games = Game.objects.filter(group=group.pk, active=True, 
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Game.objects.all().order_by('-created_date')[0:5]
-		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
+		items_recent = Game.objects.filter(group=group.pk)\
+		.order_by('-created_date')[0:5]
+		items_popular = Game.objects.filter(group=group.pk)\
+		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
 			'group': group, 'games': games, 'items_recent': items_recent, 
@@ -43,7 +45,6 @@ class GameView(View):
 	def get(self, request, *args, **kwargs):
 		game = Game.objects.filter(slug=self.kwargs['slug']).first()
 		items_recent = Game.objects.all().order_by('-created_date')[0:5]
-		print(items_recent)
 		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},

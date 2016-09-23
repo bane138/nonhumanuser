@@ -55,6 +55,9 @@ class ItemView(View):
 
 class ItemResourceView(View):
 	def get(self, request, *args, **kwargs):
+		if not 'HTTP_USER_AGENT' in request.META \
+		or u'WebKit' in request.META['HTTP_USER_AGENT']:
+			pass
 		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + \
 		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + self.kwargs['filename']
 		file_wrapper = FileWrapper(open(file_path, 'rb'))
@@ -62,7 +65,7 @@ class ItemResourceView(View):
 		response = HttpResponse(file_wrapper, content_type=file_mimetype)
 		response['X-Sendfile'] = file_path
 		response['Content-Length'] = os.stat(file_path).st_size
-		response['Content-Diposition'] = 'attachment; filename=%s' % smart_str(self.kwargs['filename'])
+		response['Content-Diposition'] = 'attachment; filename="%s"' % smart_str(self.kwargs['filename'])
 		return response
 
 

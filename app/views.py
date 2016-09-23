@@ -62,7 +62,7 @@ class ProfileView(UpdateView):
 	model = UserProfile
 	fields = ['first_name', 'last_name', 'avatar']
 	template_name = 'app/profile.html'
-	slug_field = 'user_id'
+	slug_field = 'id'
 	slug_url_kwarg = 'slug'
 
 	"""
