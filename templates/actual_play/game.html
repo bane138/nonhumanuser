@@ -17,18 +17,28 @@
 			{% endif %}
 			<p>{{ game.description|safe }}</p>
 			<p>
+			{% if game.audio_ogg %}
 				<div>Audio</div>
 				<audio controls>
+					{% if game.audio_ogg %}
 					<source src="{{ game.audio_ogg.url }}" type="audio/ogg" />
+					{% endif %}
+					{% if game.audio_mp3 %}
 					<source src="{{ game.audio_mp3.url }}" type="audio/mpeg" />
+					{% endif %}
 				</audio>
+			{% endif %}
 			</p>
-			{% if game.video %}
+			{% if game.video_ogv %}
 			<p>
 				<div>Video</div>
 				<video width="320" height="240" controls>
-					<source src="{{ game.video_ogg.url }}" type="video/mp4" />
-					<source src="{{ game.video_mp4.url }}" type="video/ogg" />
+					{% if game.video_ogv %}
+					<source src="{{ game.video_ogg.url }}" type="video/ogg" />
+					{% endif %}
+					{% if game.video_mp4 %}
+					<source src="{{ game.video_mp4.url }}" type="video/mp4" />
+					{% endif %}
 				</video>
 			</p>
 			{% endif %}

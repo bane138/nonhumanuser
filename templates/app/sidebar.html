@@ -11,7 +11,7 @@
 		<ul class="sidebar-list">	
 		{% for item in items_popular %}
 			<li class="sidebar-list-item">
-				<a class="sidebar-links" href="{{ item.get_url }}">{{ item.title }}</a>
+				<a class="sidebar-links" href="{{ item.get_absolute_url }}">{{ item.title }}</a>
 			</li>
 		{% endfor %}
 		</ul>

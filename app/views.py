@@ -64,10 +64,3 @@ class ProfileView(UpdateView):
 	template_name = 'app/profile.html'
 	slug_field = 'id'
 	slug_url_kwarg = 'slug'
-
-	"""
-	def get(self, request, *args, **kwargs):
-		context = RequestContext(request)
-		return render_to_response('app/profile.html', {'user': request.user}, 
-			context)
-"""
