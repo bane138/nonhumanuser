@@ -13,28 +13,35 @@
 		<div class="center">
 			<h2>{{ article.title }}</h2>
 			{% if article.image %}
-				<p><img src="{{ article.image.path }}" /></p>
+				<p><img src="{{ article.image.url }}" alt="{{ story.title }}" width="760" /></p>
 			{% endif %}
-			<p>{{ article.body }}</p>
+			<p>{{ article.body|safe }}</p>
 			<p><small>{{ article.publish_date }}</small></p>
 		</div>
 	</article>
 	<div class="comment-block">
-		<div class="comment-form">
-			<form method='POST' action='/comment'>
-				<label>Comment</label>
-				<textarea name="body"></textarea><br />
-				<label>Name</label>
-				<input type="text" name="author" /><br />
-				<input type="submit" name="submit" value="Save" />
-			</form>
-		</div>
-		{% for comment in comments %}
+		Comments: {{ item.comments.count }}
+		{% for comment in item.itemcomment.all %}
 		<div class="comment">
 			<h3 class="comment-author">{{ comment.author }}</h3>
 			<p>{{ comment.body }}</p>
 			<p><small>{{ comment.create_date }}</small></p>
 		</div>
+		{% empty %}
+		<p>No comments yet...</p>
+		{% if user.is_authenticated %}
+		<div class="comment-form">
+			<form method='POST' action='/comment'>
+				<filedset>
+					<label>Comment</label><br />
+					<textarea name="body"></textarea><br />
+					<label>Name</label><br />
+					<input type="text" name="author" /><br />
+					<input type="submit" name="submit" value="Save" />
+				</filedset>
+			</form>
+		</div>
+		{% endif %}
 		{% endfor %}
 	</div>
 </div>

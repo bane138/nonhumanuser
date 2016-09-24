@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% load md2 %}
+{% load markdown_deux_tags %}
 
 {% block title %}{{ category.name }}{% endblock %}
 {% block description %}{{ category.description }}{% endblock %}
@@ -14,7 +14,10 @@
 	<article>
 		<div class="center">
 			<h2><a href="{{ story.slug }}" >{{ story.title }}</a></h2>
-			<p>{{ story.description|markdown }}</p>
+			{% if story.thumbnail %}
+				<p><img src="{{ story.thumbnail.url }}" /></p>
+			{% endif %}
+			<p>{{ story.description|safe }}</p>
 			<p><small>{{ story.publish_date }}</small></p>
 		</div>
 	</article>

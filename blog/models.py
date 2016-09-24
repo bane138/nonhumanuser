@@ -2,7 +2,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django_markdown.models import MarkdownField
 
 # Create your models here.
 class Blog(models.Model):
@@ -18,9 +17,9 @@ class Blog(models.Model):
 class Entry(models.Model):
     blog = models.ForeignKey(Blog)
     title = models.CharField(max_length=250)
-    body = MarkdownField()
+    body = models.TextField()
     slug = models.SlugField(editable=False)
-    description = MarkdownField()
+    description = models.TextField(null=True, blank=True)
     active =  models.BooleanField(default=False)
     created_date = models.DateTimeField('created date')
     modified_date = models.DateTimeField()

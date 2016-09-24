@@ -15,15 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app import views
+from app.views import IndexView, ProfileView
 from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
 
 from nonhumanuser import settings
 
-from django_markdown import flatpages
-
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^stories/$', StoriesView.as_view(), name="stories"),
@@ -32,11 +30,25 @@ urlpatterns = [
     url(r'^articles/(?P<slug>[\w-]+)/$', ArticleView.as_view(), name="article"),
     url(r'^library/', include('library.urls')),
     url(r'^media/library/', include('library.urls')),
+    url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
+    url(r'^members/', include('django.contrib.auth.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
+<<<<<<< HEAD
     url(r'^register/', views.register, name='register'),
     url(r'^login/', views.user_login, name='login'),
+=======
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
+        name='update_user'),
+>>>>>>> at_work
 ]
+
+if settings.DEBUG:
+    urlpatterns += patterns('', 
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT
+            }))
 
 if settings.DEBUG:
     from django.conf.urls.static import static

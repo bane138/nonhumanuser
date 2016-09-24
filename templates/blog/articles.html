@@ -13,7 +13,10 @@
 		<article>
 			<div class="center">
 				<h2><a href="{{ article.slug }}" >{{ article.title }}</a></h2>
-				<p>{{ article.description }}</p>
+				{% if article.thumbnail %}
+					<p><img src="{{ article.thumbnail.url }}" /></p>
+				{% endif %}
+				<p>{{ article.description|safe }}</p>
 				<p><small>{{ article.publish_date }}</small></p>
 			</div>
 		</article>

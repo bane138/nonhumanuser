@@ -1,5 +1,6 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 
 # Create your models here.
@@ -35,9 +36,22 @@ class Game(models.Model):
 	slug = models.SlugField(blank=True, null=True)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
+	publish_date = models.DateTimeField(null=True, blank=True, default=None)
 	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d', blank=True, null=True)
-	audio = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
-	video = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
+	audio_mp3 = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
+	video_ogv = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+
+	def get_group_name(self):
+		if self.group:
+			group = GameGroup.objects.get(pk=self.group_id)
+
+		return group.slug
+
+	def get_absolute_url(self):
+		return reverse('game', kwargs={'group': self.get_group_name(), 
+			'slug': self.slug})
 
 	def save(self):
 		if not self.id:

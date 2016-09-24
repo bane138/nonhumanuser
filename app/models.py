@@ -8,7 +8,8 @@ class UserProfile(models.Model):
 
   # Additional attributes
   avatar = models.ImageField(upload_to='profile_images', blank=True)
+  first_name = models.CharField(max_length=50, blank=True, null=True)
+  last_name = models.CharField(max_length=50, blank=True, null=True)
 
   def __str__(self):
     return self.user.username
-

@@ -13,28 +13,63 @@
 		<div class="center">
 			<h2>{{ game.title }}</h2>
 			{% if game.image %}
-				<p><img src="{{ game.image.path }}" /></p>
+				<p><img src="{{ game.image.url }}" alt="{{ game.title }}" width="760" /></p>
 			{% endif %}
-			<p>{{ game.description }}</p>
+			<p>{{ game.description|safe }}</p>
 			<p>
+			{% if game.audio_ogg %}
 				<div>Audio</div>
 				<audio controls>
-					<source src="media/{{ game.audio.name }}" type="audio/ogg" />
-					<source src="media/{{ game.audio.name }}" type="audio/mpeg" />
+					{% if game.audio_ogg %}
+					<source src="{{ game.audio_ogg.url }}" type="audio/ogg" />
+					{% endif %}
+					{% if game.audio_mp3 %}
+					<source src="{{ game.audio_mp3.url }}" type="audio/mpeg" />
+					{% endif %}
 				</audio>
+			{% endif %}
 			</p>
-			{% if game.video %}
+			{% if game.video_ogv %}
 			<p>
 				<div>Video</div>
 				<video width="320" height="240" controls>
-					<source src="media/{{ game.video.name }}" type="video/mp4" />
-					<source src="media/{{ game.video.name }}" type="video/ogg" />
+					{% if game.video_ogv %}
+					<source src="{{ game.video_ogg.url }}" type="video/ogg" />
+					{% endif %}
+					{% if game.video_mp4 %}
+					<source src="{{ game.video_mp4.url }}" type="video/mp4" />
+					{% endif %}
 				</video>
 			</p>
 			{% endif %}
 			<p>{{ game.create_date }}</p>
 		</div>
 	</article>
+	<div class="comment-block">
+		Comments: {{ item.comments.count }}
+		{% for comment in item.itemcomment.all %}
+		<div class="comment">
+			<h3 class="comment-author">{{ comment.author }}</h3>
+			<p>{{ comment.body }}</p>
+			<p><small>{{ comment.create_date }}</small></p>
+		</div>
+		{% empty %}
+		<p>No comments yet...</p>
+		{% if user.is_authenticated %}
+		<div class="comment-form">
+			<form method='POST' action='/comment'>
+				<filedset>
+					<label>Comment</label><br />
+					<textarea name="body"></textarea><br />
+					<label>Name</label><br />
+					<input type="text" name="author" /><br />
+					<input type="submit" name="submit" value="Save" />
+				</filedset>
+			</form>
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
 </div>
 <div class="sidebar">
 	{% include 'sidebar.html' %}

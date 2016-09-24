@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'actual_play',
     'django_markdown',
     'django_markdown2',
+    'markdown_deux',
     'django_extensions',
 ]
 
@@ -138,9 +139,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Media files (images, videosd, PDFs)
+# Media files (images, videos, PDFs)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Markdown
 MARKDOWN_EDITOR_SKIN = 'simple'
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 30
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
