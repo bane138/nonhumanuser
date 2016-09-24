@@ -34,18 +34,13 @@ urlpatterns = [
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^members/', include('django.contrib.auth.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
-<<<<<<< HEAD
-    url(r'^register/', views.register, name='register'),
-    url(r'^login/', views.user_login, name='login'),
-=======
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
+    url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(),
         name='update_user'),
->>>>>>> at_work
 ]
 
 if settings.DEBUG:
-    urlpatterns += patterns('', 
+    urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT
             }))
