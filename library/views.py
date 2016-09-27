@@ -35,7 +35,8 @@ class ItemsView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': stack.name}, 
 			'items': items, 'stacks': stacks, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_library'})
 
 
 class ItemView(View):
@@ -50,7 +51,8 @@ class ItemView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': stack.name}, 
 			'item': item, 'stacks': stacks, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_library'})
 
 
 class ItemResourceView(View):
