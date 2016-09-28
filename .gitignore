@@ -1,7 +1,3 @@
 *.pyc
-<<<<<<< HEAD
 .idea/
-.idea/*
-=======
 /media
->>>>>>> at_work
