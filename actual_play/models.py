@@ -37,11 +37,16 @@ class Game(models.Model):
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
 	publish_date = models.DateTimeField(null=True, blank=True, default=None)
-	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d', blank=True, null=True)
-	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
-	audio_mp3 = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
-	video_ogv = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
-	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d',\
+	 blank=True, null=True)
+	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/',\
+	 blank=True, null=True)
+	audio_mp3 = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/',\
+	 blank=True, null=True)
+	video_ogv = models.FileField(upload_to='actual_play/video/%Y/%m/%d/',\
+	 blank=True, null=True)
+	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/',\
+	 blank=True, null=True)
 
 	@property
 	def sidebar_icon_class(self):
@@ -91,7 +96,8 @@ class Player(models.Model):
 	group = models.ManyToManyField(GameGroup)
 	active = models.BooleanField(default=True)
 	created_date = models.DateTimeField('created date')
-	image = models.ImageField(upload_to='actual_play/player/%Y/%m/%d', blank=True, null=True)
+	image = models.ImageField(upload_to='actual_play/player/%Y/%m/%d',\
+	 blank=True, null=True)
 
 
 	def __str__(self):

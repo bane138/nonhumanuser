@@ -37,9 +37,10 @@
 		<p>No comments yet...</p>
 		{% if user.is_authenticated %}
 		<div class="comment-form">
-			<form method='POST' action='/comment'>
+			<form method='POST' action='/library/comment/'>
 				<filedset>
 					<label>Comment</label><br />
+					{% csrf_token %}
 					<textarea name="body"></textarea><br />
 					<label>Name</label><br />
 					<input type="text" name="author" /><br />
