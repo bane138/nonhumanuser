@@ -93,6 +93,6 @@ class GameCommentView(View):
 			instance.save()
 
 			return HttpResponseRedirect(
-				'/actual_play/{{ group.slug }}/{{ game.slug }}/')
+				'/actual_play/' + group.slug + '/' + game.slug + '/')
 
 		print('ok cool')

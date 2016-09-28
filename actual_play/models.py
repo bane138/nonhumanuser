@@ -85,7 +85,7 @@ class GameComment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return self.text
+		return self.game.title
 
 
 class Player(models.Model):
