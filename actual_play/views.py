@@ -36,7 +36,8 @@ class GameGroupView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
 			'group': group, 'games': games, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_actual_play'})
 
 
 class GameView(View):
@@ -49,7 +50,8 @@ class GameView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
 			'game': game, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_actual_play'})
 
 
 class GameResourceView(View):

@@ -31,6 +31,13 @@ class Entry(models.Model):
     thumbnail = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
     image = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
 
+    @property
+    def sidebar_icon_class(self):
+        if self.category.name == 'Stories':
+            return 'sm_icon_class_stories'
+        else:
+            return 'sm_icon_class_articles'
+
     def save(self):
         if not self.id:
             self.slug = slugify(self.title)
@@ -49,7 +56,7 @@ class Entry(models.Model):
         return name
 
     def get_absolute_url(self):
-        return reverse(self.get_category_name(), kwargs={'slug': self.slug})#self.get_category_name().lower()
+        return reverse(self.get_category_name(), kwargs={'slug': self.slug})
 
 
     def __str__(self):

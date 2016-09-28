@@ -51,11 +51,14 @@ class Item(models.Model):
 
 		super(Item, self).save()
 
+	@property
+	def sidebar_icon_class(self):
+		return 'sm_icon_class_library'
+
 	def get_stack_name(self):
 		name = 'resources'
 		if self.stack:
 			stack = Stack.objects.get(pk=self.stack_id)
-			#name = stack.name.replace('s', '').lower()
 
 		return stack.name
 

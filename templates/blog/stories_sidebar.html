@@ -3,7 +3,7 @@
     <ul class="sidebar-list">
     {% for item in items_recent %}
       <li class="sidebar-list-item">
-        <a class="sidebar-inks" href="{{ item.get_absolute_url }}">{{ item.title }}</a>
+        <a class="sidebar-inks {{ item.sidebar_icon_class }}" href="{{ item.get_absolute_url }}">{{ item.title }}</a>
       </li>
     {% endfor %}
     </ul>   
@@ -11,7 +11,7 @@
     <ul class="sidebar-list"> 
     {% for item in items_popular %}
       <li class="sidebar-list-item">
-        <a class="sidebar-links" href="{{ item.get_url }}">{{ item.title }}</a>
+        <a class="sidebar-links {{ item.sidebar_icon_class }}" href="{{ item.get_url }}">{{ item.title }}</a>
       </li>
     {% endfor %}
     </ul>
@@ -19,7 +19,7 @@
     <ul class="sidebar-list">
     {% for link in links %}
       <li class="sidebar-list-item">
-        <a class="sidebar-offsite-links" href="{{ link.url }}" target="_blank">{{ link.link }}</a>
+        <a class="sidebar-offsite-links sm_icon_class_articles" href="{{ link.url }}" target="_blank">{{ link.link }}</a>
       </li>
     {% endfor %}
     </ul>

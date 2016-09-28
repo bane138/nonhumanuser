@@ -14,7 +14,7 @@
 	{% endfor %}
 	<article>
 		<div class="center">
-			<h2>{{ item.title }}</h2>
+			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
 			{% if item.image %}
 				<p><img src="{{ item.image.url }}" alt="{{ item.title }}" width="760" /></p>
 			{% endif %}

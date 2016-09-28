@@ -43,6 +43,11 @@ class Game(models.Model):
 	video_ogv = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
 	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
 
+	@property
+	def sidebar_icon_class(self):
+	    return 'sm_icon_class_actual_play'
+	
+
 	def get_group_name(self):
 		if self.group:
 			group = GameGroup.objects.get(pk=self.group_id)

@@ -12,7 +12,7 @@
 <div class="content">
 	<article>
 		<div class="center">
-			<h2>{{ story.title }}</h2>
+			<h2 class="{{ icon_class }}">{{ story.title }}</h2>
 			{% if story.image %}
 				<p><img src="{{ story.image.url }}" alt="{{ story.title }}" width="760" /></p>
 			{% endif %}

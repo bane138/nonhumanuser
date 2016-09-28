@@ -14,7 +14,7 @@
 {% for game in games %}
 	<article class="row{{ forloop.counter }}">
 		<div class="center">
-			<h2><a href="{{ game.slug }}">{{ game.title }}</a></h2>
+			<h2><a class="{{ icon_class }}"  href="{{ game.slug }}">{{ game.title }}</a></h2>
       {% if game.thumbnail %}
         <p><img src="{{ game.thumbnail.url }}" /></p>
       {% endif %}

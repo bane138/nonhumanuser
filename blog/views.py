@@ -26,7 +26,8 @@ class StoriesView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'stories': stories, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_stories'})
 
 
 class StoryView(View):
@@ -42,7 +43,8 @@ class StoryView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'story': story, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_stories'})
 
 
 class ArticlesView(View):
@@ -57,10 +59,10 @@ class ArticlesView(View):
 		items_popular = Entry.objects.filter(category=catetory, active=True)\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		print(links)
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
 			'articles': articles, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_articles'})
 
 
 class ArticleView(View):
@@ -76,4 +78,5 @@ class ArticleView(View):
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
 			'article': article, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			'items_popular': items_popular, 'links': links, 
+			'icon_class': 'lg_icon_class_articles'})
