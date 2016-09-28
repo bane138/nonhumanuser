@@ -82,13 +82,17 @@ class GameCommentView(View):
 	template = 'actual_play/game.html'
 
 	def post(self, request, *args, **kwargs):
-		print(kwargs)
 		form = GameCommentForm(request.POST)
 
-		if form.is_valid:
-			comment = GameComment(body=kwargs['body'], author=kwargs['author'])
-			comment.save()
+		if form.is_valid():
+			body = form.cleaned_data['body']
+			author = form.cleaned_data['author']
+			game = Game.objects.get(pk=form.cleaned_data['game_id'])
+			group = game.group
+			instance = GameComment(body=body, author=author, game=game)
+			instance.save()
 
-			return HttpResponseRedirect('/success/')
+			return HttpResponseRedirect(
+				'/actual_play/{{ group.slug }}/{{ game.slug }}/')
 
 		return render(request, self.template, {})
