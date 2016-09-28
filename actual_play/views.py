@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from actual_play.models import GameGroup, Game, Player, GameComment
 from actual_play.forms import GameCommentForm
@@ -87,7 +87,7 @@ class GameCommentView(View):
 		if form.is_valid():
 			body = form.cleaned_data['body']
 			author = form.cleaned_data['author']
-			game = Game.objects.get(pk=form.cleaned_data['game_id'])
+			game = Game.objects.get(pk=request.POST.get('game_id'))
 			group = game.group
 			instance = GameComment(body=body, author=author, game=game)
 			instance.save()
@@ -95,4 +95,4 @@ class GameCommentView(View):
 			return HttpResponseRedirect(
 				'/actual_play/{{ group.slug }}/{{ game.slug }}/')
 
-		return render(request, self.template, {})
+		print('ok cool')

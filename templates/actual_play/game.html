@@ -57,7 +57,7 @@
 		<p>No comments yet...</p>
 		{% if user.is_authenticated %}
 		<div class="comment-form">
-			<form method='POST' action='/actual_play/comment/'>
+			<form method='POST' action='comment/'>
 				{% csrf_token %}
 				{{ form.as_ul }}
 				<input type="hidden" name="game_id" value="{{ game.pk }}" />

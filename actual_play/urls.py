@@ -11,5 +11,7 @@ urlpatterns = [
     GameResourceView.as_view(), name='resource'),
   url(r'^video/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/(?P<filename>[\w_\.]+)$', 
     GameResourceView.as_view(), name='resource'),
-  url(r'^comment/$', GameCommentView.as_view(), name="comment"),
+  url(r'^(?P<group>[\w-]+)/(?P<slug>[\w-]+)/comment/$', 
+    GameCommentView.as_view(), 
+    name="comment"),
 ]
