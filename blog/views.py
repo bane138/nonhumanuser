@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import View
-from blog.models import Blog, Entry, Category
+from django.http import HttpResponse, HttpResponseRedirect
+from blog.models import Blog, Entry, Category, EntryComment
 from nonhumanuser.utils import *
+from .forms import EntryCommentForm
 import datetime
 
 # Create your views here.
@@ -41,10 +43,32 @@ class StoryView(View):
 		items_popular = Entry.objects.filter(category=catetory, active=True)\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
+		form = EntryCommentForm(request.POST)
+		story_comments = story.comments.all()
+		story.number_comments = story_comments.count()
+		story.number_views = story.number_views + 1
+		story.save()
 		return render(request, self.template, {'section': {'name': 'Stories'}, 
 			'story': story, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links, 
-			'icon_class': 'lg_icon_class_stories'})
+			'items_popular': items_popular, 'links': links, 'form': form, 
+			'comments': story_comments, 'icon_class': 'lg_icon_class_stories'})
+
+
+class StoriesCommentView(View):
+	template = 'blog/story.html'
+
+	def post(self, request, *args, **kwargs):
+		form = EntryCommentForm(request.POST)
+
+		if form.is_valid():
+			body = form.cleaned_data['body']
+			author = request.user.username
+			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
+			instance = EntryComment(body=body, author=author, entry=entry)
+			instance.save()
+
+		return HttpResponseRedirect(
+			'/stories/' + kwargs['slug'] + '/')
 
 
 class ArticlesView(View):
@@ -76,7 +100,29 @@ class ArticleView(View):
 		items_popular = Entry.objects.filter(category=catetory, active=True)\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
+		form = EntryCommentForm(request.POST)
+		article_comments = article.comments.all()
+		article.number_comments = article_comments.count()
+		article.number_views = article.number_views + 1
+		article.save()
 		return render(request, self.template, {'section': {'name': 'Articles'}, 
 			'article': article, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links, 
-			'icon_class': 'lg_icon_class_articles'})
+			'items_popular': items_popular, 'links': links, 'form': form, 
+			'comments': article_comments, 'icon_class': 'lg_icon_class_articles'})
+
+
+class ArticlesCommentView(View):
+	template = 'blog/article.html'
+
+	def post(self, request, *args, **kwargs):
+		form = EntryCommentForm(request.POST)
+
+		if form.is_valid():
+			body = form.cleaned_data['body']
+			author = request.user.username
+			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
+			instance = EntryComment(body=body, author=author, entry=entry)
+			instance.save()
+
+		return HttpResponseRedirect(
+			'/articles/' + kwargs['slug'] + '/')

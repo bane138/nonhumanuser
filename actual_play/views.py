@@ -86,7 +86,6 @@ class GameCommentView(View):
 	template = 'actual_play/game.html'
 
 	def post(self, request, *args, **kwargs):
-		print(kwargs)
 		form = GameCommentForm(request.POST)
 
 		if form.is_valid():

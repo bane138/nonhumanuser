@@ -21,29 +21,26 @@
 		</div>
 	</article>
 	<div class="comment-block">
-		Comments: {{ item.comments.count }}
-		{% for comment in item.itemcomment.all %}
+		Comments: {{ comments.count }}
+		{% for comment in comments %}
 		<div class="comment">
-			<h3 class="comment-author">{{ comment.author }}</h3>
-			<p>{{ comment.body }}</p>
-			<p><small>{{ comment.create_date }}</small></p>
+			<p class="sm_icon_class_actual_play">{{ comment.body }}</p>
+			<span class="comment-author">{{ comment.author }}</span>
+			<span><small>{{ comment.created_date }}</small></span>
 		</div>
 		{% empty %}
 		<p>No comments yet...</p>
+		{% endfor %}
 		{% if user.is_authenticated %}
 		<div class="comment-form">
-			<form method='POST' action='/comment'>
-				<filedset>
-					<label>Comment</label><br />
-					<textarea name="body"></textarea><br />
-					<label>Name</label><br />
-					<input type="text" name="author" /><br />
-					<input type="submit" name="submit" value="Save" />
-				</filedset>
+			<form method='POST' action='comment/'>
+				{% csrf_token %}
+				{{ form.as_ul }}
+				<input type="hidden" name="entry_id" value="{{ story.pk }}" />
+				<input type="submit" name="submit" value="Save" />
 			</form>
 		</div>
 		{% endif %}
-		{% endfor %}
 	</div>
 </div>
 <div class="sidebar">

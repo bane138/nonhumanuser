@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from app.views import IndexView, ProfileView
-from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
+from blog.views import StoriesView, StoryView, ArticleView, ArticlesView,\
+ArticlesCommentView, StoriesCommentView
 
 from nonhumanuser import settings
 
@@ -26,8 +27,12 @@ urlpatterns = [
     url(r'^blog/', include('blog.urls')),
     url(r'^stories/$', StoriesView.as_view(), name="stories"),
     url(r'^stories/(?P<slug>[\w-]+)/$', StoryView.as_view(), name="story"),
+    url(r'^stories/(?P<slug>[\w-]+)/comment/$', StoriesCommentView.as_view(), 
+        name='story comment'),
     url(r'^articles/$', ArticlesView.as_view(), name="articles"),
     url(r'^articles/(?P<slug>[\w-]+)/$', ArticleView.as_view(), name="article"),
+    url(r'^articles/(?P<slug>[\w-]+)/comment/$', ArticlesCommentView.as_view(), 
+        name='article comment'),
     url(r'^library/', include('library.urls')),
     url(r'^media/library/', include('library.urls')),
     url(r'^media/actual_play/', include('actual_play.urls')),
