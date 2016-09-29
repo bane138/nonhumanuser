@@ -7,7 +7,7 @@ class ItemCreateForm(ModelForm):
 		exclude = ('slug',)
 
 
-class ItemCommentForm(forms.ModelForm):
-	class Meta:
-		model = ItemComment
-		fields = ('author', 'body'	)
+class ItemCommentForm(ModelForm):
+  class Meta:
+    model = ItemComment
+    exclude = ('item', 'created_date', 'approved', 'author')

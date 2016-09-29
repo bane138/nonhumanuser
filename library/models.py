@@ -70,7 +70,7 @@ class Item(models.Model):
 
 
 class ItemComment(models.Model):
-	comment = models.ForeignKey(Item, related_name='comments')
+	item = models.ForeignKey(Item, related_name='comments')
 	body = models.TextField()
 	author = models.CharField(max_length=200)
 	created_date = models.DateTimeField(auto_now=True)
@@ -81,7 +81,7 @@ class ItemComment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return self.text
+		return self.item.title
 
 
 class ItemType(models.Model):

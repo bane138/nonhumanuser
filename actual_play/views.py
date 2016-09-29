@@ -51,10 +51,14 @@ class GameView(View):
 		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
 		form = GameCommentForm(request.POST)
+		game_comments = game.comments.all()
+		game.number_comments = game_comments.count()
+		game.number_views = game.number_views + 1
+		game.save()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
 			'game': game, 'items_recent': items_recent, 
 			'items_popular': items_popular, 'links': links, 'form': form, 
-			'icon_class': 'lg_icon_class_actual_play'})
+			'comments': game_comments, 'icon_class': 'lg_icon_class_actual_play'})
 
 
 class GameResourceView(View):
@@ -82,17 +86,16 @@ class GameCommentView(View):
 	template = 'actual_play/game.html'
 
 	def post(self, request, *args, **kwargs):
+		print(kwargs)
 		form = GameCommentForm(request.POST)
 
 		if form.is_valid():
 			body = form.cleaned_data['body']
-			author = form.cleaned_data['author']
+			author = request.user.username
 			game = Game.objects.get(pk=request.POST.get('game_id'))
 			group = game.group
 			instance = GameComment(body=body, author=author, game=game)
 			instance.save()
 
-			return HttpResponseRedirect(
-				'/actual_play/' + group.slug + '/' + game.slug + '/')
-
-		print('ok cool')
+		return HttpResponseRedirect(
+			'/actual_play/' + kwargs['group'] + '/' + kwargs['slug'] + '/')
