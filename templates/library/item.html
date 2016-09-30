@@ -16,7 +16,7 @@
 		<div class="center">
 			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
 			{% if item.image %}
-				<p><img src="{{ item.image.url }}" alt="{{ item.title }}" width="760" /></p>
+				<p><img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" /></p>
 			{% endif %}
 			<P>{{ item.body|safe }}</P>
 			{% if item.resource %}

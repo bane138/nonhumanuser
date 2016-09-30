@@ -17,7 +17,7 @@
 					<h2><a class="lg_icon_class_stories" href="stories/{{ story.slug }}">{{ story.title }}</a></h2>
 					<a href="stories/{{ story.slug }}">
 					{% if story.image %}
-					<img src="{{ story.image.url }}" alt="{{ story.title }}" width="335" />
+					<img src="{{ story.image.url }}" alt="{{ story.title }}" />
 					{% endif %}
 					</a>
 					<p>{{ story.description|safe }}</p>
@@ -30,7 +30,7 @@
 					<h2><a class="lg_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">{{ game.title }}</a></h2>
 					<a href="actual_play/{{ game_group.slug }}/{{ game.slug }}">
 					{% if game.image %}
-					<img src="{{ game.image.url }}" alt="{{ game.title }}" width="335" />
+					<img src="{{ game.image.url }}" alt="{{ game.title }}" />
 					{% endif %}
 					</a>
 					<p>{{ game.description|safe }}</p>
@@ -43,7 +43,7 @@
 					<h2><a class="lg_icon_class_articles" href="articles/{{ article.slug }}">{{ article.title }}</a></h2>
 					<a href="articles/{{ article.slug }}">
 					{% if article.image %}
-					<img src="{{ article.image.url }}" alt="{{ article.title }}" width="335" />
+					<img src="{{ article.image.url }}" alt="{{ article.title }}" />
 					{% endif %}
 					</a>
 					<p>{{ article.description|safe }}</p>
@@ -56,7 +56,7 @@
 					<h2><a class="lg_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.title }}</a></h2>
 					<a href="library/{{ library_item.item_type }}/{{ library_item.slug }}">
 					{% if library_item.image %}
-					<img src="{{ library_item.image.url }}" alt="{{ library_item.title }}" width="335" />
+					<img src="{{ library_item.image.url }}" alt="{{ library_item.title }}" />
 					{% endif %}
 					</a>
 					<p>{{ library_item.description|safe }}</p>

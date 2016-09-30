@@ -17,7 +17,7 @@
 			<div class="center">
 				<h2><a class="{{ icon_class }}" href="{{ item.slug }}">{{ item.title }}</a></h2>
 				{% if item.thumbnail %}
-					<p><img src="{{ item.thumbnail.url }}" alt="{{ item.title }}" width="760" /></p>
+					<p><img class="content-image" src="{{ item.thumbnail.url }}" alt="{{ item.title }}" /></p>
 				{% endif %}
 				<p>{{ item.created_date }}</p>
 			</div>

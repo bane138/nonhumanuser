@@ -18,7 +18,8 @@ class IndexView(View):
 		items_recent = Item.objects.all().order_by('-created_date')[0:5]
 		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, 'library/index.html', {'section': {'name': 'Library'}, 
+		return render(request, 'library/index.html', 
+			{'section': {'name': 'Library'}, 
 			'stacks': stacks, 'items_recent': items_recent, 
 			'items_popular': items_popular, 'links': links})
 
@@ -67,13 +68,15 @@ class ItemResourceView(View):
 		or u'WebKit' in request.META['HTTP_USER_AGENT']:
 			pass
 		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + \
-		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + self.kwargs['filename']
+		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + \
+		self.kwargs['filename']
 		file_wrapper = FileWrapper(open(file_path, 'rb'))
 		file_mimetype = mimetypes.guess_type(file_path)
 		response = HttpResponse(file_wrapper, content_type=file_mimetype)
 		response['X-Sendfile'] = file_path
 		response['Content-Length'] = os.stat(file_path).st_size
-		response['Content-Diposition'] = 'attachment; filename="%s"' % smart_str(self.kwargs['filename'])
+		response['Content-Diposition'] = 'attachment; filename="%s"' \
+		% smart_str(self.kwargs['filename'])
 		return response
 
 

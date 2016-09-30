@@ -15,7 +15,7 @@
 		<div class="center">
 			<h2><a class="{{ icon_class }}" href="{{ story.slug }}" >{{ story.title }}</a></h2>
 			{% if story.thumbnail %}
-				<p><img src="{{ story.thumbnail.url }}" /></p>
+				<p><img class="content-image" src="{{ story.thumbnail.url }}" /></p>
 			{% endif %}
 			<p>{{ story.description|safe }}</p>
 			<p><small>{{ story.publish_date }}</small></p>
