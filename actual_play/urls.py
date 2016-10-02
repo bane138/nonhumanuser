@@ -1,10 +1,6 @@
 from django.conf.urls import url
-<<<<<<< HEAD
-from actual_play.views import IndexView,GameGroupView,GameView,GameResourceView,GameCommentView
-=======
 from actual_play.views import IndexView,GameGroupView,\
 GameView,GameResourceView,GameCommentView
->>>>>>> 2a5a7abc3ce316b9bf75a62408a01e1916372d5e
 
 urlpatterns = [
 	url(r'^$', IndexView.as_view(), name='index'),
