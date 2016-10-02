@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import View
-from library.models import Item, Stack
+from library.models import Item, Stack, ItemComment
+from library.forms import ItemCommentForm
 from nonhumanuser import settings
 import os
 import mimetypes
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
 from nonhumanuser.utils import *
@@ -17,7 +18,8 @@ class IndexView(View):
 		items_recent = Item.objects.all().order_by('-created_date')[0:5]
 		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, 'library/index.html', {'section': {'name': 'Library'}, 
+		return render(request, 'library/index.html', 
+			{'section': {'name': 'Library'}, 
 			'stacks': stacks, 'items_recent': items_recent, 
 			'items_popular': items_popular, 'links': links})
 
@@ -49,10 +51,15 @@ class ItemView(View):
 		items_recent = Item.objects.all().order_by('-created_date')[0:5]
 		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
 		links = get_main_links()
+		form = ItemCommentForm(request.POST)
+		item_comments = item.comments.all()
+		item.number_comments = item_comments.count()
+		item.number_views = item.number_views + 1
+		item.save()
 		return render(request, self.template, {'section': {'name': stack.name}, 
 			'item': item, 'stacks': stacks, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links, 
-			'icon_class': 'lg_icon_class_library'})
+			'items_popular': items_popular, 'links': links, 'form': form, 
+			'comments': item_comments, 'icon_class': 'lg_icon_class_library'})
 
 
 class ItemResourceView(View):
@@ -61,16 +68,30 @@ class ItemResourceView(View):
 		or u'WebKit' in request.META['HTTP_USER_AGENT']:
 			pass
 		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + \
-		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + self.kwargs['filename']
+		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + \
+		self.kwargs['filename']
 		file_wrapper = FileWrapper(open(file_path, 'rb'))
 		file_mimetype = mimetypes.guess_type(file_path)
 		response = HttpResponse(file_wrapper, content_type=file_mimetype)
 		response['X-Sendfile'] = file_path
 		response['Content-Length'] = os.stat(file_path).st_size
-		response['Content-Diposition'] = 'attachment; filename="%s"' % smart_str(self.kwargs['filename'])
+		response['Content-Diposition'] = 'attachment; filename="%s"' \
+		% smart_str(self.kwargs['filename'])
 		return response
 
 
 class ItemCommentView(View):
+	template = 'library/item.html'
+
 	def post(self, request, *args, **kwargs):
-		pass
+		form = ItemCommentForm(request.POST)
+
+		if form.is_valid():
+			body = form.cleaned_data['body']
+			author = request.user.username
+			item = Item.objects.get(pk=request.POST.get('item_id'))
+			instance = ItemComment(body=body, author=author, item=item)
+			instance.save()
+
+		return HttpResponseRedirect(
+			'/library/' + kwargs['stack'] + '/' + kwargs['slug'] + '/')

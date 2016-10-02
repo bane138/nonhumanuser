@@ -41,9 +41,12 @@ class Item(models.Model):
 		null=True)
 	number_views = models.IntegerField(default=0)
 	number_comments = models.IntegerField(default=0)
-	thumbnail = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
-	image = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
-	resource = models.FileField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
+	thumbnail = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
+	image = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
+	resource = models.FileField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
 
 	def save(self):
 		if not self.id:
@@ -63,14 +66,15 @@ class Item(models.Model):
 		return stack.name
 
 	def get_absolute_url(self):
-		return reverse('item', kwargs={'stack': self.get_stack_name(), 'slug': self.slug})
+		return reverse('item', kwargs={'stack': self.get_stack_name(), 
+			'slug': self.slug})
 
 	def __str__(self):
 		return self.title
 
 
 class ItemComment(models.Model):
-	comment = models.ForeignKey(Item, related_name='comments')
+	item = models.ForeignKey(Item, related_name='comments')
 	body = models.TextField()
 	author = models.CharField(max_length=200)
 	created_date = models.DateTimeField(auto_now=True)
@@ -81,7 +85,7 @@ class ItemComment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return self.text
+		return self.item.title
 
 
 class ItemType(models.Model):
