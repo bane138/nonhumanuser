@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 from actual_play.models import GameGroup, Game, Player
 from nonhumanuser.utils import *
 from nonhumanuser import settings
 from wsgiref.util import FileWrapper
 from django.utils.encoding import smart_str
+from actual_play.models import GameComment
 import mimetypes
 import datetime
 import os
@@ -71,3 +73,13 @@ class GameResourceView(View):
 		response['Content-Length'] = os.stat(file_path).st_size
 		response['Content-Diposition'] = 'attachment; filename=%s' % smart_str(self.kwargs['filename'])
 		return response
+
+@csrf_protect
+class GameCommentView(View):
+	template = 'actual_play/game.html'
+
+	def post(self, request, *args, **kwargs):
+		comment = GameComment(body=kwargs['body'], author=kwargs['author'])
+		comment.save()
+
+		return render(request, self.template, {'icon_class': 'lg_icon_class_actual_play'})
