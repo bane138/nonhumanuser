@@ -44,10 +44,8 @@ INSTALLED_APPS = [
     'blog',
     'library',
     'actual_play',
-    'django_markdown',
-    'django_markdown2',
-    'markdown_deux',
     'django_extensions',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [

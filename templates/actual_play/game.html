@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}{{ game.name }}{% endblock %}
 {% block description %}{{ game.description }}{% endblock %}
@@ -60,7 +61,7 @@
 		<div class="comment-form">
 			<form method='POST' action='comment/'>
 				{% csrf_token %}
-				{{ form.as_ul }}
+				{% bootstrap_form form %}
 				<input type="hidden" name="game_id" value="{{ game.pk }}" />
 				<input type="submit" name="submit" value="Save" />
 			</form>
