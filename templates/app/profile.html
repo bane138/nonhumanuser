@@ -6,10 +6,7 @@
 
 {% block content %}
 <div class="page">
-  <div class="section-heading">
-    <img src="{% static "images/" %}{{ section.title }}.png" />
-  </div>
-  <div class="content">
+  <div class="content profile">
   <h1>{{ user.username }} Profile</h1>
   <form id="user_form" method="post" action="/members/login/?next=/" 
   enctype="multipart/form-data">

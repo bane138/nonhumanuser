@@ -211,6 +211,11 @@ li {
     display: inline-block;
 }
 
+.profile {
+    position: relative;
+    top: 80 px;
+}
+
 .content-list {
     background: #fff;
     margin: 0;
@@ -230,6 +235,10 @@ li {
 
 .content-box img {
     width: 300px;
+}
+
+.content-image {
+    width: 700px;
 }
 
 .library-stacks {
@@ -472,6 +481,10 @@ footer {
     .sidebar {
         padding-top: 10px;
     }
+
+    .content-image {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width : 850px) {
@@ -563,6 +576,10 @@ footer {
 
     .sidebar-links {
 
+    }
+
+    .content-image {
+        width: 100%;
     }
 
 }
