@@ -91,6 +91,7 @@ class GameCommentView(View):
 		if form.is_valid():
 			body = form.cleaned_data['body']
 			author = request.user.username
+			user = request.user
 			game = Game.objects.get(pk=request.POST.get('game_id'))
 			group = game.group
 			instance = GameComment(body=body, author=author, game=game)

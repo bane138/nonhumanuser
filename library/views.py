@@ -89,6 +89,7 @@ class ItemCommentView(View):
 		if form.is_valid():
 			body = form.cleaned_data['body']
 			author = request.user.username
+			user = request.user
 			item = Item.objects.get(pk=request.POST.get('item_id'))
 			instance = ItemComment(body=body, author=author, item=item)
 			instance.save()

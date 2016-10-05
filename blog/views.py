@@ -63,6 +63,7 @@ class StoriesCommentView(View):
 		if form.is_valid():
 			body = form.cleaned_data['body']
 			author = request.user.username
+			user = request.user
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
 			instance = EntryComment(body=body, author=author, entry=entry)
 			instance.save()
@@ -120,6 +121,7 @@ class ArticlesCommentView(View):
 		if form.is_valid():
 			body = form.cleaned_data['body']
 			author = request.user.username
+			user = request.user
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
 			instance = EntryComment(body=body, author=author, entry=entry)
 			instance.save()

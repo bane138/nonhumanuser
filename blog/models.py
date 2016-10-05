@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Blog(models.Model):
@@ -67,6 +68,7 @@ class EntryComment(models.Model):
     entry = models.ForeignKey(Entry, related_name='comments')
     body = models.TextField()
     author = models.CharField(max_length=200)
+    user = models.ForeignKey(User, related_name='blog_user', null=True, blank=True)
     created_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
 
