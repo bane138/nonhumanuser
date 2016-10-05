@@ -76,9 +76,9 @@ class Item(models.Model):
 
 class ItemComment(models.Model):
 	item = models.ForeignKey(Item, related_name='comments')
-	body = models.TextField()
-	author = models.CharField(max_length=200)
-	user = models.ForeignKey(User, related_name='library_user', null=True, blank=True)
+	comment = models.TextField()
+	user = models.ForeignKey(User, related_name='library_user', 
+		null=True, blank=True)
 	created_date = models.DateTimeField(auto_now=True)
 	approved = models.BooleanField(default=False)
 

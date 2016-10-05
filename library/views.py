@@ -87,11 +87,10 @@ class ItemCommentView(View):
 		form = ItemCommentForm(request.POST)
 
 		if form.is_valid():
-			body = form.cleaned_data['body']
-			author = request.user.username
+			comment = form.cleaned_data['comment']
 			user = request.user
 			item = Item.objects.get(pk=request.POST.get('item_id'))
-			instance = ItemComment(body=body, author=author, item=item)
+			instance = ItemComment(comment=comment, user=user, item=item)
 			instance.save()
 
 		return HttpResponseRedirect(
