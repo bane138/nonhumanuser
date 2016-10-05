@@ -205,6 +205,26 @@ li {
 /* ==========================================================================
     Content
    ========================================================================== */
+
+.accounts {
+    position: relative;
+    margin-top: 120px;
+}
+
+.accounts-container {
+    width: 600px;
+    height: 530px;
+    margin: 0 auto;
+    background-image: url('../images/elder_sign_lg.png');
+    background-repeat: no-repeat;
+}
+
+.accounts-form {
+    width: 320px;
+    margin: 0 auto;
+    background: none;
+}
+
 .content {
     width: 75%;
     padding: 10px;
@@ -634,6 +654,14 @@ footer {
     .content-image {
         width: 100%;
     }
+
+    .accounts-container {
+        width: 400px;
+        height: 353px;
+        margin: 0 auto;
+        background-image: url('../images/elder_sign_md.png');
+        background-repeat: no-repeat;
+    }
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
@@ -642,6 +670,14 @@ footer {
     
     .span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
     width: 100%; 
+    }
+
+    .accounts-container {
+        width: 320px;
+        height: 282px;
+        margin: 0 auto;
+        background-image: url('../images/elder_sign_sm.png');
+        background-repeat: no-repeat;
     }
 }
 

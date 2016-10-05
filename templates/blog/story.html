@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% load markdown_deux_tags %}
+{% load bootstrap3 %}
 
 {% block title %}{{ story.title }}{% endblock %}
 {% block description %}{{ story.description }}{% endblock %}
@@ -35,7 +35,7 @@
 		<div class="comment-form">
 			<form method='POST' action='comment/'>
 				{% csrf_token %}
-				{{ form.as_ul }}
+				{% bootstrap_form form %}
 				<input type="hidden" name="entry_id" value="{{ story.pk }}" />
 				<input type="submit" name="submit" value="Save" />
 			</form>

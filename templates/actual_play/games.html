@@ -16,7 +16,7 @@
 		<div class="center">
 			<h2><a class="{{ icon_class }}"  href="{{ game.slug }}">{{ game.title }}</a></h2>
       {% if game.thumbnail %}
-        <p><img class="content-image" src="{{ game.thumbnail.url }}" /></p>
+        <p><img class="content-image" src="{{ game.thumbnail.url }}" alt="{{ game.title }}" /></p>
       {% endif %}
 			<p>{{ game.created_date }}</p>
 		</div>

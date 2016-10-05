@@ -1,12 +1,13 @@
 from django import forms
 from django.core.files.images import get_image_dimensions
 
-from nonhumanuser.models import UserProfile
+from app.models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
+        fields = ['first_name', 'last_name', 'avatar']
 
     def clean_email(self):
         username = self.cleaned_data.get('username')
