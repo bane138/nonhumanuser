@@ -24,9 +24,14 @@
 		Comments: {{ comments.count }}
 		{% for comment in comments %}
 		<div class="comment">
-			<p class="sm_icon_class_actual_play">{{ comment.body }}</p>
-			<span class="comment-author">{{ comment.author }}</span>
+			<span class="comment-image">
+				{% if comment.user.avatar %}
+				<img src="{{ comment.user.avatar }}" width="80"/>
+				{% endif %}
+			</span>
+			<span class="comment-author">{{ comment.user.username }}</span>
 			<span><small>{{ comment.created_date }}</small></span>
+			<p class="sm_icon_class_actual_play">{{ comment.comment }}</p>
 		</div>
 		{% empty %}
 		<p>No comments yet...</p>
@@ -37,7 +42,7 @@
 				{% csrf_token %}
 				{% bootstrap_form form %}
 				<input type="hidden" name="entry_id" value="{{ article.pk }}" />
-				<input type="submit" name="submit" value="Save" />
+				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
 			</form>
 		</div>
 		{% endif %}

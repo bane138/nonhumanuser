@@ -145,7 +145,7 @@ MEDIA_URL = '/media/'
 MARKDOWN_EDITOR_SKIN = 'simple'
 
 # Registration
-AUTH_PROFILE_MODULE = "app.UserProfile"
+AUTH_PROFILE_MODULE = "app.Profile"
 ACCOUNT_ACTIVATION_DAYS = 30
 
 EMAIL_HOST = 'localhost'

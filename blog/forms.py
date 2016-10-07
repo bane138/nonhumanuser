@@ -6,4 +6,4 @@ from django_markdown.widgets import MarkdownWidget
 class EntryCommentForm(ModelForm):
   class Meta:
     model = EntryComment
-    exclude = ('entry', 'created_date', 'approved', 'author')
+    exclude = ('entry', 'created_date', 'approved', 'user')

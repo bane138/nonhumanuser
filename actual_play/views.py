@@ -89,11 +89,11 @@ class GameCommentView(View):
 		form = GameCommentForm(request.POST)
 
 		if form.is_valid():
-			body = form.cleaned_data['body']
-			author = request.user.username
+			comment = form.cleaned_data['comment']
+			user = request.user
 			game = Game.objects.get(pk=request.POST.get('game_id'))
 			group = game.group
-			instance = GameComment(body=body, author=author, game=game)
+			instance = GameComment(comment=comment, game=game, user=user)
 			instance.save()
 
 		return HttpResponseRedirect(

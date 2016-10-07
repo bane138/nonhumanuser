@@ -10,4 +10,4 @@ class ItemCreateForm(ModelForm):
 class ItemCommentForm(ModelForm):
   class Meta:
     model = ItemComment
-    exclude = ('item', 'created_date', 'approved', 'author')
+    exclude = ('item', 'created_date', 'approved', 'user')

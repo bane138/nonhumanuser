@@ -1,13 +1,15 @@
 from django import forms
 from django.core.files.images import get_image_dimensions
+from django.contrib.auth.models import User
 
-from app.models import UserProfile
+from app.models import Profile
 
 
-class UserProfileForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        fields = ['first_name', 'last_name', 'avatar']
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
 
     def clean_email(self):
         username = self.cleaned_data.get('username')
@@ -20,8 +22,15 @@ class UserProfileForm(forms.ModelForm):
 
         return email
 
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['avatar']
+
+    """
     def clean_avatar(self):
-        avatar = self.cleaned_data['avatar']
+        avatar = self.cleaned_data.get('avatar')
 
         try:
             w, h = get_image_dimensions(avatar)
@@ -45,18 +54,19 @@ class UserProfileForm(forms.ModelForm):
                     u'Avatar file size may not exceed 20k.')
 
         except AttributeError:
-            """
+            
             Handles case when we are updating the user profile
             and do not supply a new avatar
-            """
+            
             pass
 
         return avatar
+    """
+
 
     def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.avatar = self.cleaned_data['avatar']
+        user = super(ProfileForm, self).save(commit=True)
+        #user.avatar = self.cleaned_data.get('avatar')
 
         if commit:
             user.save()

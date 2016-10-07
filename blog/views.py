@@ -61,10 +61,10 @@ class StoriesCommentView(View):
 		form = EntryCommentForm(request.POST)
 
 		if form.is_valid():
-			body = form.cleaned_data['body']
-			author = request.user.username
+			comment = form.cleaned_data['comment']
+			user = request.user
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
-			instance = EntryComment(body=body, author=author, entry=entry)
+			instance = EntryComment(comment=comment, user=user, entry=entry)
 			instance.save()
 
 		return HttpResponseRedirect(
@@ -118,10 +118,10 @@ class ArticlesCommentView(View):
 		form = EntryCommentForm(request.POST)
 
 		if form.is_valid():
-			body = form.cleaned_data['body']
-			author = request.user.username
+			comment = form.cleaned_data['comment']
+			user = request.user
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
-			instance = EntryComment(body=body, author=author, entry=entry)
+			instance = EntryComment(comment=comment, user=user, entry=entry)
 			instance.save()
 
 		return HttpResponseRedirect(

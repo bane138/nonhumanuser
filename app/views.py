@@ -2,17 +2,19 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
 import datetime
-from django.views.generic import View, UpdateView
+from django.views.generic import View, UpdateView, DetailView
 from actual_play.models import GameGroup, Game, Player
 from blog.models import Blog, Entry, Category
 from library.models import Stack, Item
 from itertools import chain
 from nonhumanuser.utils import *
-from app.models import UserProfile
-from app.forms import UserProfileForm
-
+from app.models import Profile
+from app.forms import UserForm, ProfileForm
+from django.contrib import messages
 
 # Create your views here.
 class IndexView(View):
@@ -55,30 +57,32 @@ class IndexView(View):
         return render(request, 'app/index.html', context)
 
 
-class ProfileView(UpdateView):
+class UpdateProfileView(UpdateView):
     """
     Display user profile
     """
-    model = UserProfile
-    fields = ['first_name', 'last_name', 'avatar']
-    template_name = 'app/profile.html'
-    slug_field = 'id'
-    slug_url_kwarg = 'slug'
-
-
-class ProfileEditView(View):
-    template = 'app/profile.html'
-
+    @transaction.atomic
     def post(self, request, *args, **kwargs):
-        print('here we are')
-        user = request.user
-        #form = UserProfileForm(request.POST)
-        """
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(self.template)
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile update successful.')
         else:
-            form = UserProfile()
-        """
+            messages.error(request, 'Please correct the error below.')
 
-        return render(request, self.template, {})
+        return render(request, 'app/profile.html', {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            })
+
+
+    def get(self, request, *args, **kwargs):
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+
+        return render(request, 'app/profile.html', {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            })

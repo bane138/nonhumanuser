@@ -16,4 +16,4 @@ class PlayerCreateForm(ModelForm):
 class GameCommentForm(ModelForm):
   class Meta:
     model = GameComment
-    exclude = ('game', 'created_date', 'approved', 'author')
+    exclude = ('game', 'created_date', 'approved', 'user')

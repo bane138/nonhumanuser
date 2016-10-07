@@ -262,6 +262,11 @@ li {
     width: 700px;
 }
 
+.comment {
+    margin: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
 .library-stacks {
     padding: 3px 10px;
     border-right: 1px solid #000;

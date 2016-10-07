@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app.views import IndexView, ProfileView, ProfileEditView
+from app.views import IndexView, UpdateProfileView
 from blog.views import StoriesView, StoryView, ArticleView, ArticlesView,\
 ArticlesCommentView, StoriesCommentView
 
@@ -40,10 +40,10 @@ urlpatterns = [
     url(r'^members/', include('django.contrib.auth.urls')),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
-    url(r'^accounts/profile/(?P<slug>[\-\w]+)/$', ProfileView.as_view(),
+    url(r'^accounts/profile/(?P<slug>[\-\w]+)/$', UpdateProfileView.as_view(),
         name='profile'),
-    url(r'^accounts/profile/edit/(?P<slug>[\-\w]+)/$', 
-        ProfileEditView.as_view(), name='edit_profile'),
+    #url(r'^accounts/profile/edit/(?P<slug>[\-\w]+)/$', 
+    #    ProfileEditView.as_view(), name='edit_profile'),
 ]
 
 if settings.DEBUG:
