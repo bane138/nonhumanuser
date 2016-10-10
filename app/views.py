@@ -11,6 +11,7 @@ from library.models import Stack, Item
 from itertools import chain
 from nonhumanuser.utils import *
 from app.models import UserProfile
+from app.utils import get_query
 
 
 # Create your views here.
@@ -64,3 +65,47 @@ class ProfileView(UpdateView):
 	template_name = 'app/profile.html'
 	slug_field = 'id'
 	slug_url_kwarg = 'slug'
+
+
+class SearchView(View):
+    template = 'app/search_results.html'
+
+    def get(self, request, *args, **kwargs):
+        query_string = ''
+        found_entries = None
+
+        # Sidebar
+        entry_recent = Entry.objects.filter(active=True).order_by('-created_date')
+        library_recent = Item.objects.filter(active=True).order_by('-created_date')
+        games_recent = Game.objects.filter(active=True).order_by('-created_date')
+        items_recent = list(chain(entry_recent, library_recent, games_recent))
+        entry_popular = Entry.objects.filter(active=True).order_by('-number_comments')
+        library_popular = Item.objects.filter(active=True).order_by('-number_comments')
+        games_popular = Game.objects.filter(active=True).order_by('-number_comments')
+        items_popular = list(chain(entry_popular, library_popular, games_popular))
+        links = get_main_links()
+
+        context = {
+            'items_recent': items_recent[0:5],
+            'items_popular': items_popular[0:5],
+            'links': links,
+        }
+
+        if ('q' in request.GET) and request.GET['q'].strip():
+            query_string = request.GET['q']
+
+            entry_query = get_query(query_string, ['title', 'body',])
+
+            # have to figure out the type here
+
+            entries = Entry.objects.filter(entry_query)\
+            .order_by('-publish_date')
+            items = Item.objects.filter(entry_query).order_by('-publish_date')
+            games = Game.objects.filter(entry_query).order_by('-publish_date')
+
+            found_entries = list(chain(entries, items, games))
+
+        context['query_string'] = query_string
+        context['found_entries'] = found_entries
+        return render(request, self.template, 
+            context, context_instance=RequestContext(request))

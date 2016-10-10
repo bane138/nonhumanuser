@@ -121,10 +121,11 @@ a:visited, a:active {
 header {
     background: #fff;
     width: 100%;
-    height: 105px;
+    height: 115px;
     position: fixed;
     top: 0;
     left: 0;
+    padding: 10px;
     border-bottom: 4px solid #efefef;
     z-index: 100;
 }
@@ -152,7 +153,7 @@ section {
     
 nav {
     float: right;
-    padding: 40px 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .menu-icon {
@@ -225,9 +226,19 @@ li {
     background: none;
 }
 
+.search-input {
+    float: right;
+    width: 200px !important;
+}
+
+.search-btn {
+    float: right;
+}
+
 .content {
     width: 75%;
-    padding: 10px;
+    padding: 0;
+    margin-right: 20px;
     display: inline-block;
 }
 
@@ -254,6 +265,11 @@ li {
 
 .content-image {
     width: 700px;
+}
+
+.comment {
+    margin: 5px 0;
+    border-bottom: 1px solid #ddd;
 }
 
 .library-stacks {
@@ -520,6 +536,7 @@ footer {
     nav {
 
     }
+
     .nav-center {
         width: 400px;
     }

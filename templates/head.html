@@ -1,6 +1,10 @@
 {% load staticfiles %}
 <header>
 	<a href="/" id="logo" alt="nonhumanuser.com"></a>
+	<form method="GET" action='search/'>
+	<input type="text" name="q" class="form-control search-input" />
+	<input type="submit" name="search" value="SEARCH" class="btn btn-primary search-btn" />
+	</form>
 	<nav>
 		<a href="#" class="menu-icon"></a>
 		<ul>

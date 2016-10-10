@@ -30,7 +30,8 @@ class Game(models.Model):
 		on_delete=models.PROTECT,
 		blank=True,
 		null=True)
-	description = models.TextField()
+	body = models.TextField(blank=True, null=True)
+	description = models.TextField(blank=True, null=True)
 	active = models.BooleanField(default=False)
 	number_views = models.IntegerField(default=0)
 	number_comments = models.IntegerField(default=0)

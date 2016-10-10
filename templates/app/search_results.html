@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{ site.title }}{% endblock %}
+{% block description %}{{ site.description }}{% endblock %}
+
+{% block content %}
+<div class="page">
+  <div class="section-heading">
+    <img src="{% static "images/" %}Search.png" />
+  </div>
+  <div class="content">
+    <ul>
+    {% for entry in found_entries %}
+      <li>
+        {% if entry.group %}
+        <h2><a class="lg_icon_class_actual_play" href="actual_play/{{ entry.group.slug }}/{{ entry.slug }}">{{ entry.title }}</a></h2>
+        <a href="actual_play/{{ entry.group.slug }}/{{ entry.slug }}">
+        {% elif entry.category %}
+        <h2><a class="lg_icon_class_{{ entry.category.name }}" href="{{ entry.category.name }}/{{ entry.slug }}">{{ entry.title }}</a></h2>
+        <a href="{{ entry.category.name }}/{{ entry.slug }}">
+        {% else %}
+        <h2><a class="lg_icon_class_library" href="library/{{ entry.item_type }}/{{ entry.slug }}">{{ entry.title }}</a></h2>
+        <a href="library/{{ entry.item_type }}/{{ entry.slug }}">
+        {% endif %}
+
+        {% if entry.image %}
+        <img src="{{ entry.image.url }}" alt="{{ entry.title }}" />
+        {% endif %}
+        </a>
+        <p>{{ entry.description|safe }}</p>
+        <p class="date">{{ entry.created_date }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="sidebar">
+    {% include 'sidebar.html' %}
+  </div>
+</div>
+{% endblock %}

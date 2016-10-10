@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app.views import IndexView, ProfileView
+from app.views import IndexView, ProfileView, SearchView
 from blog.views import StoriesView, StoryView, ArticleView, ArticlesView,\
 ArticlesCommentView, StoriesCommentView
 
@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
         name='update_user'),
+    url(r'^search/(?P<q>.*)$', SearchView.as_view(), name='search'),
 ]
 
 if settings.DEBUG:
