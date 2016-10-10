@@ -61,7 +61,6 @@ class ProfileForm(forms.ModelForm):
             pass
 
         return avatar
-    """
 
 
     def save(self, commit=True):
@@ -72,3 +71,4 @@ class ProfileForm(forms.ModelForm):
             user.save()
 
         return user
+    """
