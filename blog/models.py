@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Blog(models.Model):
@@ -13,12 +14,13 @@ class Blog(models.Model):
     def __str__(self):
         return self.name
 
+
 class Entry(models.Model):
     blog = models.ForeignKey(Blog)
     title = models.CharField(max_length=250)
     body = models.TextField()
     slug = models.SlugField(editable=False)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(null=True, blank=True)
     active =  models.BooleanField(default=False)
     created_date = models.DateTimeField('created date')
     modified_date = models.DateTimeField()
@@ -29,6 +31,13 @@ class Entry(models.Model):
     number_comments = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
     image = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
+
+    @property
+    def sidebar_icon_class(self):
+        if self.category.name == 'Stories':
+            return 'sm_icon_class_stories'
+        else:
+            return 'sm_icon_class_articles'
 
     def save(self):
         if not self.id:
@@ -48,17 +57,18 @@ class Entry(models.Model):
         return name
 
     def get_absolute_url(self):
-        return reverse(self.get_category_name(), kwargs={'slug': self.slug})#self.get_category_name().lower()
+        return reverse(self.get_category_name(), kwargs={'slug': self.slug})
 
 
     def __str__(self):
         return self.title
 
+
 class EntryComment(models.Model):
     entry = models.ForeignKey(Entry, related_name='comments')
-    body = models.TextField()
-    author = models.CharField(max_length=200)
-    created_date = models.DateTimeField(default=timezone.now())
+    comment = models.TextField()
+    user = models.ForeignKey(User, related_name='blog_user', null=True, blank=True)
+    created_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
 
     def approve(self):

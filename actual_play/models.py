@@ -1,5 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.core.urlresolvers import reverse
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class GameGroup(models.Model):
@@ -22,28 +25,70 @@ class GameGroup(models.Model):
 
 
 class Game(models.Model):
-	name = models.CharField(max_length=255)
+	title = models.CharField(max_length=255)
 	group = models.ForeignKey('GameGroup', 
 		on_delete=models.PROTECT,
 		blank=True,
 		null=True)
-	description = models.TextField()
+	body = models.TextField(blank=True, null=True)
+	description = models.TextField(blank=True, null=True)
 	active = models.BooleanField(default=False)
+	number_views = models.IntegerField(default=0)
+	number_comments = models.IntegerField(default=0)
 	slug = models.SlugField(blank=True, null=True)
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
-	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d', blank=True, null=True)
-	audio = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/', blank=True, null=True)
-	video = models.FileField(upload_to='actual_play/video/%Y/%m/%d/', blank=True, null=True)
+	publish_date = models.DateTimeField(null=True, blank=True, default=None)
+	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d',\
+	 blank=True, null=True)
+	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/',\
+	 blank=True, null=True)
+	audio_mp3 = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/',\
+	 blank=True, null=True)
+	video_ogv = models.FileField(upload_to='actual_play/video/%Y/%m/%d/',\
+	 blank=True, null=True)
+	video_mp4 = models.FileField(upload_to='actual_play/video/%Y/%m/%d/',\
+	 blank=True, null=True)
+
+	@property
+	def sidebar_icon_class(self):
+	    return 'sm_icon_class_actual_play'
+	
+
+	def get_group_name(self):
+		if self.group:
+			group = GameGroup.objects.get(pk=self.group_id)
+
+		return group.slug
+
+	def get_absolute_url(self):
+		return reverse('game', kwargs={'group': self.get_group_name(), 
+			'slug': self.slug})
 
 	def save(self):
 		if not self.id:
-			self.slug = slugify(self.name)
+			self.slug = slugify(self.title)
 
 		super(Game, self).save()
 
 	def __str__(self):
-		return self.name
+		return self.title
+
+
+class GameComment(models.Model):
+	game = models.ForeignKey(Game, related_name='comments')
+	comment = models.TextField()
+	user = models.ForeignKey(User, related_name='actual_play_user', 
+		null=True, blank=True)
+	created_date = models.DateTimeField(auto_now=True)
+	approved = models.BooleanField(default=False)
+
+	def approve(self):
+		self.approved = True
+		self.save()
+
+	def __str__(self):
+		return self.game.title
 
 
 class Player(models.Model):
@@ -54,7 +99,8 @@ class Player(models.Model):
 	group = models.ManyToManyField(GameGroup)
 	active = models.BooleanField(default=True)
 	created_date = models.DateTimeField('created date')
-	image = models.ImageField(upload_to='actual_play/player/%Y/%m/%d', blank=True, null=True)
+	image = models.ImageField(upload_to='actual_play/player/%Y/%m/%d',\
+	 blank=True, null=True)
 
 
 	def __str__(self):

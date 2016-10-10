@@ -12,14 +12,17 @@
 	{% for article in articles %}
 		<article>
 			<div class="center">
-				<h2><a href="{{ article.slug }}" >{{ article.title }}</a></h2>
-				<p>{{ article.description }}</p>
+				<h2><a class="{{ icon_class }}" href="{{ article.slug }}" >{{ article.title }}</a></h2>
+				{% if article.thumbnail %}
+					<p><img class="content-image" src="{{ article.thumbnail.url }}" alt="{{ article.title }}" /></p>
+				{% endif %}
+				<p>{{ article.description|safe }}</p>
 				<p><small>{{ article.publish_date }}</small></p>
 			</div>
 		</article>
 	{% endfor %}
 </div>
 <div class="sidebar">
-	{% include 'sidebar.html' %}
+	{% include 'blog/articles_sidebar.html' %}
 </div>
 {% endblock %}

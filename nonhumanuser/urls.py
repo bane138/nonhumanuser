@@ -15,18 +15,43 @@ Including another URLconf
 """
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app import views
-from blog.views import StoriesView, StoryView, ArticleView, ArticlesView
+from app.views import IndexView, ProfileView, SearchView
+from blog.views import StoriesView, StoryView, ArticleView, ArticlesView,\
+ArticlesCommentView, StoriesCommentView
+
+from nonhumanuser import settings
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^stories/$', StoriesView.as_view(), name="stories"),
     url(r'^stories/(?P<slug>[\w-]+)/$', StoryView.as_view(), name="story"),
+    url(r'^stories/(?P<slug>[\w-]+)/comment/$', StoriesCommentView.as_view(), 
+        name='story comment'),
     url(r'^articles/$', ArticlesView.as_view(), name="articles"),
     url(r'^articles/(?P<slug>[\w-]+)/$', ArticleView.as_view(), name="article"),
+    url(r'^articles/(?P<slug>[\w-]+)/comment/$', ArticlesCommentView.as_view(), 
+        name='article comment'),
     url(r'^library/', include('library.urls')),
     url(r'^media/library/', include('library.urls')),
+    url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
+    url(r'^members/', include('django.contrib.auth.urls')),
+    url(r'^markdown/', include('django_markdown.urls')),
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^accounts/update/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
+        name='update_user'),
+    url(r'^search/(?P<q>.*)$', SearchView.as_view(), name='search'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += patterns('', 
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT
+            }))
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, 
+        document_root=settings.STATIC_ROOT)

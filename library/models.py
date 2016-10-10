@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Stack(models.Model):
@@ -41,36 +42,44 @@ class Item(models.Model):
 		null=True)
 	number_views = models.IntegerField(default=0)
 	number_comments = models.IntegerField(default=0)
-	thumbnail = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
-	image = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
-	resource = models.FileField(upload_to='library/item/%Y/%m/%d', blank=True, null=True)
+	thumbnail = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
+	image = models.ImageField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
+	resource = models.FileField(upload_to='library/item/%Y/%m/%d', blank=True, 
+		null=True)
 
 	def save(self):
 		if not self.id:
-			self.slug = slugify(self.name)
+			self.slug = slugify(self.title)
 
 		super(Item, self).save()
+
+	@property
+	def sidebar_icon_class(self):
+		return 'sm_icon_class_library'
 
 	def get_stack_name(self):
 		name = 'resources'
 		if self.stack:
 			stack = Stack.objects.get(pk=self.stack_id)
-			#name = stack.name.replace('s', '').lower()
 
 		return stack.name
 
 	def get_absolute_url(self):
-		return reverse('item', kwargs={'stack': self.get_stack_name(), 'slug': self.slug})
+		return reverse('item', kwargs={'stack': self.get_stack_name(), 
+			'slug': self.slug})
 
 	def __str__(self):
 		return self.title
 
 
 class ItemComment(models.Model):
-	comment = models.ForeignKey(Item, related_name='comments')
-	body = models.TextField()
-	author = models.CharField(max_length=200)
-	created_date = models.DateTimeField(default=timezone.now())
+	item = models.ForeignKey(Item, related_name='comments')
+	comment = models.TextField()
+	user = models.ForeignKey(User, related_name='library_user', 
+		null=True, blank=True)
+	created_date = models.DateTimeField(auto_now=True)
 	approved = models.BooleanField(default=False)
 
 	def approve(self):
@@ -78,7 +87,7 @@ class ItemComment(models.Model):
 		self.save()
 
 	def __str__(self):
-		return self.text
+		return self.item.title
 
 
 class ItemType(models.Model):

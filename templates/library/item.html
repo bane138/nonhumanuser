@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}{{ item.title }}{% endblock %}
 {% block description %}{{ item.descdription }}{% endblock %}
@@ -14,8 +15,11 @@
 	{% endfor %}
 	<article>
 		<div class="center">
-			<h2>{{ item.title }}</h2>
-			<P>{{ item.body }}</P>
+			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
+			{% if item.image %}
+				<p><img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" /></p>
+			{% endif %}
+			<P>{{ item.body|safe }}</P>
 			{% if item.resource %}
 				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
 			{% endif %}
@@ -23,27 +27,31 @@
 		</div>
 	</article>
 	<div class="comment-block">
-		Comments: {{ item.comments.count }}
-		{% for comment in item.itemcomment.all %}
+		Comments: {{ comments.count }}
+		{% for comment in comments %}
 		<div class="comment">
-			<h3 class="comment-author">{{ comment.author }}</h3>
-			<p>{{ comment.body }}</p>
-			<p><small>{{ comment.create_date }}</small></p>
+			<span class="comment-image">
+				{% if comment.user.avatar %}
+				<img src="{{ comment.user.avatar }}" width="80"/>
+				{% endif %}
+			</span>
+			<span class="comment-author">{{ comment.user.username }}</span>
+			<span><small>{{ comment.created_date }}</small></span>
+			<p class="sm_icon_class_actual_play">{{ comment.comment }}</p>
 		</div>
 		{% empty %}
 		<p>No comments yet...</p>
+		{% endfor %}
+		{% if user.is_authenticated %}
 		<div class="comment-form">
-			<form method='POST' action='/comment'>
-				<filedset>
-					<label>Comment</label><br />
-					<textarea name="body"></textarea><br />
-					<label>Name</label><br />
-					<input type="text" name="author" /><br />
-					<input type="submit" name="submit" value="Save" />
-				</filedset>
+			<form method='POST' action='comment/'>
+				{% csrf_token %}
+				{% bootstrap_form form %}
+				<input type="hidden" name="item_id" value="{{ item.pk }}" />
+				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
 			</form>
 		</div>
-		{% endfor %}
+		{% endif %}
 	</div>
 </div>
 <div class="sidebar">

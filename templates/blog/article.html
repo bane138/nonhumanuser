@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}{{ article.title }}{% endblock %}
 {% block description %}{{ article.description }}{% endblock %}
@@ -11,31 +12,40 @@
 <div class="content">
 	<article>
 		<div class="center">
-			<h2>{{ article.title }}</h2>
+			<h2 class="{{ icon_class }}">{{ article.title }}</h2>
 			{% if article.image %}
-				<p><img src="{{ article.image.path }}" /></p>
+				<p><img class="content-image" src="{{ article.image.url }}" alt="{{ story.title }}" /></p>
 			{% endif %}
-			<p>{{ article.body }}</p>
+			<p>{{ article.body|safe }}</p>
 			<p><small>{{ article.publish_date }}</small></p>
 		</div>
 	</article>
 	<div class="comment-block">
-		<div class="comment-form">
-			<form method='POST' action='/comment'>
-				<label>Comment</label>
-				<textarea name="body"></textarea><br />
-				<label>Name</label>
-				<input type="text" name="author" /><br />
-				<input type="submit" name="submit" value="Save" />
-			</form>
-		</div>
+		Comments: {{ comments.count }}
 		{% for comment in comments %}
 		<div class="comment">
-			<h3 class="comment-author">{{ comment.author }}</h3>
-			<p>{{ comment.body }}</p>
-			<p><small>{{ comment.create_date }}</small></p>
+			<span class="comment-image">
+				{% if comment.user.avatar %}
+				<img src="{{ comment.user.avatar }}" width="80"/>
+				{% endif %}
+			</span>
+			<span class="comment-author">{{ comment.user.username }}</span>
+			<span><small>{{ comment.created_date }}</small></span>
+			<p class="sm_icon_class_actual_play">{{ comment.comment }}</p>
 		</div>
+		{% empty %}
+		<p>No comments yet...</p>
 		{% endfor %}
+		{% if user.is_authenticated %}
+		<div class="comment-form">
+			<form method='POST' action='comment/'>
+				{% csrf_token %}
+				{% bootstrap_form form %}
+				<input type="hidden" name="entry_id" value="{{ article.pk }}" />
+				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
+			</form>
+		</div>
+		{% endif %}
 	</div>
 </div>
 <div class="sidebar">

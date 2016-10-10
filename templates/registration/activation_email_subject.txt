@@ -1,0 +1,1 @@
+Please verify your account creation within {{ expiration_days }} days.

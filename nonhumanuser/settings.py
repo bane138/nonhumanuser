@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -37,11 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'app',
     'blog',
     'library',
-    'actual_play'
+    'actual_play',
+    'django_extensions',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -116,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -133,6 +137,15 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# Media files (images, videosd, PDFs)
+# Media files (images, videos, PDFs)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Markdown
+MARKDOWN_EDITOR_SKIN = 'simple'
+
+# Registration
+ACCOUNT_ACTIVATION_DAYS = 30
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

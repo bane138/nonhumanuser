@@ -1,12 +1,13 @@
 from django.contrib import admin
 from blog.models import Blog, Entry, EntryComment, Category
+from django.db.models import TextField
 
 # Register your models here.
 class BlogAdmin(admin.ModelAdmin):
 	pass
 
 class EntryAdmin(admin.ModelAdmin):
-	pass
+  pass
 
 class EntryCommentAdmin(admin.ModelAdmin):
 	pass

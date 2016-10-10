@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% block title %}{{ game.name }}{% endblock %}
 {% block description %}{{ game.description }}{% endblock %}
@@ -11,28 +12,67 @@
 <div class="content">
 	<article class="row1">
 		<div class="center">
-			<h2>{{ game.name }}</h2>
+			<h2 class="{{ icon_class }}" >{{ game.title }}</h2>
 			{% if game.image %}
-				<p><img src="{{ game.image.path }}" /></p>
+				<p><img class="content-image" src="{{ game.image.url }}" alt="{{ game.title }}" /></p>
 			{% endif %}
-			<p>{{ game.description }}</p>
+			<p>{{ game.description|safe }}</p>
 			<p>
+			{% if game.audio_ogg %}
 				<div>Audio</div>
 				<audio controls>
-					<source src="media/{{ game.audio.name }}" type="audio/ogg" />
-					<source src="media/{{ game.audio.name }}" type="audio/mpeg" />
+					{% if game.audio_ogg %}
+					<source src="{{ game.audio_ogg.url }}" type="audio/ogg" />
+					{% endif %}
+					{% if game.audio_mp3 %}
+					<source src="{{ game.audio_mp3.url }}" type="audio/mpeg" />
+					{% endif %}
 				</audio>
+			{% endif %}
 			</p>
+			{% if game.video_ogv %}
 			<p>
 				<div>Video</div>
 				<video width="320" height="240" controls>
-					<source src="media/{{ game.video.name }}" type="video/mp4" />
-					<source src="media/{{ game.video.name }}" type="video/ogg" />
+					{% if game.video_ogv %}
+					<source src="{{ game.video_ogg.url }}" type="video/ogg" />
+					{% endif %}
+					{% if game.video_mp4 %}
+					<source src="{{ game.video_mp4.url }}" type="video/mp4" />
+					{% endif %}
 				</video>
 			</p>
+			{% endif %}
 			<p>{{ game.create_date }}</p>
 		</div>
 	</article>
+	<div class="comment-block">
+		Comments: {{ comments.count }}
+		{% for comment in comments %}
+		<div class="comment">
+			<span class="comment-image">
+				{% if comment.user.avatar %}
+				<img src="{{ comment.user.avatar }}" width="80"/>
+				{% endif %}
+			</span>
+			<span class="comment-author">{{ comment.user.username }}</span>
+			<span><small>{{ comment.created_date }}</small></span>
+			<p class="sm_icon_class_actual_play">{{ comment.comment }}</p>
+		</div>
+		{% empty %}
+		<p>No comments yet...</p>
+		{% endfor %}
+		{% if user.is_authenticated %}
+		<div class="comment-form">
+			<form method='POST' action='comment/'>
+				{% csrf_token %}
+				{% bootstrap_form form %}
+				<input type="hidden" name="game_id" value="{{ game.pk }}" />
+				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
+			</form>
+		</div>
+		{% endif %}
+	</div>
 </div>
 <div class="sidebar">
 	{% include 'sidebar.html' %}

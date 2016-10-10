@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}{{ site.title }}{% endblock %}
+{% block description %}{{ site.description }}{% endblock %}
+
+{% block content %}
+<div class="page accounts">
+  <div class="accounts-container">
+    <div class="accounts-form">
+    <h1>{{ user.username }} Profile</h1>
+    <form id="user_form" method="post" action="/members/login/?next=/" 
+    enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input type="submit" name="submit" class="btn btn-primary" value="Update" />
+    </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

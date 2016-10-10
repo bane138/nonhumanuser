@@ -1,7 +1,9 @@
 from django.forms import ModelForm
-from .models import Entry
+from .models import Entry, EntryComment
+from django_markdown.widgets import MarkdownWidget
 
-class EntryCreateForm(ModelForm):
-	class Meta:
-		model = Entry
-		exclude = ('slug',)
+
+class EntryCommentForm(ModelForm):
+  class Meta:
+    model = EntryComment
+    exclude = ('entry', 'created_date', 'approved', 'user')

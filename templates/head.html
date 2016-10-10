@@ -1,6 +1,10 @@
 {% load staticfiles %}
 <header>
 	<a href="/" id="logo" alt="nonhumanuser.com"></a>
+	<form method="GET" action='search/'>
+	<input type="text" name="q" class="form-control search-input" />
+	<input type="submit" name="search" value="SEARCH" class="btn btn-primary search-btn" />
+	</form>
 	<nav>
 		<a href="#" class="menu-icon"></a>
 		<ul>
@@ -8,6 +12,13 @@
 			<li><a href="/articles">Articles</a></li>
 			<li><a href="/library">Library</a></li>
 			<li><a href="/actual_play">Actual Play</a></li>
+			{% if user.is_authenticated %}
+			<li><a href="/accounts/update/{{ user.pk }}">{{ user.username }}</a></li>
+			<li><a href="/members/logout/?next=/">Logout</a></li>
+			{% else %}
+			<li><a href="/members/login/">Login</a></li>
+			<li><a href="/accounts/register">Register</a></li>
+			{% endif %}
 		</ul>
 	</nav>
 </header>
