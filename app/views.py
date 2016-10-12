@@ -13,15 +13,10 @@ from blog.models import Blog, Entry, Category
 from library.models import Stack, Item
 from itertools import chain
 from nonhumanuser.utils import *
-<<<<<<< HEAD
-from app.models import UserProfile
 from app.utils import get_query
-
-=======
 from app.models import Profile
 from app.forms import UserForm, ProfileForm
 from django.contrib import messages
->>>>>>> tweaked_profile_stuff
 
 # Create your views here.
 class IndexView(View):
