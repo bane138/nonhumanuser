@@ -42,8 +42,6 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/(?P<slug>[\-\w]+)/$', UpdateProfileView.as_view(),
         name='profile'),
-    #url(r'^accounts/profile/edit/(?P<slug>[\-\w]+)/$', 
-    #    ProfileEditView.as_view(), name='edit_profile'),
 ]
 
 if settings.DEBUG:

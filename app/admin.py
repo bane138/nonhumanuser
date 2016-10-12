@@ -10,8 +10,9 @@ class ProfileInline(admin.StackedInline):
   verbose_name_plural = 'profile'
 
 
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(admin.ModelAdmin):
   inlines = (ProfileInline, )
+  pass
 
 
 admin.site.unregister(User)

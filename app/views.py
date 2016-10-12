@@ -1,7 +1,8 @@
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
+from django.utils.decorators import method_decorator
 from django.db import transaction
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponse
@@ -57,30 +58,36 @@ class IndexView(View):
         return render(request, 'app/index.html', context)
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(View):
     """
     Display user profile
     """
-    @transaction.atomic
+    user_form = UserForm
+    profile_form = ProfileForm
+    initial = {'key': 'value'}
+    template_name = 'app/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        user_form = self.user_form(initial=self.initial)
+        profile_form = self.profile_form(initial=self.initial)
+
+        return render(request, self.template_name, {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            })
+
+
     def post(self, request, *args, **kwargs):
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        user_form = self.user_form(request.POST, instance=request.user)
+        profile_form = self.profile_form(request.POST, request.FILES,
+            instance=request.user.profile)
+
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
             messages.success(request, 'Profile update successful.')
         else:
             messages.error(request, 'Please correct the error below.')
-
-        return render(request, 'app/profile.html', {
-            'user_form': user_form,
-            'profile_form': profile_form,
-            })
-
-
-    def get(self, request, *args, **kwargs):
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
 
         return render(request, 'app/profile.html', {
             'user_form': user_form,
