@@ -69,8 +69,10 @@ class ProfileView(View):
     template_name = 'app/profile.html'
 
     def get(self, request, *args, **kwargs):
-        user_form = self.user_form(initial=self.initial)
-        profile_form = self.profile_form(initial=self.initial)
+        user_form = self.user_form(initial=self.initial, 
+            instance=request.user)
+        profile_form = self.profile_form(initial=self.initial,
+            instance=request.user.profile)
 
         return render(request, self.template_name, {
             'user_form': user_form,

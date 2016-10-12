@@ -277,6 +277,41 @@ li {
     border-bottom: 1px solid #ddd;
 }
 
+.comment-block-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+}
+
+.comment-block-list-item-left {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    width: 80px;
+}
+
+.comment-block-list-item-right {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+.comment-image {
+    width: 80px;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.comment-date {
+    font-size: .5em;
+}
+
 .library-stacks {
     padding: 3px 10px;
     border-right: 1px solid #000;

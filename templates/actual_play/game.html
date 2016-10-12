@@ -50,14 +50,20 @@
 		Comments: {{ comments.count }}
 		{% for comment in comments %}
 		<div class="comment">
-			<span class="comment-image">
-				{% if comment.user.avatar %}
-				<img src="{{ comment.user.avatar }}" width="80"/>
-				{% endif %}
-			</span>
-			<span class="comment-author">{{ comment.user.username }}</span>
-			<span><small>{{ comment.created_date }}</small></span>
-			<p class="sm_icon_class_actual_play">{{ comment.comment }}</p>
+			<ul class="comment-block-list">
+				<li class="comment-block-list-item-left">
+					<div class="comment-image">
+						{% if comment.user.profile.avatar %}
+						<img src="{{ comment.user.profile.avatar.url }}" width="80"/>
+						{% endif %}
+					</div>
+					<div class="comment-author">{{ comment.user.username }}</div>
+					<div class="comment-date">{{ comment.created_date }}</div>
+				</li>
+				<li class="comment-block-list-item-right">
+					<p class="sm_icon_class_actual_play comment-body">{{ comment.comment }}</p>
+				</li>
+			</ul>
 		</div>
 		{% empty %}
 		<p>No comments yet...</p>
