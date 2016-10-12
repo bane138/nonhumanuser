@@ -242,6 +242,11 @@ li {
     display: inline-block;
 }
 
+.profile {
+    position: relative;
+    margin-top: 100px;
+}
+
 .content-list {
     background: #fff;
     margin: 0;

@@ -10,10 +10,18 @@
   <div class="accounts-container">
     <div class="accounts-form">
     <h1>{{ user.username }} Profile</h1>
-    <form id="user_form" method="post" action="/members/login/?next=/" 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form id="user_form" method="post" action="/accounts/profile/{{ user.pk }}/"
     enctype="multipart/form-data">
       {% csrf_token %}
-      {% bootstrap_form form %}
+      {% bootstrap_form user_form %}
+      {% bootstrap_form profile_form %}
       <input type="submit" name="submit" class="btn btn-primary" value="Update" />
     </form>
     </div>

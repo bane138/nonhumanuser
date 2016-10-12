@@ -1,12 +1,15 @@
 from django import forms
 from django.core.files.images import get_image_dimensions
+from django.contrib.auth.models import User
 
-from nonhumanuser.models import UserProfile
+from app.models import Profile
 
 
-class UserProfileForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
 
     def clean_email(self):
         username = self.cleaned_data.get('username')
@@ -19,6 +22,13 @@ class UserProfileForm(forms.ModelForm):
 
         return email
 
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('avatar',)
+
+
     def clean_avatar(self):
         avatar = self.cleaned_data['avatar']
 
@@ -26,7 +36,7 @@ class UserProfileForm(forms.ModelForm):
             w, h = get_image_dimensions(avatar)
 
             #validate dimensions
-            max_width = max_height = 100
+            max_width = max_height = 80
             if w > max_width or h > max_height:
                 raise forms.ValidationError(
                     u'Please use an image that is '
@@ -52,12 +62,6 @@ class UserProfileForm(forms.ModelForm):
 
         return avatar
 
+
     def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
-        user.avatar = self.cleaned_data['avatar']
-
-        if commit:
-            user.save()
-
-        return user
+        user = super(ProfileForm, self).save(commit=False)

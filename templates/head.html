@@ -13,7 +13,7 @@
 			<li><a href="/library">Library</a></li>
 			<li><a href="/actual_play">Actual Play</a></li>
 			{% if user.is_authenticated %}
-			<li><a href="/accounts/update/{{ user.pk }}">{{ user.username }}</a></li>
+			<li><a href="/accounts/profile/{{ user.pk }}">{{ user.username }}</a></li>
 			<li><a href="/members/logout/?next=/">Logout</a></li>
 			{% else %}
 			<li><a href="/members/login/">Login</a></li>
