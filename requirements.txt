@@ -1,9 +1,12 @@
+dj-database-url==0.4.1
 Django==1.9.1
 django-annoying==0.10.1
+django-bootstrap3==7.1.0
 django-extensions==1.7.4
 django-markdown==0.8.4
 django-markdown-deux==1.0.5
 django-markdown2==0.3.0
+django-registration==2.1.2
 django-scheduler==0.8
 icalendar==3.10
 Markdown==2.6.6
