@@ -76,7 +76,7 @@ class EntryComment(models.Model):
         self.save()
 
     def __str__(self):
-        return self.text
+        return self.entry.title
 
 
 class Category(models.Model):

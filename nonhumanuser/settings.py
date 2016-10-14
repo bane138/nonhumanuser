@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '403xt9_9l+*)tw08ur@t_k8fem7_g*du-*^*^e0v+m1d6j6i#p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('NHU_DEBUG'))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.environ.get('NHU_HOST')]
 
 SITE_ID = 1
 
@@ -89,12 +90,20 @@ DATABASES = {
         'NAME': 'nonhumanuser',
         'HOST': 'localhost',
         'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': 'NHU#lanfear138',
+        'USER': 'webboss',
+        'PASSWORD': 'NHU@lanfear138',
     }
  }
 
-
+DB_ENV = {
+    'default': 'NHU_DATABASE',
+}
+"""
+for db_name, env_var in DB_ENV.items():
+    url = os.environ.get(env_var)
+    if url:
+        DATABASES[db_name] = dj_database_url.parse(url)
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -145,6 +154,7 @@ MEDIA_URL = '/media/'
 MARKDOWN_EDITOR_SKIN = 'simple'
 
 # Registration
+AUTH_PROFILE_MODULE = "app.Profile"
 ACCOUNT_ACTIVATION_DAYS = 30
 
 EMAIL_HOST = 'localhost'

@@ -5,10 +5,7 @@
 {% block description %}{{ site.description }}{% endblock %}
 
 {% block content %}
-<div class="page">
-  <div class="section-heading">
-    <img src="{% static "images/" %}Search.png" />
-  </div>
+<div class="page frontpage">
   <div class="content">
     <ul>
     {% for entry in found_entries %}

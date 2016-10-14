@@ -242,6 +242,15 @@ li {
     display: inline-block;
 }
 
+.frontpage {
+    margin-top: 120px;
+}
+
+.profile {
+    position: relative;
+    margin-top: 100px;
+}
+
 .content-list {
     background: #fff;
     margin: 0;
@@ -270,6 +279,41 @@ li {
 .comment {
     margin: 5px 0;
     border-bottom: 1px solid #ddd;
+}
+
+.comment-block-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+}
+
+.comment-block-list-item-left {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    width: 80px;
+}
+
+.comment-block-list-item-right {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+.comment-image {
+    width: 80px;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.comment-date {
+    font-size: .5em;
 }
 
 .library-stacks {
@@ -414,7 +458,7 @@ footer {
 .section-heading {
     position: relative;
     width: 1020px;
-    margin: 170px 0 20px;
+    margin: 100px 0 20px;
     border-bottom: 3px solid #eee;
 }
 
