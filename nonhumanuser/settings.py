@@ -90,21 +90,20 @@ DATABASES = {
         'NAME': 'nonhumanuser',
         'HOST': 'localhost',
         'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': 'NHU#lanfear138',
+        'USER': 'webboss',
+        'PASSWORD': 'NHU@lanfear138',
     }
  }
 
 DB_ENV = {
     'default': 'NHU_DATABASE',
 }
-
+"""
 for db_name, env_var in DB_ENV.items():
     url = os.environ.get(env_var)
     if url:
         DATABASES[db_name] = dj_database_url.parse(url)
-
-
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
