@@ -91,7 +91,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'webboss',
-        'PASSWORD': 'NHU@lanfear138',
+        'PASSWORD': 'NHU#lanfear138',
     }
  }
 
