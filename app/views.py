@@ -25,7 +25,10 @@ class IndexView(View):
         article = Entry.objects.filter(category=2).last()
         library_item = Item.objects.filter(active=True).last()
         game = Game.objects.last()
-        game_group = GameGroup.objects.filter(name=game.group).first()
+        if game:
+            game_group = GameGroup.objects.filter(name=game.group).first()
+        else:
+            game_group = None
         entry_recent = Entry.objects.filter(active=True).order_by('-created_date')
         library_recent = Item.objects.filter(active=True).order_by('-created_date')
         games_recent = Game.objects.filter(active=True).order_by('-created_date')
