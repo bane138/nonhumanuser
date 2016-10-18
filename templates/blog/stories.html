@@ -16,6 +16,12 @@
 			{% if story.thumbnail %}
 				<p><img class="content-image" src="{{ story.thumbnail.url }}" alt="{{ story.title }}" /></p>
 			{% endif %}
+			<div>{{ story.description|safe }} 
+					{% if story %}
+						<span><a href="{{ story.slug }}">Read more...</a></span>
+					{% endif %}
+			</div>
+			<div><small>{{ story.publish_date }}</small></div>
 			<p>{{ story.description|safe }}</p>
 			<p><small>{{ story.publish_date }}</small></p>
 		</div>
