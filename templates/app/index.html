@@ -17,7 +17,7 @@
 					<img src="{{ story.image.url }}" alt="{{ story.title }}" />
 					{% endif %}
 					</a>
-					<div>{{ story.description|safe }} <span><a class="lg_icon_class_stories" href="stories/{{ story.slug }}">Read more...</a></span></div>
+					<div>{{ story.description|safe }} <span><a class="sm_icon_class_stories" href="stories/{{ story.slug }}">Read more...</a></span></div>
 					<div class="date">{{ story.created_date }}</div>
 				</div>
 			</li>		
@@ -30,7 +30,7 @@
 					<img src="{{ game.image.url }}" alt="{{ game.title }}" />
 					{% endif %}
 					</a>
-					<div>{{ game.description|safe }} <span><a class="lg_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">Read more...</a></span></div>
+					<div>{{ game.description|safe }} <span><a class="sm_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">Read more...</a></span></div>
 					<div class="date">{{ game.created_date }}</div>
 				</div>
 			</li>		
@@ -43,7 +43,7 @@
 					<img src="{{ article.image.url }}" alt="{{ article.title }}" />
 					{% endif %}
 					</a>
-					<div>{{ article.description|safe }} <span><a class="lg_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span></div>
+					<div>{{ article.description|safe }} <span><a class="sm_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span></div>
 					<div class="date">{{ article.created_date }}</div>
 				</div>
 			</li>
@@ -56,7 +56,7 @@
 					<img src="{{ library_item.image.url }}" alt="{{ library_item.title }}" />
 					{% endif %}
 					</a>
-					<div>{{ library_item.description|safe }} <span><a class="lg_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">Read more...</a></span></div>
+					<div>{{ library_item.description|safe }} <span><a class="sm_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">Read more...</a></span></div>
 					<div class="date">{{ library_item.created_date }}</div>
 				</div>
 			</li>
