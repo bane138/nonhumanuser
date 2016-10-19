@@ -36,7 +36,7 @@ class StoryView(View):
 	template = 'blog/story.html'
 
 	def get(self, request, *args, **kwargs):
-		catetory = 1
+		#catetory = 1
 		story = Entry.objects.get(slug=self.kwargs['slug'])
 		items_recent = Entry.objects.filter(category__name='Stories', active=True)\
 		.order_by('-created_date')[0:5]
@@ -75,12 +75,12 @@ class ArticlesView(View):
 	template = 'blog/articles.html'
 
 	def get(self, request):
-		catetory = 2
-		articles = Entry.objects.filter(category=catetory, active=True,
+		#catetory = 2
+		articles = Entry.objects.filter(category__name='Articles', active=True,
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Entry.objects.filter(category=catetory, active=True)\
+		items_recent = Entry.objects.filter(category__name='Articles', active=True)\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category=catetory, active=True)\
+		items_popular = Entry.objects.filter(category__name='Articles', active=True)\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Articles'},
@@ -93,11 +93,11 @@ class ArticleView(View):
 	template = 'blog/article.html'
 
 	def get(self, request, *args, **kwargs):
-		catetory = 2
+		#catetory = 2
 		article = Entry.objects.get(slug=self.kwargs['slug'])
-		items_recent = Entry.objects.filter(category=catetory, active=True)\
+		items_recent = Entry.objects.filter(category__name='Articles', active=True)\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category=catetory, active=True)\
+		items_popular = Entry.objects.filter(category__name='Articles', active=True)\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		form = EntryCommentForm(request.POST)
