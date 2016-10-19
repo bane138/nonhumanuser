@@ -16,7 +16,7 @@
 			{% if game.image %}
 				<p><img class="content-image" src="{{ game.image.url }}" alt="{{ game.title }}" /></p>
 			{% endif %}
-			<p>{{ game.description|safe }}</p>
+			<p>{{ game.body|safe }}</p>
 			<p>
 			{% if game.audio_ogg %}
 				<div>Audio</div>
