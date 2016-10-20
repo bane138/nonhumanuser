@@ -39,6 +39,8 @@ class Game(models.Model):
 	created_date = models.DateTimeField('created date')
 	modified_date = models.DateTimeField()
 	publish_date = models.DateTimeField(null=True, blank=True, default=None)
+	thumbnail = models.ImageField(upload_to='actual_play/image/%Y/%m/%d',\
+	 blank=True, null=True)
 	image = models.ImageField(upload_to='actual_play/image/%Y/%m/%d',\
 	 blank=True, null=True)
 	audio_ogg = models.FileField(upload_to='actual_play/audio/%Y/%m/%d/',\
