@@ -11,7 +11,7 @@ django-scheduler==0.8
 icalendar==3.10
 Markdown==2.6.6
 markdown2==2.3.1
-Pillow==3.1.1
+#Pillow==3.1.1
 psycopg2==2.6.1
 python-dateutil==2.5.3
 pytz==2016.6.1
