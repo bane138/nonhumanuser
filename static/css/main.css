@@ -237,7 +237,7 @@ li {
 
 .content {
     width: 75%;
-    padding: 0;
+    padding: 0 20px;
     margin-right: 20px;
     display: inline-block;
 }

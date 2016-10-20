@@ -237,9 +237,13 @@ li {
 
 .content {
     width: 75%;
-    padding: 0;
+    padding: 0 20px;
     margin-right: 20px;
     display: inline-block;
+}
+
+.frontpage {
+    margin-top: 120px;
 }
 
 .profile {
@@ -454,7 +458,7 @@ footer {
 .section-heading {
     position: relative;
     width: 1020px;
-    margin: 170px 0 20px;
+    margin: 100px 0 20px;
     border-bottom: 3px solid #eee;
 }
 
