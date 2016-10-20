@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '403xt9_9l+*)tw08ur@t_k8fem7_g*du-*^*^e0v+m1d6j6i#p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('NHU_DEBUG'))
+DEBUG = True #bool(os.environ.get('NHU_DEBUG'))
 
-ALLOWED_HOSTS = [os.environ.get('NHU_HOST')]
+ALLOWED_HOSTS = ['*'] #[os.environ.get('NHU_HOST')]
 
 SITE_ID = 1
 
