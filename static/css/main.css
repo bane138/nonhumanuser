@@ -349,6 +349,7 @@ li {
 }
 
 .patron-link {
+    display: block;
     padding: 20px 25px;
     background-color: #e6461a;
     color: #fff;
@@ -358,6 +359,7 @@ li {
 }
 
 .patron-link:hover {
+    display: block;
     padding: 20px 25px;
     background-color: #ccc;
     color: #000;
