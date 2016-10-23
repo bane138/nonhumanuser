@@ -348,6 +348,12 @@ li {
 
 }
 
+.patron-link {
+    padding: 15px 5px;
+    background: #e6461a;
+    border-radius: 4px;
+}
+
 .sidebar-offsite-links {
     font-size: 12px;
     line-height: 12px;
