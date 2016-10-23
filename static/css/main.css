@@ -349,10 +349,18 @@ li {
 }
 
 .patron-link {
-    padding: 15px 25px;
+    padding: 20px 25px;
     background-color: #e6461a;
     color: #fff;
-    border-radius: 10px
+    border-radius: 5px;
+    line-height: 40px;
+}
+
+.patron-link:hover {
+    padding: 20px 25px;
+    background-color: #ccc;
+    color: #000;
+    border-radius: 5px;
     line-height: 40px;
 }
 
