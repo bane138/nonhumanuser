@@ -341,7 +341,7 @@ li {
 }
 
 .sidebar-list-item {
-    height: 20px;
+    height: 20px;./
 }
 
 .sidebar-links {
@@ -350,8 +350,9 @@ li {
 
 .patron-link {
     padding: 15px 5px;
-    background: #e6461a;
+    background-color: #e6461a;
     border-radius: 4px;
+    line-height: 40px;
 }
 
 .sidebar-offsite-links {
