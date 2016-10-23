@@ -341,11 +341,15 @@ li {
 }
 
 .sidebar-list-item {
-    height: 20px;./
+    height: 20px;
 }
 
 .sidebar-links {
 
+}
+
+.sidebar-patron-list-item {
+    height: 50px;
 }
 
 .patron-link {
