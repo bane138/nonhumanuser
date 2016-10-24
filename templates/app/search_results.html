@@ -15,7 +15,7 @@
         <a href="/actual_play/{{ entry.group.slug }}/{{ entry.slug }}">
         {% elif entry.category %}
         <h2><a class="lg_icon_class_{{ entry.category.name }}" href="/{{ entry.category.name }}/{{ entry.slug }}">{{ entry.title }}</a></h2>
-        <a href="/{{ entry.category.name }}/{{ entry.slug }}">
+        <a href="/{{ entry.category.name|lower }}/{{ entry.slug }}">
         {% else %}
         <h2><a class="lg_icon_class_library" href="/library/{{ entry.item_type }}/{{ entry.slug }}">{{ entry.title }}</a></h2>
         <a href="/library/{{ entry.item_type }}/{{ entry.slug }}">
@@ -30,7 +30,7 @@
             {% if entry.group %}
             <span><a href="/actual_play/{{ entry.group.slug }}/{{ entry.slug }}">Read more...</a></span>
             {% elif entry.category %}
-            <span><a href="/{{ entry.category.name }}/{{ entry.slug }}">Read more...</a></span>
+            <span><a href="/{{ entry.category.name|lower }}/{{ entry.slug }}">Read more...</a></span>
             {% else %}
             <span><a href="/library/{{ entry.item_type }}/{{ entry.slug }}">Read more...</a></span>
             {% endif %}
