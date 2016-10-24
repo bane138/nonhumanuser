@@ -77,6 +77,9 @@
 				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
 			</form>
 		</div>
+		{% else %}
+		<div class="comment-form">You must <a href="/members/login/">login</a> 
+		or <a href="/accounts/register">register</a> to post a comment.</div>
 		{% endif %}
 	</div>
 </div>
