@@ -235,6 +235,13 @@ li {
     float: right;
 }
 
+.content-main {
+    width: 75%;
+    padding: 0;
+    margin-right: 20px;
+    display: inline-block;
+}
+
 .content {
     width: 75%;
     padding: 0 20px;
@@ -259,7 +266,7 @@ li {
 
 .content-list-item {
     display: inline-block;
-    width: 45%;
+    width: 48%;
     background: #fff;
     vertical-align: top;
 }
@@ -339,6 +346,26 @@ li {
 
 .sidebar-links {
 
+}
+
+.sidebar-patron-list-item {
+    height: 50px;
+}
+
+.patron-link {
+    padding: 20px 25px;
+    background-color: #e6461a;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 40px;
+}
+
+.patron-link:hover {
+    padding: 20px 25px;
+    background-color: #ccc;
+    color: #000;
+    border-radius: 5px;
+    line-height: 40px;
 }
 
 .sidebar-offsite-links {
