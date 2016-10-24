@@ -157,5 +157,10 @@ MARKDOWN_EDITOR_SKIN = 'simple'
 AUTH_PROFILE_MODULE = "app.Profile"
 ACCOUNT_ACTIVATION_DAYS = 30
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_MAIL_FROM = 'Support support@nonhumanuser.com'
