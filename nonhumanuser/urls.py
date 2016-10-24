@@ -45,13 +45,13 @@ urlpatterns = [
     url(r'^search/(?P<q>.*)$', SearchView.as_view(), name='search'),
 ]
 
-#if settings.DEBUG:
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.MEDIA_ROOT
-        }))
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT
+            }))
 
-#if settings.DEBUG:
-from django.conf.urls.static import static
-urlpatterns += static(settings.STATIC_URL,
-    document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL,
+        document_root=settings.STATIC_ROOT)
