@@ -163,4 +163,4 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
-DEFAULT_MAIL_FROM = 'Support support@nonhumanuser.com'
+DEFAULT_FROM_EMAIL = 'Support support@nonhumanuser.com'
