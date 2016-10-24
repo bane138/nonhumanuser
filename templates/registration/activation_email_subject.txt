@@ -1,1 +1,1 @@
-Please verify your account creation within {{ expiration_days }} days.
+Hello {{ user.username }}, your accounts needs to be activated.

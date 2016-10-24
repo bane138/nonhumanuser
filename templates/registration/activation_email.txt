@@ -1,9 +1,14 @@
 Hello {{ user.username }},
 
-Your account has been created. Please verify your account creation by visiting 
-http://www.nonhumanuser.com within {{ expiration_days }}.
+Thanks for creating an account at nonhumanuser.com. Please verify your account creation by visiting 
+http://www.nonhumanuser.com within {{ expiration_days }} days.
 
 Your activation key is http://www.nonhumanuser.com/accounts/activate/{{ activation_key }}
+
+Your account is required to post comments on the site and to get updates when new content 
+goes up. That is all, you will not be spammed or upsold or any other slimy things, although
+slimy things are found in many of the stories on the site. I hope you enjoy the content on the 
+site and pass it along to others. 
 
 thanks,
 nonhumanuser.com
