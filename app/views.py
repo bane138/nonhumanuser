@@ -21,10 +21,12 @@ from django.contrib import messages
 # Create your views here.
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        story = Entry.objects.filter(category=1).last()
-        article = Entry.objects.filter(category=2).last()
-        library_item = Item.objects.filter(active=True).last()
-        game = Game.objects.last()
+        story = Entry.objects.filter(category__name='Stories', active=True,
+                                     publish_date__lte=datetime.datetime.now()).first()
+        article = Entry.objects.filter(category__name='Articles', active=True,
+                                     publish_date__lte=datetime.datetime.now()).first()
+        library_item = Item.objects.filter(active=True, publish_date__lte=datetime.datetime.now()).first()
+        game = Game.objects.filter(active=True, publish_date__lte=datetime.datetime.now()).first()
         if game:
             game_group = GameGroup.objects.filter(name=game.group).first()
         else:
