@@ -15,8 +15,10 @@ import datetime
 class IndexView(View):
 	def get(self, request):
 		stacks = Stack.objects.all()
-		items_recent = Item.objects.all().order_by('-created_date')[0:5]
-		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
+		items_recent = Item.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Item.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, 'library/index.html', 
 			{'section': {'name': 'Library'}, 
@@ -32,8 +34,10 @@ class ItemsView(View):
 		stacks = Stack.objects.all()
 		items = Item.objects.filter(stack__exact=stack.id, active=True, 
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Item.objects.all().order_by('-created_date')[0:5]
-		items_popular = Item.objects.all().order_by('-number_comments')[0:5]
+		items_recent = Item.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Item.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': stack.name}, 
 			'items': items, 'stacks': stacks, 'items_recent': items_recent, 
