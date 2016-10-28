@@ -21,9 +21,11 @@ class StoriesView(View):
 		#catetory = 1
 		stories = Entry.objects.filter(category__name='Stories', active=True,
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Entry.objects.filter(category__name='Stories', active=True)\
+		items_recent = Entry.objects.filter(category__name='Stories', active=True,
+											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category__name='Stories', active=True)\
+		items_popular = Entry.objects.filter(category__name='Stories', active=True,
+											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Stories'},
@@ -38,9 +40,11 @@ class StoryView(View):
 	def get(self, request, *args, **kwargs):
 		#catetory = 1
 		story = Entry.objects.get(slug=self.kwargs['slug'])
-		items_recent = Entry.objects.filter(category__name='Stories', active=True)\
+		items_recent = Entry.objects.filter(category__name='Stories', active=True,
+											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category__name='Stories', active=True)\
+		items_popular = Entry.objects.filter(category__name='Stories', active=True,
+											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		form = EntryCommentForm(request.POST)
@@ -78,9 +82,11 @@ class ArticlesView(View):
 		#catetory = 2
 		articles = Entry.objects.filter(category__name='Articles', active=True,
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Entry.objects.filter(category__name='Articles', active=True)\
+		items_recent = Entry.objects.filter(category__name='Articles', active=True,
+											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category__name='Articles', active=True)\
+		items_popular = Entry.objects.filter(category__name='Articles', active=True,
+											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Articles'},
@@ -95,9 +101,11 @@ class ArticleView(View):
 	def get(self, request, *args, **kwargs):
 		#catetory = 2
 		article = Entry.objects.get(slug=self.kwargs['slug'])
-		items_recent = Entry.objects.filter(category__name='Articles', active=True)\
+		items_recent = Entry.objects.filter(category__name='Articles', active=True,
+											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
-		items_popular = Entry.objects.filter(category__name='Articles', active=True)\
+		items_popular = Entry.objects.filter(category__name='Articles', active=True,
+											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		form = EntryCommentForm(request.POST)

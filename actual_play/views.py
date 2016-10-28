@@ -16,8 +16,10 @@ import os
 class IndexView(View):
 	def get(self, request):
 		groups = GameGroup.objects.all()
-		items_recent = Game.objects.all().order_by('-created_date')[0:5]
-		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
+		items_recent = Game.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Game.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, 'actual_play/index.html', {'section': 
 			{'name': 'Actual Play'}, 'groups': groups, 'items_recent': items_recent, 
@@ -31,9 +33,9 @@ class GameGroupView(View):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
 		games = Game.objects.filter(group=group.pk, active=True, 
 			publish_date__lte=datetime.datetime.now())[0:5]
-		items_recent = Game.objects.filter(group=group.pk)\
+		items_recent = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
-		items_popular = Game.objects.filter(group=group.pk)\
+		items_popular = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, self.template, {'section': {'name': 'Actual Play'},
@@ -47,8 +49,10 @@ class GameView(View):
 
 	def get(self, request, *args, **kwargs):
 		game = Game.objects.filter(slug=self.kwargs['slug']).first()
-		items_recent = Game.objects.all().order_by('-created_date')[0:5]
-		items_popular = Game.objects.all().order_by('-number_comments')[0:5]
+		items_recent = Game.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Game.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		form = GameCommentForm(request.POST)
 		game_comments = game.comments.all()
