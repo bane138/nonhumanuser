@@ -32,18 +32,18 @@ class IndexView(View):
         else:
             game_group = None
         entry_recent = Entry.objects.filter(active=True,
-                                            publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+                                            publish_date__lte=datetime.datetime.now()).order_by('created_date')
         library_recent = Item.objects.filter(active=True,
-                                             publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+                                             publish_date__lte=datetime.datetime.now()).order_by('created_date')
         games_recent = Game.objects.filter(active=True,
-                                           publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+                                           publish_date__lte=datetime.datetime.now()).order_by('created_date')
         items_recent = list(chain(entry_recent, library_recent, games_recent))
         entry_popular = Entry.objects.filter(active=True,
-                                             publish_date__lte=datetime.datetime.now()).order_by('-number_comments')
+                                             publish_date__lte=datetime.datetime.now()).order_by('number_comments')
         library_popular = Item.objects.filter(active=True,
-                                              publish_date__lte=datetime.datetime.now()).order_by('-number_comments')
+                                              publish_date__lte=datetime.datetime.now()).order_by('number_comments')
         games_popular = Game.objects.filter(active=True,
-                                            publish_date__lte=datetime.datetime.now()).order_by('-number_comments')
+                                            publish_date__lte=datetime.datetime.now()).order_by('number_comments')
         items_popular = list(chain(entry_popular, library_popular, games_popular))
         links = get_main_links()
 

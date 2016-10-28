@@ -67,7 +67,7 @@ class Item(models.Model):
 		return stack.name
 
 	def get_absolute_url(self):
-		return reverse('item', kwargs={'stack': self.get_stack_name(), 
+		return reverse('library-item', kwargs={'stack': self.get_stack_name(), 
 			'slug': self.slug})
 
 	def __str__(self):
