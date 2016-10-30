@@ -9,6 +9,7 @@ def get_main_links():
     {'link': 'Miskatonic University Podcast', 
     'url': 'http://www.mu-podcast.com/'},
     {'link': 'Skype of Cthulhu', 'url': 'http://www.cthulhu.me/'},
+    {'link': 'How We Roll Podcast', 'url': 'http://www.howwerollpodcast.com/'},
     {'link': 'Chaosium Inc.', 'url': 'http://www.chaosium.com/'},
   ]
 
