@@ -15,7 +15,7 @@ import os
 # Create your views here.
 class IndexView(View):
 	def get(self, request):
-		groups = GameGroup.objects.all()
+		groups = GameGroup.objects.filter(active=True)
 		items_recent = Game.objects.filter(active=True,
 										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
 		items_popular = Game.objects.filter(active=True,
