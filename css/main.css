@@ -226,6 +226,11 @@ li {
     background: none;
 }
 
+.search-container {
+    float: right;
+    width: 300px;
+}
+
 .search-input {
     float: right;
     width: 200px !important;
@@ -355,7 +360,7 @@ li {
 .patron-link {
     padding: 20px 25px;
     background-color: #e6461a;
-    color: #fff;
+    color: #fff !important;
     border-radius: 5px;
     line-height: 40px;
 }
@@ -604,6 +609,12 @@ footer {
         border-bottom: 3px solid #eee;
     }
 
+    .content-main {
+        width: 100%;
+        padding: 10px;
+        display: inline-block;
+    }
+
     nav {
 
     }
@@ -629,7 +640,7 @@ footer {
         padding: 20px 0;
         background: none;
         right: 0px;
-        top: 80px;
+        top: 100px;
         width: 30%;
         border-radius: 4px 0 4px 4px;
     }
@@ -644,7 +655,7 @@ footer {
     }
 
     nav li:first-child {
-        background: none;
+        background: #fff;
         text-align: center;
         width: 100%;
         padding: 10px 0;
@@ -658,6 +669,9 @@ footer {
 
     .menu-icon {
         display:inline-block;
+        position: absolute;
+        top: 71px;
+        right: 0px;
     }
 
     .sidebar {
@@ -687,7 +701,7 @@ footer {
 
 }
 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 660px) {
 
     header {
         position: absolute;
@@ -745,6 +759,14 @@ footer {
         background-image: url('../images/elder_sign_md.png');
         background-repeat: no-repeat;
     }
+
+    .search-container {
+        float: none;
+        position: relative;
+        width: 300px;
+        top: 20px;
+        margin: 0 auto;
+    }
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
@@ -761,6 +783,15 @@ footer {
         margin: 0 auto;
         background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
+    }
+
+    .content-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content-box img {
+        width: 100%;
     }
 }
 

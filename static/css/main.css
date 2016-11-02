@@ -226,6 +226,11 @@ li {
     background: none;
 }
 
+.search-container {
+    float: right;
+    width: 300px;
+}
+
 .search-input {
     float: right;
     width: 200px !important;
@@ -669,18 +674,6 @@ footer {
         right: 0px;
     }
 
-    .search-input {
-        float: right;
-        width: 200px !important;
-        margin-right: 100px;
-        margin-top: 110px;
-    }
-
-    .search-btn {
-        float: right;
-        margin-top: 110px;
-    }
-
     .sidebar {
         display: block;
         width: 100%;
@@ -708,7 +701,7 @@ footer {
 
 }
 
-@media only screen and (max-width : 640px) {
+@media only screen and (max-width : 660px) {
 
     header {
         position: absolute;
@@ -766,6 +759,14 @@ footer {
         background-image: url('../images/elder_sign_md.png');
         background-repeat: no-repeat;
     }
+
+    .search-container {
+        float: none;
+        position: relative;
+        width: 300px;
+        top: 20px;
+        margin: 0 auto;
+    }
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */
@@ -782,18 +783,6 @@ footer {
         margin: 0 auto;
         background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
-    }
-
-    .search-input {
-        float: right;
-        width: 200px !important;
-        margin-right: 100px;
-        margin-top: 10px;
-    }
-
-    .search-btn {
-        float: right;
-        margin-top: 10px;
     }
 
     .content-box {
