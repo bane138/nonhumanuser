@@ -670,14 +670,15 @@ footer {
     }
 
     .search-input {
-        float: left;
-        width: 270px !important;
-        margin-top: 10px;
+        float: right;
+        width: 200px !important;
+        margin-right: 100px;
+        margin-top: 110px;
     }
 
     .search-btn {
         float: right;
-        margin-top: 10px;
+        margin-top: 110px;
     }
 
     .sidebar {
@@ -781,6 +782,18 @@ footer {
         margin: 0 auto;
         background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
+    }
+
+    .search-input {
+        float: right;
+        width: 200px !important;
+        margin-right: 100px;
+        margin-top: 10px;
+    }
+
+    .search-btn {
+        float: right;
+        margin-top: 10px;
     }
 
     .content-box {
