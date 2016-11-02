@@ -730,6 +730,13 @@ footer {
         display: block;
     }
 
+    .content-main {
+        width: 100%;
+        padding: 0;
+        margin-right: 20px;
+        display: inline-block;
+    }
+
     .section-heading img {
         width: 100%;
     }
