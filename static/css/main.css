@@ -651,6 +651,7 @@ footer {
 
     nav li:first-child {
         background: none;
+        background: #fff;
         text-align: center;
         width: 100%;
         padding: 10px 0;
@@ -664,6 +665,20 @@ footer {
 
     .menu-icon {
         display:inline-block;
+        position: absolute;
+        top: 71px;
+        right: 0px;
+    }
+
+    .search-input {
+        float: left;
+        width: 270px !important;
+        margin-top: 10px;
+    }
+
+    .search-btn {
+        float: right;
+        margin-top: 10px;
     }
 
     .sidebar {
