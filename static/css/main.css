@@ -762,6 +762,15 @@ footer {
         background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
     }
+
+    .content-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content-box img {
+        width: 100%;
+    }
 }
 
 /* ==========================================================================
