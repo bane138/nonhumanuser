@@ -604,6 +604,12 @@ footer {
         border-bottom: 3px solid #eee;
     }
 
+    .content-main {
+        width: 100%;
+        padding: 10px;
+        display: inline-block;
+    }
+
     nav {
 
     }
@@ -728,13 +734,6 @@ footer {
 
     nav:hover ul {
         display: block;
-    }
-
-    .content-main {
-        width: 100%;
-        padding: 0;
-        margin-right: 20px;
-        display: inline-block;
     }
 
     .section-heading img {
