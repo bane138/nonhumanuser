@@ -650,7 +650,6 @@ footer {
     }
 
     nav li:first-child {
-        background: none;
         background: #fff;
         text-align: center;
         width: 100%;
