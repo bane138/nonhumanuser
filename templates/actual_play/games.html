@@ -18,8 +18,12 @@
       {% if game.thumbnail %}
         <p><img class="content-image" src="{{ game.thumbnail.url }}" alt="{{ game.title }}" /></p>
       {% endif %}
-			<p>{{ game.description|safe }}</p>
-			<p>{{ game.created_date }}</p>
+			<div>{{ game.description|safe }}
+				{% if game %}
+				<span><a href="{{ game.slug }}">Listen to the game...</a></span>
+				{% endif %}
+			</div>
+			<div><small>{{ game.created_date }}</small></div>
 		</div>
 	</article>
 {% endfor %}
