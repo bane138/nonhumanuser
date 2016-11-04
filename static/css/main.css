@@ -732,7 +732,7 @@ footer {
     }
 
     nav li:first-child {
-        background: none;
+        background: #fff;
         text-align: center;
         width: 100%;
         padding: 10px 0;
