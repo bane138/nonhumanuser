@@ -18,7 +18,7 @@ class StoriesView(View):
 	template = 'blog/stories.html'
 
 	def get(self, request):
-		#catetory = 1
+		category = Category.objects.get(name="Stories")
 		stories = Entry.objects.filter(category__name='Stories', active=True,
 			publish_date__lte=datetime.datetime.now())[0:5]
 		items_recent = Entry.objects.filter(category__name='Stories', active=True,
@@ -28,7 +28,16 @@ class StoriesView(View):
 											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, self.template, {'section': {'name': 'Stories'},
+		return render(request, self.template, {
+			'section': {
+				'name': 'Stories'
+			},
+			'category': category,
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/stories/',
+			'og_title': category.name,
+			'og_description': category.description,
+			'og_image': 'http://www.nonhumanuser.com/images/Stories.png',
 			'stories': stories, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
 			'icon_class': 'lg_icon_class_stories'})
@@ -38,7 +47,7 @@ class StoryView(View):
 	template = 'blog/story.html'
 
 	def get(self, request, *args, **kwargs):
-		#catetory = 1
+		category = Category.objects.get(name='Stories')
 		story = Entry.objects.get(slug=self.kwargs['slug'])
 		items_recent = Entry.objects.filter(category__name='Stories', active=True,
 											publish_date__lte=datetime.datetime.now())\
@@ -52,7 +61,16 @@ class StoryView(View):
 		story.number_comments = story_comments.count()
 		story.number_views = story.number_views + 1
 		story.save()
-		return render(request, self.template, {'section': {'name': 'Stories'},
+		return render(request, self.template, {
+			'section': {
+				'name': 'Stories'
+			},
+			'category': category,
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/stories/' + story.slug + '/',
+			'og_title': story.title,
+			'og_description': story.description,
+			'og_image': story.image.url if story.image else '',
 			'story': story, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links, 'form': form,
 			'comments': story_comments, 'icon_class': 'lg_icon_class_stories'})
@@ -79,7 +97,7 @@ class ArticlesView(View):
 	template = 'blog/articles.html'
 
 	def get(self, request):
-		#catetory = 2
+		category = Category.objects.get(name='Articles')
 		articles = Entry.objects.filter(category__name='Articles', active=True,
 			publish_date__lte=datetime.datetime.now())[0:5]
 		items_recent = Entry.objects.filter(category__name='Articles', active=True,
@@ -89,7 +107,16 @@ class ArticlesView(View):
 											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, self.template, {'section': {'name': 'Articles'},
+		return render(request, self.template, {
+			'section': {
+				'name': 'Articles'
+			},
+			'category': category,
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/articles/',
+			'og_title': category.name,
+			'og_description': category.description,
+			'og_image': 'http://www.nonhumanuser.com/images/Articles.png',
 			'articles': articles, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
 			'icon_class': 'lg_icon_class_articles'})
@@ -99,7 +126,7 @@ class ArticleView(View):
 	template = 'blog/article.html'
 
 	def get(self, request, *args, **kwargs):
-		#catetory = 2
+		category = Category.objects.get(name='Articles')
 		article = Entry.objects.get(slug=self.kwargs['slug'])
 		items_recent = Entry.objects.filter(category__name='Articles', active=True,
 											publish_date__lte=datetime.datetime.now())\
@@ -113,7 +140,16 @@ class ArticleView(View):
 		article.number_comments = article_comments.count()
 		article.number_views = article.number_views + 1
 		article.save()
-		return render(request, self.template, {'section': {'name': 'Articles'},
+		return render(request, self.template, {
+			'section': {
+				'name': 'Articles'
+			},
+			'category': category,
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/stories/' + article.slug + '/',
+			'og_title': article.title,
+			'og_description': article.description,
+			'og_image': article.image.url if article.image else '',
 			'article': article, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links, 'form': form,
 			'comments': article_comments, 'icon_class': 'lg_icon_class_articles'})
