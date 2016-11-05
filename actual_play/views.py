@@ -22,8 +22,16 @@ class IndexView(View):
 										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, 'actual_play/index.html', {'section': 
-			{'name': 'Actual Play'}, 'groups': groups, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			{'name': 'Actual Play'},
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/actual_play/',
+			'og_title': 'Actual Plays',
+			'og_description': 'Call of Cthulhu play sessions',
+			'og_image': 'http://www.nonhumanuser.com/images/Actual_Play.png',
+			'groups': groups,
+			'items_recent': items_recent,
+			'items_popular': items_popular,
+			'links': links})
 
 
 class GameGroupView(View):
@@ -38,9 +46,20 @@ class GameGroupView(View):
 		items_popular = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, self.template, {'section': {'name': 'Actual Play'},
-			'group': group, 'games': games, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links, 
+		return render(request, self.template, {
+			'section': {
+				'name': 'Actual Play'
+			},
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/actual_play/' + group.slug + '/',
+			'og_title': group.name,
+			'og_description': group.status,
+			'og_image': '',
+			'group': group,
+			'games': games,
+			'items_recent': items_recent,
+			'items_popular': items_popular,
+			'links': links,
 			'icon_class': 'lg_icon_class_actual_play'})
 
 
@@ -49,6 +68,7 @@ class GameView(View):
 
 	def get(self, request, *args, **kwargs):
 		game = Game.objects.filter(slug=self.kwargs['slug']).first()
+		group = game.group
 		items_recent = Game.objects.filter(active=True,
 										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
 		items_popular = Game.objects.filter(active=True,
@@ -59,9 +79,20 @@ class GameView(View):
 		game.number_comments = game_comments.count()
 		game.number_views = game.number_views + 1
 		game.save()
-		return render(request, self.template, {'section': {'name': 'Actual Play'},
-			'game': game, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links, 'form': form, 
+		return render(request, self.template, {
+			'section': {
+				'name': 'Actual Play'
+			},
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/actual_play/' + group.slug + '/' + game.slug,
+			'og_title': game.title,
+			'og_description': game.description,
+			'og_image': 'http://www.nonhumanuser.com' + game.image.url if game.image else '',
+			'game': game,
+			'items_recent': items_recent,
+			'items_popular': items_popular,
+			'links': links,
+			'form': form,
 			'comments': game_comments, 'icon_class': 'lg_icon_class_actual_play'})
 
 

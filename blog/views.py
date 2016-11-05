@@ -70,7 +70,7 @@ class StoryView(View):
 			'og_url': 'http://www.nonhumanuser.com/stories/' + story.slug + '/',
 			'og_title': story.title,
 			'og_description': story.description,
-			'og_image': story.image.url if story.image else '',
+			'og_image': 'http://www.nonhumanuser.com' + story.image.url if story.image else '',
 			'story': story, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links, 'form': form,
 			'comments': story_comments, 'icon_class': 'lg_icon_class_stories'})
@@ -149,7 +149,7 @@ class ArticleView(View):
 			'og_url': 'http://www.nonhumanuser.com/stories/' + article.slug + '/',
 			'og_title': article.title,
 			'og_description': article.description,
-			'og_image': article.image.url if article.image else '',
+			'og_image': 'http://www.nonhumanuser.com' + article.image.url if article.image else '',
 			'article': article, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links, 'form': form,
 			'comments': article_comments, 'icon_class': 'lg_icon_class_articles'})

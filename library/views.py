@@ -21,9 +21,16 @@ class IndexView(View):
 										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
 		return render(request, 'library/index.html', 
-			{'section': {'name': 'Library'}, 
-			'stacks': stacks, 'items_recent': items_recent, 
-			'items_popular': items_popular, 'links': links})
+			{'section': {'name': 'Library'},
+			 'og_type': 'webpage',
+			 'og_url': 'http://www.nonhumanuser.com/library/',
+			 'og_title': 'Library',
+			 'og_description': 'Library of Call of Cthulhu resources.',
+			 'og_image': 'http://www.nonhumanuser.com/images/Library.png',
+			 'stacks': stacks,
+			 'items_recent': items_recent,
+			 'items_popular': items_popular,
+			 'links': links})
 
 
 class ItemsView(View):
@@ -39,9 +46,18 @@ class ItemsView(View):
 		items_popular = Item.objects.filter(active=True,
 										   publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		links = get_main_links()
-		return render(request, self.template, {'section': {'name': stack.name}, 
-			'items': items, 'stack': stack, 'stacks': stacks, 'items_recent': items_recent,
-			'items_popular': items_popular, 'links': links, 
+		return render(request, self.template, {'section': {'name': stack.name},
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/library/' + stack.name.lower() + '/',
+			'og_title': stack.name,
+			'og_description': stack.tagline,
+			'og_image': 'http://www.nonhumanuser.com/images/' + stack.name + '.png',
+			'items': items,
+			'stack': stack,
+			'stacks': stacks,
+			'items_recent': items_recent,
+			'items_popular': items_popular,
+			'links': links,
 			'icon_class': 'lg_icon_class_library'})
 
 
@@ -60,9 +76,22 @@ class ItemView(View):
 		item.number_comments = item_comments.count()
 		item.number_views = item.number_views + 1
 		item.save()
-		return render(request, self.template, {'section': {'name': stack.name}, 
-			'item': item, 'stack': stack, 'stacks': stacks, 'items_recent': items_recent,
-			'items_popular': items_popular, 'links': links, 'form': form, 
+		return render(request, self.template, {
+			'section': {
+				'name': stack.name
+			},
+			'og_type': 'webpage',
+			'og_url': 'http://www.nonhumanuser.com/library/' + stack.name.lower() + '/' + item.slug,
+			'og_title': item.title,
+			'og_description': item.description,
+			'og_image': 'http://www.nonhumanuser.com' + item.image.url if item.image else '',
+			'item': item,
+			'stack': stack,
+			'stacks': stacks,
+			'items_recent': items_recent,
+			'items_popular': items_popular,
+			'links': links,
+			'form': form,
 			'comments': item_comments, 'icon_class': 'lg_icon_class_library'})
 
 
