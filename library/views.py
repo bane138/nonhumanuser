@@ -40,7 +40,7 @@ class ItemsView(View):
 		stack = Stack.objects.get(slug=self.kwargs['slug'])
 		stacks = Stack.objects.all()
 		items = Item.objects.filter(stack__exact=stack.id, active=True, 
-			publish_date__lte=datetime.datetime.now()).order_by('-date_published')[0:5]
+			publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		items_recent = Item.objects.filter(active=True,
 										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
 		items_popular = Item.objects.filter(active=True,
