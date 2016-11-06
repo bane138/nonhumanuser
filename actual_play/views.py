@@ -40,7 +40,7 @@ class GameGroupView(View):
 	def get(self, request, *args, **kwargs):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
 		games = Game.objects.filter(group=group.pk, active=True, 
-			publish_date__lte=datetime.datetime.now())[0:5]
+			publish_date__lte=datetime.datetime.now()).order_by('-date_published')[0:5]
 		items_recent = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
 		items_popular = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\

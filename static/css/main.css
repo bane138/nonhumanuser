@@ -767,6 +767,39 @@ footer {
         top: 20px;
         margin: 0 auto;
     }
+
+    .sidebar-links {
+        display: block;
+        line-height: 30px;
+    }
+
+    .sm_icon_class_actual_play {
+        background-image: url('../images/ap_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_articles {
+        background-image: url('../images/sa_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_library {
+        background-image: url('../images/l_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_stories {
+        background-image: url('../images/sa_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
 }
 
 /*  GO FULL WIDTH BELOW 480 PIXELS */

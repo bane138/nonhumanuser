@@ -20,7 +20,7 @@ class StoriesView(View):
 	def get(self, request):
 		category = Category.objects.get(name="Stories")
 		stories = Entry.objects.filter(category__name='Stories', active=True,
-			publish_date__lte=datetime.datetime.now())[0:5]
+			publish_date__lte=datetime.datetime.now()).order_by('-date_published')[0:5]
 		items_recent = Entry.objects.filter(category__name='Stories', active=True,
 											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
@@ -99,7 +99,7 @@ class ArticlesView(View):
 	def get(self, request):
 		category = Category.objects.get(name='Articles')
 		articles = Entry.objects.filter(category__name='Articles', active=True,
-			publish_date__lte=datetime.datetime.now())[0:5]
+			publish_date__lte=datetime.datetime.now()).order_by('-date_published')[0:5]
 		items_recent = Entry.objects.filter(category__name='Articles', active=True,
 											publish_date__lte=datetime.datetime.now())\
 		.order_by('-created_date')[0:5]
