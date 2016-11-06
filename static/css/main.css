@@ -778,6 +778,7 @@ footer {
     }
 
     .sidebar-offsite-links {
+        display: block;
         font-size: 0.9em;
         line-height: 30px;
         padding-top: 2px;
