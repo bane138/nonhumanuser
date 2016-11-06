@@ -768,9 +768,19 @@ footer {
         margin: 0 auto;
     }
 
+    .sidebar-list-item {
+        height: 3em;
+    }
+
     .sidebar-links {
         display: block;
         line-height: 30px;
+    }
+
+    .sidebar-offsite-links {
+        font-size: 0.9em;
+        line-height: 30px;
+        padding-top: 2px;
     }
 
     .sm_icon_class_actual_play {
