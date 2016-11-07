@@ -350,7 +350,7 @@ li {
 }
 
 .sidebar-links {
-
+    display: block;
 }
 
 .sidebar-patron-list-item {
@@ -693,10 +693,6 @@ footer {
         display: block;
         height: 1.5em;
         font-size: 1.5em;
-    }
-
-    .sidebar-links {
-
     }
 
     .content-image {
