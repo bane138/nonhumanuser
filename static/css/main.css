@@ -592,6 +592,10 @@ footer {
     .content-image {
         width: 100%;
     }
+
+    .post-image {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width : 850px) {
