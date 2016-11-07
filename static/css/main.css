@@ -351,6 +351,7 @@ li {
 
 .sidebar-links {
     display: block;
+
 }
 
 .sidebar-patron-list-item {
@@ -374,6 +375,7 @@ li {
 }
 
 .sidebar-offsite-links {
+    display: block;
     font-size: 12px;
     line-height: 12px;
 }
