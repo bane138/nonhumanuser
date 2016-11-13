@@ -15,11 +15,16 @@
 	{% for item in items %}
 		<article>
 			<div class="center">
-				<h2><a class="{{ icon_class }}" href="{{ item.slug }}">{{ item.title }}</a></h2>
 				{% if item.thumbnail %}
 					<p><img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" /></p>
 				{% endif %}
-				<p>{{ item.created_date }}</p>
+				<h2><a class="{{ icon_class }}" href="{{ item.slug }}">{{ item.title }}</a></h2>
+				<div>{{ item.description|safe }}
+					{% if story %}
+						<span><a href="{{ item.slug }}">Read more...</a></span>
+					{% endif %}
+				</div>
+				<div><small>{{ item.created_date }}</small></div>
 			</div>
 		</article>
 	{% endfor %}

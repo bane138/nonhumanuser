@@ -12,12 +12,12 @@
 <div class="content">
 	<article>
 		<div class="center">
-			<h2 class="{{ icon_class }}">{{ story.title }}</h2>
 			{% if story.image %}
 				<p><img class="content-image" src="{{ story.image.url }}" alt="{{ story.title }}" /></p>
 			{% endif %}
-			<p>{{ story.body|safe }}</p>
-			<div>{{ story.publish_date }}</div>
+			<h2 class="{{ icon_class }}">{{ story.title }}</h2>
+			<div>{{ story.body|safe }}</div>
+			<div><small>{{ story.publish_date }}</small></div>
 		</div>
 	</article>
 	<div class="comment-block">

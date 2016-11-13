@@ -12,10 +12,10 @@
 	{% for story in stories %}
 	<article>
 		<div class="center">
-			<h2><a class="{{ icon_class }}" href="{{ story.slug }}" >{{ story.title }}</a></h2>
 			{% if story.thumbnail %}
 				<p><img class="content-image" src="{{ story.image.url }}" alt="{{ story.title }}" /></p>
 			{% endif %}
+			<h2><a class="{{ icon_class }}" href="{{ story.slug }}" >{{ story.title }}</a></h2>
 			<div>{{ story.description|safe }} 
 					{% if story %}
 						<span><a href="{{ story.slug }}">Read more...</a></span>

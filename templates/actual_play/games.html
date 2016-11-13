@@ -14,10 +14,10 @@
 {% for game in games %}
 	<article class="row{{ forloop.counter }}">
 		<div class="center">
+		  {% if game.thumbnail %}
+			<p><img class="content-image" src="{{ game.thumbnail.url }}" alt="{{ game.title }}" /></p>
+		  {% endif %}
 			<h2><a class="{{ icon_class }}"  href="{{ game.slug }}">{{ game.title }}</a></h2>
-      {% if game.thumbnail %}
-        <p><img class="content-image" src="{{ game.thumbnail.url }}" alt="{{ game.title }}" /></p>
-      {% endif %}
 			<div>{{ game.description|safe }}
 				{% if game %}
 				<span><a href="{{ game.slug }}">Listen to the game...</a></span>

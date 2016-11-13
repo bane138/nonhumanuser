@@ -12,12 +12,12 @@
 <div class="content">
 	<article class="row1">
 		<div class="center">
-			<h2 class="{{ icon_class }}" >{{ game.title }}</h2>
 			{% if game.image %}
 				<p><img class="content-image" src="{{ game.image.url }}" alt="{{ game.title }}" /></p>
 			{% endif %}
-			<p>{{ game.body|safe }}</p>
-			<p>
+			<h2 class="{{ icon_class }}" >{{ game.title }}</h2>
+			<div>{{ game.body|safe }}</div>
+			<div>
 			{% if game.audio_ogg %}
 				<div>Audio</div>
 				<audio controls>
@@ -29,9 +29,9 @@
 					{% endif %}
 				</audio>
 			{% endif %}
-			</p>
+			</div>
 			{% if game.video_ogv %}
-			<p>
+			<div>
 				<div>Video</div>
 				<video width="320" height="240" controls>
 					{% if game.video_ogv %}
@@ -41,9 +41,9 @@
 					<source src="{{ game.video_mp4.url }}" type="video/mp4" />
 					{% endif %}
 				</video>
-			</p>
+			</div>
 			{% endif %}
-			<p>{{ game.create_date }}</p>
+			<div><small>{{ game.create_date }}</small></div>
 		</div>
 	</article>
 	<div class="comment-block">

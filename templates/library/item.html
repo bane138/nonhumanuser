@@ -15,15 +15,15 @@
 	{% endfor %}
 	<article>
 		<div class="center">
-			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
 			{% if item.image %}
 				<p><img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" /></p>
 			{% endif %}
-			<P>{{ item.body|safe }}</P>
+			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
+			<div>{{ item.body|safe }}</div>
 			{% if item.resource %}
 				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
 			{% endif %}
-			<p>{{ item.created_date }}</p>
+			<div><small>{{ item.created_date }}</small></div>
 		</div>
 	</article>
 	<div class="comment-block">
