@@ -144,7 +144,7 @@ section {
     position: relative;
     margin: 0 auto 40px;
     max-width: 1020px;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 /* ==========================================================================
@@ -337,6 +337,7 @@ li {
 .sidebar {
     display: inline-block;
     width: 29%;
+    padding: 0 0 0 20px;
     vertical-align: top;
 }
 
@@ -443,6 +444,7 @@ li {
 
 article {
     width: 100%;
+    padding: 10px;
 }
 
 /* ==========================================================================
