@@ -20,7 +20,7 @@
 					</a>
 					<div>
 					{% with description=story.description|safe %}
-					{{ description|smart_truncate_chars:70 }}
+					{{ description|smart_truncate_chars:300 }}
 					{% endwith %}
 					{% if story %}
 						<span><a class="sm_icon_class_stories" href="stories/{{ story.slug }}">Read more...</a></span>
@@ -40,7 +40,7 @@
 					</a>
 					<div>
 					{% with description=game.description|safe %}
-					{{ description|smart_truncate_chars:70 }}
+					{{ description|smart_truncate_chars:300 }}
 					{% endwith %}
 					{% if game %}
 						<span><a class="sm_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">Read more...</a></span>
@@ -60,7 +60,7 @@
 					</a>
 					<div>
 					{% with description=article.description|safe %}
-					{{ description|smart_truncate_chars:70 }}
+					{{ description|smart_truncate_chars:300 }}
 					{% endwith %}
 					{% if article %}
 						<span><a class="sm_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span>
@@ -80,7 +80,7 @@
 					</a>
 					<div>
 					{% with description=library_item.description|safe %}
-					{{ description|smart_truncate_chars:70 }}
+					{{ description|smart_truncate_chars:300 }}
 					{% endwith %}
 					{% if library_item %}
 						<span><a class="sm_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">Read more...</a></span>
