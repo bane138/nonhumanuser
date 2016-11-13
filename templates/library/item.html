@@ -21,7 +21,7 @@
 			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
 			<div>{{ item.body|safe }}</div>
 			{% if item.resource %}
-				<p><a href="/media/{{ item.resource.name }}">{{ item.resource.name }}</a></p>
+				<div><a href="/media/{{ item.resource.name }}" class="btn btn-primary">{{ item.name }}</a></div>
 			{% endif %}
 			<div><small>{{ item.created_date }}</small></div>
 		</div>
