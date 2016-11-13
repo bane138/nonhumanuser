@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load main_extras %}
 
 {% block title %}{{ site.title }}{% endblock %}
 {% block description %}{{ site.description }}{% endblock %}
@@ -17,7 +18,10 @@
 					{% endif %}
 					<h3><a class="lg_icon_class_stories" href="stories/{{ story.slug }}">{{ story.title }}</a></h3>
 					</a>
-					<div>{{ story.description|safe }} 
+					<div>
+					{% with description=story.description|safe %}
+					{{ description|smart_truncate_chars:70 }}
+					{% endwith %}
 					{% if story %}
 						<span><a class="sm_icon_class_stories" href="stories/{{ story.slug }}">Read more...</a></span>
 					{% endif %}
@@ -34,7 +38,10 @@
 					{% endif %}
 					<h3><a class="lg_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">{{ game.title }}</a></h3>
 					</a>
-					<div>{{ game.description|safe }} 
+					<div>
+					{% with description=game.description|safe %}
+					{{ description|smart_truncate_chars:70 }}
+					{% endwith %}
 					{% if game %}
 						<span><a class="sm_icon_class_actual_play" href="actual_play/{{ game_group.slug }}/{{ game.slug }}">Read more...</a></span>
 					{% endif %}
@@ -51,7 +58,10 @@
 					{% endif %}
 					<h3><a class="lg_icon_class_articles" href="articles/{{ article.slug }}">{{ article.title }}</a></h3>
 					</a>
-					<div>{{ article.description|safe }} 
+					<div>
+					{% with description=article.description|safe %}
+					{{ description|smart_truncate_chars:70 }}
+					{% endwith %}
 					{% if article %}
 						<span><a class="sm_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span>
 					{% endif %}
@@ -68,7 +78,10 @@
 					{% endif %}
 					<h3><a class="lg_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">{{ library_item.title }}</a></h3>
 					</a>
-					<div>{{ library_item.description|safe }} 
+					<div>
+					{% with description=library_item.description|safe %}
+					{{ description|smart_truncate_chars:70 }}
+					{% endwith %}
 					{% if library_item %}
 						<span><a class="sm_icon_class_library" href="library/{{ library_item.item_type }}/{{ library_item.slug }}">Read more...</a></span>
 					{% endif %}
