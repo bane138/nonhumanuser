@@ -773,10 +773,10 @@ footer {
     }
 
     .accounts-container {
-        width: 400px;
-        height: 353px;
-        margin: 0 auto;
-        background-image: url('../images/elder_sign_md.png');
+        width: 320px;
+        height: 480px;
+        margin: 170px auto 0;
+        background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
     }
 
@@ -843,7 +843,7 @@ footer {
 
     .accounts-container {
         width: 320px;
-        height: 450px;
+        height: 480px;
         margin: 170px auto 0;
         background-image: url('../images/elder_sign_sm.png');
         background-repeat: no-repeat;
