@@ -13,7 +13,11 @@
 		<article>
 			<div class="center">
 				{% if article.thumbnail %}
-					<p><img class="content-image" src="{{ article.image.url }}" alt="{{ article.title }}" /></p>
+					<div>
+						<a class="{{ icon_class }}" href="{{ article.slug }}" >
+							<img class="content-image" src="{{ article.image.url }}" alt="{{ article.title }}" />
+						</a>
+					</div>
 				{% endif %}
 				<h2><a class="{{ icon_class }}" href="{{ article.slug }}" >{{ article.title }}</a></h2>
 				<div>{{ article.description|safe }} 

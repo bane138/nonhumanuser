@@ -16,11 +16,15 @@
 		<article>
 			<div class="center">
 				{% if item.thumbnail %}
-					<p><img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" /></p>
+					<div>
+						<a class="{{ icon_class }}" href="{{ item.slug }}">
+							<img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" />
+						</a>
+					</div>
 				{% endif %}
 				<h2><a class="{{ icon_class }}" href="{{ item.slug }}">{{ item.title }}</a></h2>
 				<div>{{ item.description|safe }}
-					{% if story %}
+					{% if item %}
 						<span><a href="{{ item.slug }}">Read more...</a></span>
 					{% endif %}
 				</div>
