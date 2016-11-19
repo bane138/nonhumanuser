@@ -22,7 +22,25 @@
         {% endif %}
 
         {% if entry.image %}
-        <img src="{{ entry.image.url }}" alt="{{ entry.title }}" />
+          {% if entry.group %}
+          <div>
+            <a href="/actual_play/{{ entry.group.slug }}/{{ entry.slug }}">
+              <img class="content-image" src="{{ entry.image.url }}" alt="{{ entry.title }}" />
+            </a>
+          </div>
+          {% elif entry.category %}
+          <div>
+            <a href="/{{ entry.category.name|lower }}/{{ entry.slug }}">
+              <img class="content-image" src="{{ entry.image.url }}" alt="{{ entry.title }}" />
+            </a>
+          </div>
+          {% else %}
+          <div>
+            <a href="/library/{{ entry.item_type }}/{{ entry.slug }}">
+              <img class="content-image" src="{{ entry.image.url }}" alt="{{ entry.title }}" />
+            </a>
+          </div>
+          {% endif %}
         {% endif %}
         </a>
         <div>{{ entry.description|safe }} 
