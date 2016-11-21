@@ -32,6 +32,9 @@
 			</div>
 		</article>
 	{% endfor %}
+	{% if count > 5 %}
+	<div class="archive-link"><a href="/library/library_archive/">View more...</a></div>
+	{% endif %}
 </div>
 <div class="sidebar">
 	{% include 'sidebar.html' %}

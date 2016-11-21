@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ stack.name }}{% endblock %}
+{% block description %}{{ stack.tagline }}{% endblock %}
+
+{% block content %}
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
+<div class="content">
+	{% for stack in stacks %}
+        <h1>{{ stack.name }}</h1>
+        {% for item in items %}
+            {% if item.stack.name == stack.name %}
+            <article>
+                <div class="center">
+                    {% if item.thumbnail %}
+                        <div>
+                            <a href="{{ item.slug }}">
+                                <img class="content-image" src="{{ item.image.url }}" alt="{{ item.title }}" />
+                            </a>
+                        </div>
+                    {% endif %}
+                    <h2><a class="{{ icon_class }}" href="{{ item.slug }}">{{ item.title }}</a></h2>
+                    <div>{{ item.description|safe }}
+                        {% if item %}
+                            <span><a href="{{ item.slug }}">Read more...</a></span>
+                        {% endif %}
+                    </div>
+                    <div><small>{{ item.created_date }}</small></div>
+                </div>
+            </article>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</div>
+<div class="sidebar">
+	{% include 'sidebar.html' %}
+</div>
+{% endblock %}

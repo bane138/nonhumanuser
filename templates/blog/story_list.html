@@ -20,7 +20,7 @@
 				</div>
 			{% endif %}
 			<h2><a class="{{ icon_class }}" href="{{ story.slug }}" >{{ story.title }}</a></h2>
-			<div>{{ story.description|safe }} 
+			<div>{{ story.description|safe }}
 					{% if story %}
 						<span><a href="{{ story.slug }}">Read more...</a></span>
 					{% endif %}
@@ -29,9 +29,6 @@
 		</div>
 	</article>
 	{% endfor %}
-	{% if count > 5 %}
-	<div class="archive-link"><a href="/stories/story_archive/">View more...</a></div>
-	{% endif %}
 </div>
 <div class="sidebar">
 	{% include 'blog/stories_sidebar.html' %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ group.name }}{% endblock %}
+{% block description %}{{ group.game_type }}{% endblock %}
+
+{% block content %}
+
+<div class="section-heading">
+	<img src="{% static "images/" %}{{ section.name }}.png" />
+</div>
+<section class="content">
+{% for group in game_groups %}
+	<div class="archive-group">
+		<h1>{{ group.name }}</h1>
+	{% for game in games %}
+		{% if game.group.name == group.name %}
+		<article class="row{{ forloop.counter }}">
+			<div class="center">
+			  {% if game.thumbnail %}
+				<div>
+					<a href="{{ game.slug }}">
+						<img class="content-image" src="{{ game.thumbnail.url }}" alt="{{ game.title }}" />
+					</a>
+				</div>
+			  {% endif %}
+				<h2><a class="{{ icon_class }}"  href="/actual_play/{{ game.group.slug }}/{{ game.slug }}">{{ game.title }}</a></h2>
+				<div>{{ game.description|safe }}
+					{% if game %}
+					<span><a href="/actual_play/{{ game.group.slug }}/{{ game.slug }}">Listen to the game...</a></span>
+					{% endif %}
+				</div>
+				<div><small>{{ game.created_date }}</small></div>
+			</div>
+		</article>
+		{% endif %}
+	{% endfor %}
+	</div>
+{% endfor %}
+</section>
+<div class="sidebar">
+	{% include 'sidebar.html' %}
+</div>
+{% endblock %}

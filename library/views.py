@@ -58,6 +58,7 @@ class ItemsView(View):
 			'items_recent': items_recent,
 			'items_popular': items_popular,
 			'links': links,
+			'count': items.count(),
 			'icon_class': 'lg_icon_class_library'})
 
 
@@ -128,3 +129,33 @@ class ItemCommentView(View):
 
 		return HttpResponseRedirect(
 			'/library/' + kwargs['stack'] + '/' + kwargs['slug'] + '/')
+	
+	
+class ItemArchiveView(View):
+	template = 'library/library_list.html'
+
+	def get(self, request, *args, **kwargs):
+		items_recent = Item.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Item.objects.filter(active=True,
+											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
+		items = Item.objects.filter(active=True,
+									publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+		stacks = Stack.objects.all()
+		links = get_main_links()
+		context = {
+			'section': { 'name': 'Library' }
+		}
+		context['og_type'] = 'webpage'
+		context['og_url'] = 'http://www.nonhumanuser.com/Items/article_archive/'
+		context['og_title'] = 'Library Archive'
+		context['og_description'] = 'Resources and content for the Call of Cthulhu role playing game.'
+		context['og_image'] = 'http://www.nonhumanuser.com//images/Library.png'
+		context['items_recent'] = items_recent
+		context['items_popular'] = items_popular
+		context['links'] = links
+		context['icon_class'] = 'lg_icon_class_library'
+		context['items'] = items
+		context['stacks'] = stacks
+
+		return render(request, self.template, context)

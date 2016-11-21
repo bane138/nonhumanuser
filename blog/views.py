@@ -40,6 +40,7 @@ class StoriesView(View):
 			'og_image': 'http://www.nonhumanuser.com/images/Stories.png',
 			'stories': stories, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
+			'count': stories.count(),
 			'icon_class': 'lg_icon_class_stories'})
 
 
@@ -93,6 +94,34 @@ class StoriesCommentView(View):
 			'/stories/' + kwargs['slug'] + '/')
 
 
+class StoryArchiveView(View):
+	template = 'blog/story_list.html'
+
+	def get(self, request, *args, **kwargs):
+		items_recent = Entry.objects.filter(active=True, category__name='Stories',
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Entry.objects.filter(active=True, category__name='Stories',
+											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
+		stories = Entry.objects.filter(active=True, category__name='Stories',
+									   publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+		links = get_main_links()
+		context = {
+			'section': { 'name': 'Stories' }
+		}
+		context['og_type'] = 'webpage'
+		context['og_url'] = 'http://www.nonhumanuser.com/stories/story_archive/'
+		context['og_title'] = 'Story Archive'
+		context['og_description'] = 'Horror stories in the tradition of H.P. Lovecraft and the Cthulhu Mythos'
+		context['og_image'] = 'http://www.nonhumanuser.com//images/Stories.png'
+		context['items_recent'] = items_recent
+		context['items_popular'] = items_popular
+		context['links'] = links
+		context['icon_class'] = 'lg_icon_class_stories'
+		context['stories'] = stories
+
+		return render(request, self.template, context)
+
+
 class ArticlesView(View):
 	template = 'blog/articles.html'
 
@@ -119,6 +148,7 @@ class ArticlesView(View):
 			'og_image': 'http://www.nonhumanuser.com/images/Articles.png',
 			'articles': articles, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
+			'count': articles.count(),
 			'icon_class': 'lg_icon_class_articles'})
 
 
@@ -170,3 +200,31 @@ class ArticlesCommentView(View):
 
 		return HttpResponseRedirect(
 			'/articles/' + kwargs['slug'] + '/')
+
+
+class ArticleArchiveView(View):
+	template = 'blog/article_list.html'
+
+	def get(self, request, *args, **kwargs):
+		items_recent = Entry.objects.filter(active=True, category__name='Articles',
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Entry.objects.filter(active=True, category__name='Articles',
+											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
+		articles = Entry.objects.filter(active=True, category__name='Articles',
+									   publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+		links = get_main_links()
+		context = {
+			'section': { 'name': 'Articles' }
+		}
+		context['og_type'] = 'webpage'
+		context['og_url'] = 'http://www.nonhumanuser.com/articles/article_archive/'
+		context['og_title'] = 'Article Archive'
+		context['og_description'] = 'Articles and observations about the Call of Cthulhu role playing game.'
+		context['og_image'] = 'http://www.nonhumanuser.com//images/Articles.png'
+		context['items_recent'] = items_recent
+		context['items_popular'] = items_popular
+		context['links'] = links
+		context['icon_class'] = 'lg_icon_class_articles'
+		context['articles'] = articles
+
+		return render(request, self.template, context)

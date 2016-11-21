@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, ListView
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import timezone
 from actual_play.models import GameGroup, Game, Player, GameComment
 from actual_play.forms import GameCommentForm
 from nonhumanuser.utils import *
@@ -60,6 +61,7 @@ class GameGroupView(View):
 			'items_recent': items_recent,
 			'items_popular': items_popular,
 			'links': links,
+			'count': games.count(),
 			'icon_class': 'lg_icon_class_actual_play'})
 
 
@@ -133,3 +135,32 @@ class GameCommentView(View):
 
 		return HttpResponseRedirect(
 			'/actual_play/' + kwargs['group'] + '/' + kwargs['slug'] + '/')
+
+
+class GameArchiveView(View):
+	template = 'actual_play/game_list.html'
+
+	def get(self, request, *args, **kwargs):
+		items_recent = Game.objects.filter(active=True,
+										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+		items_popular = Game.objects.filter(active=True,
+											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
+		game_groups = GameGroup.objects.filter(active=True)
+		games = Game.objects.filter(active=True, publish_date__lte=datetime.datetime.now()).order_by('-created_date')
+		links = get_main_links()
+		context = {
+			'section': { 'name': 'Actual Play' }
+		}
+		context['og_type'] = 'webpage'
+		context['og_url'] = 'http://www.nonhumanuser.com/actual_play/game_archive/'
+		context['og_title'] = 'Game Archive'
+		context['og_description'] = 'Recorded actual play sessions of Call of Cthulhu and Delta Green.'
+		context['og_image'] = 'http://www.nonhumanuser.com//images/Actual_Play.png'
+		context['items_recent'] = items_recent
+		context['items_popular'] = items_popular
+		context['links'] = links
+		context['icon_class'] = 'lg_icon_class_actual_play'
+		context['game_groups'] = game_groups
+		context['games'] = games
+
+		return render(request, self.template, context)

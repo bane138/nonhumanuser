@@ -1,8 +1,9 @@
 from django.conf.urls import url
-from library.views import IndexView, ItemsView, ItemView, ItemResourceView, ItemCommentView
+from library.views import IndexView, ItemsView, ItemView, ItemResourceView, ItemCommentView, ItemArchiveView
 
 urlpatterns = [
 	url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^library_archive/$', ItemArchiveView.as_view(), name="library-archive"),
 	url(r'^(?P<slug>[\w-]+)/$', ItemsView.as_view(), name='library-items'),
 	url(r'^(?P<stack>[\w-]+)/(?P<slug>[\w-]+)/$', ItemView.as_view(), 
     name='library-item'),
