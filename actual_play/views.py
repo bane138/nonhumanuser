@@ -38,8 +38,9 @@ class IndexView(View):
 class GameGroupView(View):
 	template = 'actual_play/games.html'
 
-	def get(self, request, *args, **kwargs):
+	def get(self, request, *args, **kwargs)
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
+		games_total = Game.objects.all()
 		games = Game.objects.filter(group=group.pk, active=True, 
 			publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		items_recent = Game.objects.filter(group=group.pk, active=True, publish_date__lte=datetime.datetime.now())\
@@ -61,7 +62,7 @@ class GameGroupView(View):
 			'items_recent': items_recent,
 			'items_popular': items_popular,
 			'links': links,
-			'count': games.count(),
+			'count': games_total.count(),
 			'icon_class': 'lg_icon_class_actual_play'})
 
 

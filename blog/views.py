@@ -19,6 +19,7 @@ class StoriesView(View):
 
 	def get(self, request):
 		category = Category.objects.get(name="Stories")
+		stories_total = Entry.objects.filter(category__name='Stories').all()
 		stories = Entry.objects.filter(category__name='Stories', active=True,
 			publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		items_recent = Entry.objects.filter(category__name='Stories', active=True,
@@ -40,7 +41,7 @@ class StoriesView(View):
 			'og_image': 'http://www.nonhumanuser.com/images/Stories.png',
 			'stories': stories, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
-			'count': stories.count(),
+			'count': stories_total.count(),
 			'icon_class': 'lg_icon_class_stories'})
 
 
@@ -127,6 +128,7 @@ class ArticlesView(View):
 
 	def get(self, request):
 		category = Category.objects.get(name='Articles')
+		articles_total = Entry.objects.filter(category__name='Articles').all()
 		articles = Entry.objects.filter(category__name='Articles', active=True,
 			publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		items_recent = Entry.objects.filter(category__name='Articles', active=True,
@@ -148,7 +150,7 @@ class ArticlesView(View):
 			'og_image': 'http://www.nonhumanuser.com/images/Articles.png',
 			'articles': articles, 'items_recent': items_recent,
 			'items_popular': items_popular, 'links': links,
-			'count': articles.count(),
+			'count': articles_total.count(),
 			'icon_class': 'lg_icon_class_articles'})
 
 

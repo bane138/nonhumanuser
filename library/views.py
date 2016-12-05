@@ -39,6 +39,7 @@ class ItemsView(View):
 	def get(self, request, *args, **kwargs):
 		stack = Stack.objects.get(slug=self.kwargs['slug'])
 		stacks = Stack.objects.all()
+		items_total = Item.objects.all()
 		items = Item.objects.filter(stack__exact=stack.id, active=True, 
 			publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		items_recent = Item.objects.filter(active=True,
@@ -58,7 +59,7 @@ class ItemsView(View):
 			'items_recent': items_recent,
 			'items_popular': items_popular,
 			'links': links,
-			'count': items.count(),
+			'count': items_total.count(),
 			'icon_class': 'lg_icon_class_library'})
 
 
