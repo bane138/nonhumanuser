@@ -38,7 +38,7 @@ class IndexView(View):
 class GameGroupView(View):
 	template = 'actual_play/games.html'
 
-	def get(self, request, *args, **kwargs)
+	def get(self, request, *args, **kwargs):
 		group = GameGroup.objects.get(slug=self.kwargs['slug'])
 		games_total = Game.objects.all()
 		games = Game.objects.filter(group=group.pk, active=True, 
