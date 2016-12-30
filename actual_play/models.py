@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 class GameGroup(models.Model):
 	name = models.CharField(max_length=255)
 	game_type = models.CharField(max_length=255)
+	description = models.TextField(blank=True, null=True)
 	active = models.BooleanField(default=True)
 	created_date = models.DateTimeField('created date')
 	last_played = models.DateTimeField('last played')
