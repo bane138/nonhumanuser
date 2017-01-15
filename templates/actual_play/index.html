@@ -15,8 +15,9 @@
 		<li class="content-list-item">
 			<div class="center">
 				<h2><a href="{{ group.slug }}">{{ group.name }}</a></h2>
-				<div>{{ group.description }}</div>
+				<div>{{ group.description|safe }} <a href="{{ group.slug }}">Listen to games >></a></div>
 				<div>{{ group.created_date }}</div>
+
 			</div>
 		</li>
 	{% endfor %}
