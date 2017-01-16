@@ -20,6 +20,7 @@
 					</div>
 				{% endif %}
 				<h2><a class="{{ icon_class }}" href="{{ article.slug }}" >{{ article.title }}</a></h2>
+				<h5>By: {{ article.author }}</h5>
 				<div>{{ article.description|safe }} 
 					{% if article %}
 						<span><a href="{{ article.slug }}">Read more...</a></span>

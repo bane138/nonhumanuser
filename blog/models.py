@@ -16,6 +16,7 @@ class Blog(models.Model):
 
 
 class Entry(models.Model):
+    author = models.CharField(max_length=30, null=True, blank=True)
     blog = models.ForeignKey(Blog)
     title = models.CharField(max_length=250)
     body = models.TextField()
