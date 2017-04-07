@@ -58,8 +58,12 @@ class StoryView(View):
 											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		form = EntryCommentForm(request.POST)
-		story_comments = story.comments.all()
+		form = EntryCommentForm(initial={'name': request.user.username})
+
+		"""if request.user.is_authenticated():
+			form.name = request.user.username"""
+
+		story_comments = story.comments.filter(approved=True).all()
 		story.number_comments = story_comments.count()
 		story.number_views = story.number_views + 1
 		story.save()
@@ -87,8 +91,13 @@ class StoriesCommentView(View):
 		if form.is_valid():
 			comment = form.cleaned_data['comment']
 			user = request.user
+			if user.is_authenticated():
+				name = user.username
+			else:
+				user = None
+				name = request.POST['name']
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
-			instance = EntryComment(comment=comment, user=user, entry=entry)
+			instance = EntryComment(comment=comment, user=user, entry=entry, name=name)
 			instance.save()
 
 		return HttpResponseRedirect(
@@ -167,8 +176,8 @@ class ArticleView(View):
 											 publish_date__lte=datetime.datetime.now())\
 		.order_by('-number_comments')[0:5]
 		links = get_main_links()
-		form = EntryCommentForm(request.POST)
-		article_comments = article.comments.all()
+		form = EntryCommentForm(initial={'name': request.user.username})
+		article_comments = article.comments.filter(approved=True).all()
 		article.number_comments = article_comments.count()
 		article.number_views = article.number_views + 1
 		article.save()
@@ -196,8 +205,13 @@ class ArticlesCommentView(View):
 		if form.is_valid():
 			comment = form.cleaned_data['comment']
 			user = request.user
+			if user.is_authenticated():
+				name = user.username
+			else:
+				user = None
+				name = request.POST['name']
 			entry = Entry.objects.get(pk=request.POST.get('entry_id'))
-			instance = EntryComment(comment=comment, user=user, entry=entry)
+			instance = EntryComment(comment=comment, user=user, entry=entry, name=name)
 			instance.save()
 
 		return HttpResponseRedirect(

@@ -67,8 +67,9 @@ class Entry(models.Model):
 
 class EntryComment(models.Model):
     entry = models.ForeignKey(Entry, related_name='comments')
-    comment = models.TextField()
+    comment = models.TextField(null=True, blank=True)
     user = models.ForeignKey(User, related_name='blog_user', null=True, blank=True)
+    name = models.CharField(max_length=30, null=True, blank=True)
     created_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
 

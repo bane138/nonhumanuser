@@ -19,13 +19,13 @@
 						</a>
 					</div>
 				{% endif %}
-				<h2><a class="{{ icon_class }}" href="{{ article.slug }}" >{{ article.title }}</a></h2>
+				<h2><a class="{{ icon_class }}" href="/articles/{{ article.slug }}" >{{ article.title }}</a></h2>
 				<div>{{ article.description|safe }}
 					{% if article %}
 						<span><a href="{{ article.slug }}">Read more...</a></span>
 					{% endif %}
 				</div>
-				<div><small>{{ article.created_date }}</small></div>
+				<div><small>By: {{ article.author }}</small> <small>{{ article.created_date }}</small></div>
 			</div>
 		</article>
 	{% endfor %}

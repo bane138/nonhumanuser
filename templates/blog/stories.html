@@ -25,7 +25,7 @@
 						<span><a href="{{ story.slug }}">Read more...</a></span>
 					{% endif %}
 			</div>
-			<div><small>{{ story.publish_date }}</small></div>
+			<div><small>By: {{ story.author }}</small> <small>{{ story.publish_date }}</small></div>
 		</div>
 	</article>
 	{% endfor %}

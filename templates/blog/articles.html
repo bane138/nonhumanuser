@@ -26,7 +26,7 @@
 						<span><a href="{{ article.slug }}">Read more...</a></span>
 					{% endif %}
 				</div>
-				<div><small>{{ article.created_date }}</small></div>
+				<div><small>By: {{ article.author }}</small> <small>{{ article.created_date }}</small></div>
 			</div>
 		</article>
 	{% endfor %}
