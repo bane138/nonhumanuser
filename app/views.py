@@ -28,7 +28,7 @@ class IndexView(View):
         library_item = Item.objects.filter(active=True,
                                            publish_date__lte=datetime.datetime.now()).order_by('-created_date').first()
         game = Game.objects.filter(active=True,
-                                   publish_date__lte=datetime.datetime.now()).order_by('-created_date').first()
+                                   publish_date__lte=datetime.datetime.now()).order_by('-publish_date').first()
         if game:
             game_group = GameGroup.objects.filter(name=game.group).first()
         else:
