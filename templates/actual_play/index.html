@@ -9,14 +9,14 @@
 	<img src="{% static "images/" %}{{ section.name }}.png" />
 </div>
 <div class="content">
-	<h1>Game Groups</h1>
+	<h1>Games</h1>
 	<ul class="content-list">
-	{% for group in groups %}
+	{% for type in game_types %}
 		<li class="content-list-item">
 			<div class="center">
-				<h2><a href="{{ group.slug }}">{{ group.name }}</a></h2>
-				<div>{{ group.description|safe }} <a href="{{ group.slug }}">Listen to games >></a></div>
-				<div>{{ group.created_date }}</div>
+				<h2><a href="{{ type.slug }}">{{ type.name }}</a></h2>
+				<div>{{ type.description|safe }} <a href="{{ type.slug }}">Listen to games >></a></div>
+				<div>{{ type.created_date }}</div>
 
 			</div>
 		</li>

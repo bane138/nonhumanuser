@@ -13,8 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.static import serve
 from app.views import IndexView, ProfileView, SearchView
 from blog.views import StoriesView, StoryView, StoryArchiveView, ArticleView, ArticlesView, ArticleArchiveView,\
 ArticlesCommentView, StoriesCommentView
@@ -40,7 +41,6 @@ urlpatterns = [
     url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^members/', include('django.contrib.auth.urls')),
-    url(r'^markdown/', include('django_markdown.urls')),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^accounts/profile/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
         name='update_user'),
@@ -48,10 +48,11 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+    urlpatterns += [
+        url(r'^media/(?P<path>.*)$', serve, {
             'document_root': settings.MEDIA_ROOT
-            }))
+            }),
+        ]
 
 if settings.DEBUG:
     from django.conf.urls.static import static
