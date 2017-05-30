@@ -18,6 +18,14 @@
 			<h2 class="{{ icon_class }}" >{{ game.title }}</h2>
 			<div>{{ game.body|safe }}</div>
 			<div>
+				<span>
+					<a href="/actual_play/{{ game.game_type.slug }}/">{{ game.game_type.name }}</a>
+				</span> | 
+				<span>
+					<a href="/actual_play/{{ game.group.slug }}/">{{ game.group.name }}</a>
+				</span>
+			</div>
+			<div>
 			{% if game.audio_ogg %}
 				<div>Audio</div>
 				<audio controls>
@@ -68,7 +76,6 @@
 		{% empty %}
 		<p>No comments yet...</p>
 		{% endfor %}
-		{% if user.is_authenticated %}
 		<div class="comment-form">
 			<form method='POST' action='comment/'>
 				{% csrf_token %}
@@ -77,10 +84,6 @@
 				<input type="submit" name="submit" class="btn btn-primary" value="Save" />
 			</form>
 		</div>
-		{% else %}
-		<div class="comment-form">You must <a href="/members/login/">login</a> 
-		or <a href="/accounts/register">register</a> to post a comment.</div>
-		{% endif %}
 	</div>
 </div>
 <div class="sidebar">
