@@ -178,11 +178,27 @@ class GameArchiveView(View):
 		items_popular = Game.objects.filter(active=True,
 											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
 		game_groups = GameGroup.objects.filter(active=True)
+		game_types = GameType.objects.filter(active=True)
 		games = Game.objects.filter(active=True, publish_date__lte=datetime.datetime.now()).order_by('-created_date')
 		links = get_main_links()
 		context = {
 			'section': { 'name': 'Actual Play' }
 		}
+
+		for group in game_groups:
+			group_games = games.filter(group=group)
+			context['game_groups'] = { 
+				'group': group,
+				'games': group_games,
+			}
+
+		for game_type in game_types:
+			type_games = games.filter(game_type=game_type)
+			context['game_types'] = {
+				'type': game_type,
+				'games': type_games,
+			}
+		
 		context['og_type'] = 'webpage'
 		context['og_url'] = 'http://www.nonhumanuser.com/actual_play/game_archive/'
 		context['og_title'] = 'Game Archive'
@@ -192,7 +208,7 @@ class GameArchiveView(View):
 		context['items_popular'] = items_popular
 		context['links'] = links
 		context['icon_class'] = 'lg_icon_class_actual_play'
-		context['game_groups'] = game_groups
+		context['game_types'] = game_types
 		context['games'] = games
 
 		return render(request, self.template, context)
