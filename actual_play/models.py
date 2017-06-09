@@ -130,7 +130,7 @@ class Game(models.Model):
 
 class GameComment(models.Model):
 	game = models.ForeignKey(Game, related_name='comments')
-	comment = models.TextField()
+	comment = models.TextField(null=True, blank=True)
 	user = models.ForeignKey(User, related_name='actual_play_user', 
 		null=True, blank=True)
 	name = models.CharField(max_length=30, null=True, blank=True)

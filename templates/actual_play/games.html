@@ -10,7 +10,7 @@
 	<img src="{% static "images/" %}{{ section.name }}.png" />
 </div>
 <section class="content">
-<h1>Games</h1>
+<h1>{{ game_type }} Games</h1>
 {% for game in games %}
 	<article class="row{{ forloop.counter }}">
 		<div class="center">
