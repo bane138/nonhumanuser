@@ -44,11 +44,11 @@ class GameTypeView(View):
 	def get(self, request, *args, **kwargs):
 		if GameType.objects.filter(slug=self.kwargs['game_type']).exists():
 			game_type = GameType.objects.filter(slug=self.kwargs['game_type']).first()
-			games = Game.objects.filter(game_type=game_type.pk, active=True, 
+			games = Game.objects.filter(game_type=game_type.pk, active=True,
 				publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		else:
 			game_type = GameGroup.objects.filter(slug=self.kwargs['game_type']).first()
-			games = Game.objects.filter(group=game_type.pk, active=True, 
+			games = Game.objects.filter(group=game_type.pk, active=True,
 				publish_date__lte=datetime.datetime.now()).order_by('-publish_date')[0:5]
 		games_total = Game.objects.all() #
 		items_recent = Game.objects.filter(group=game_type.pk, active=True, publish_date__lte=datetime.datetime.now())\
@@ -65,13 +65,14 @@ class GameTypeView(View):
 		context['og_description'] = game_type.description
 		context['og_image'] = ''
 		context['game_type'] = game_type
+		context['game_type_slug'] = game_type.slug
 		context['games'] = games
 		context['items_recent'] = items_recent
 		context['items_popular'] = items_popular
 		context['links'] = links
 		context['count'] = games_total.count()
 		context['icon_class'] = 'lg_icon_class_actual_play'
-		
+
 		return render(request, self.template, context)
 
 
@@ -81,13 +82,13 @@ class GameView(View):
 	def get(self, request, *args, **kwargs):
 		if GameType.objects.filter(slug=self.kwargs['game_type']).exists():
 			game_type = GameType.objects.filter(slug=self.kwargs['game_type']).first()
-			game = Game.objects.filter(slug=self.kwargs['slug'], 
+			game = Game.objects.filter(slug=self.kwargs['slug'],
 				game_type=game_type.pk).first()
 		else:
 			game_type = GameGroup.objects.filter(slug=self.kwargs['game_type']).first()
-			game = Game.objects.filter(slug=self.kwargs['slug'], 
+			game = Game.objects.filter(slug=self.kwargs['slug'],
 				group=game_type.pk).first()
-		
+
 
 		items_recent = Game.objects.filter(active=True,
 										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
@@ -184,41 +185,54 @@ class GameArchiveView(View):
 	template = 'actual_play/game_list.html'
 
 	def get(self, request, *args, **kwargs):
-		items_recent = Game.objects.filter(active=True,
-										   publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
-		items_popular = Game.objects.filter(active=True,
-											publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
-		game_groups = GameGroup.objects.filter(active=True)
-		game_types = GameType.objects.filter(active=True)
-		games = Game.objects.filter(active=True, publish_date__lte=datetime.datetime.now()).order_by('-created_date')
-		links = get_main_links()
-		context = {
-			'section': { 'name': 'Actual Play' }
-		}
+			items_recent = Game.objects.filter(active=True,
+				publish_date__lte=datetime.datetime.now()).order_by('-created_date')[0:5]
+			items_popular = Game.objects.filter(active=True,
+				publish_date__lte=datetime.datetime.now()).order_by('-number_comments')[0:5]
+			game_groups = GameGroup.objects.filter(active=True)
+			game_types = GameType.objects.filter(active=True)
 
-		context['game_types'] = []
-		for group in game_groups:
-			group_games = games.filter(group=group)
-			context['game_types'].append({ 
-				'type': group,
-				'games': group_games,
-			})
+			if self.kwargs['game_type']:
+				if GameType.objects.filter(active=True, slug=self.kwargs['game_type']).exists():
+					games = Game.objects.filter(active=True,
+						publish_date__lte=datetime.datetime.now(),
+						game_type__slug=self.kwargs['game_type']).order_by('-created_date')
+				else:
+					games = Game.objects.filter(active=True,
+						publish_date__lte=datetime.datetime.now(),
+						group__slug=self.kwargs['game_type']).order_by('-created_date')
+			else:
+				games = Game.objects.filter(active=True,
+					publish_date__lte=datetime.datetime.now()).order_by('-created_date')
 
-		for game_type in game_types:
-			type_games = games.filter(game_type=game_type)
-			context['game_types'].append({
-				'type': game_type,
-				'games': type_games,
-			})
-		
-		context['og_type'] = 'webpage'
-		context['og_url'] = 'http://www.nonhumanuser.com/actual_play/game_archive/'
-		context['og_title'] = 'Game Archive'
-		context['og_description'] = 'Recorded actual play sessions of Call of Cthulhu and Delta Green.'
-		context['og_image'] = 'http://www.nonhumanuser.com//images/Actual_Play.png'
-		context['items_recent'] = items_recent
-		context['items_popular'] = items_popular
-		context['links'] = links
-		context['icon_class'] = 'lg_icon_class_actual_play'
+			links = get_main_links()
+			context = {
+				'section': { 'name': 'Actual Play' }
+			}
 
-		return render(request, self.template, context)
+			context['game_types'] = []
+			for group in game_groups:
+				group_games = games.filter(group=group)
+				context['game_types'].append({
+					'type': group,
+					'games': group_games,
+					})
+
+			for game_type in game_types:
+				type_games = games.filter(game_type=game_type)
+				context['game_types'].append({
+					'type': game_type,
+					'games': type_games,
+					})
+
+			context['og_type'] = 'webpage'
+			context['og_url'] = 'http://www.nonhumanuser.com/actual_play/game_archive/'
+			context['og_title'] = 'Game Archive'
+			context['og_description'] = 'Recorded actual play sessions of Call of Cthulhu and Delta Green.'
+			context['og_image'] = 'http://www.nonhumanuser.com//images/Actual_Play.png'
+			context['items_recent'] = items_recent
+			context['items_popular'] = items_popular
+			context['links'] = links
+			context['icon_class'] = 'lg_icon_class_actual_play'
+
+			return render(request, self.template, context)
