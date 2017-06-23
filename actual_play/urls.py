@@ -4,6 +4,7 @@ GameView,GameResourceView,GameCommentView, GameArchiveView
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^game_archive/$', GameArchiveView.as_view(), name="all-game-archive"),
     url(r'^game_archive/(?P<game_type>[\w-]+)/$', GameArchiveView.as_view(), name="game-archive"),
     url(r'^(?P<game_type>[\w-]+)/$', GameTypeView.as_view(), name='game-type'),
     url(r'^(?P<game_type>[\w-]+)/(?P<slug>[\w-]+)/$', GameView.as_view(),
