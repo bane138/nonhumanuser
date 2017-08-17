@@ -151,6 +151,7 @@ class GameResourceView(View):
                 else:
                         _type = 'video/'
 
+                # TODO: Add S3 path
                 file_path = settings.MEDIA_ROOT + '/actual_play/' + _type + '/' \
                 + self.kwargs['year'] + '/' + self.kwargs['month'] + '/'\
                  + self.kwargs['day'] + \

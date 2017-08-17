@@ -20,7 +20,7 @@
 			<div>
 				<span>
 					<a href="/actual_play/{{ game.game_type.slug }}/">{{ game.game_type.name }}</a>
-				</span> | 
+				</span> |
 				<span>
 					<a href="/actual_play/{{ game.group.slug }}/">{{ game.group.name }}</a>
 				</span>
@@ -35,7 +35,17 @@
 					{% if game.audio_mp3 %}
 					<source src="{{ game.audio_mp3.url }}" type="audio/mpeg" />
 					{% endif %}
-				</audio>
+                </audio>
+            {% elif game.audio_url_ogg or game.audio_url_mp3 %}
+				<div>Audio</div>
+				<audio controls>
+					{% if game.audio_url_ogg %}
+					<source src="{{ game.audio_url_ogg }}" type="audio/ogg" />
+					{% endif %}
+					{% if game.audio_url_mp3 %}
+					<source src="{{ game.audio_url_mp3 }}" type="audio/mpeg" />
+					{% endif %}
+                </audio>
 			{% endif %}
 			</div>
 			{% if game.video_ogv %}
@@ -49,7 +59,19 @@
 					<source src="{{ game.video_mp4.url }}" type="video/mp4" />
 					{% endif %}
 				</video>
-			</div>
+            </div>
+            {% elif game.video_url_ogv or game.video_url_mp4 %}
+			<div>
+				<div>Video</div>
+				<video width="320" height="240" controls>
+					{% if game.video_url_ogv %}
+					<source src="{{ game.video_url_ogg }}" type="video/ogg" />
+					{% endif %}
+					{% if game.video_url_mp4 %}
+					<source src="{{ game.video_url_mp4 }}" type="video/mp4" />
+					{% endif %}
+				</video>
+            </div>
 			{% endif %}
 			<div><small>{{ game.create_date }}</small></div>
 		</div>

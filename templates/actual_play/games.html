@@ -32,7 +32,10 @@
 	</article>
 {% endfor %}
 	{% if count > 5 %}
-    <div class="archive-link"><a href="/actual_play/game_archive/{{ game_type_slug }}">View more...</a></div>
+    <div class="archive-link">
+        <a href="/actual_play/game_archive/{{ game_type_slug }}">View more {{ game_type }}...</a> |
+        <a href="/actual_play/game_archive/">View all...</a>
+    </div>
 	{% endif %}
 </section>
 <div class="sidebar">
