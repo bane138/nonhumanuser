@@ -1,5 +1,5 @@
 dj-database-url==0.4.1
-Django==1.9.1
+Django==1.11.23
 django-annoying==0.10.1
 django-bootstrap3==7.1.0
 django-extensions==1.7.4
