@@ -1,0 +1,46 @@
+version: '3'
+services:
+
+  web:
+    build: ./docker
+    container_name: nhu
+    volumes:
+    - .:/code
+    - static:/code/static_cdn
+    - media:/code/media_cdn
+    depends_on:
+      - postgres
+    expose:
+      - 8080
+    command: bash -c 'python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 nonhumanuser.wsgi -b 0.0.0.0:8080'
+
+  postgres:
+    build: ./docker/postgres
+    restart: unless-stopped
+    expose:
+      - '5432'
+    environment:  # used by init script
+      LC_ALL: C.UTF-8
+      POSTGRES_USER: webboss
+      POSTGRES_PASSWORD: NHU#lanfear138
+      POSTGRES_DB: nonhumanuser
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+  nginx:
+    restart: always
+    build: ./docker/nginx
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d
+      - ./logs/:/code/logs
+      - static:/code/static_cdn
+      - media:/code/media_cdn
+    ports:
+      - '1221:80'
+    links:
+      - web
+
+volumes:
+  pgdata:
+  media:
+  static:
