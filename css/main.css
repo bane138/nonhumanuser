@@ -365,7 +365,7 @@ li {
     overflow: hidden; 
 }
 
-.embed-container iframe, .video-container object, .video-container embed { 
+.embed-container iframe, .embed-container object, .embed-container embed { 
     position: absolute; 
     top: 0; 
     left: 0; 
