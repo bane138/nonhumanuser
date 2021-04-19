@@ -64,10 +64,14 @@
 			<div>
 				<div>Video</div>
 				{% if game.video_url_ogv %}
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ game.video_url_ogv }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="embed-container">
+					<iframe src="https://www.youtube.com/embed/{{ game.video_url_ogv }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
 				{% endif %}
 				{% if game.video_url_mp4 %}
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ game.video_url_mp4 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<div class="embed-container">
+					<iframe src="https://www.youtube.com/embed/{{ game.video_url_mp4 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
 				{% endif %}
 				<!--<video width="320" height="240" controls>
 					{% if game.video_url_ogv %}
