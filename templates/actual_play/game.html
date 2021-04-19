@@ -63,14 +63,20 @@
             {% elif game.video_url_ogv or game.video_url_mp4 %}
 			<div>
 				<div>Video</div>
-				<video width="320" height="240" controls>
+				{% if game.video_url_ogv %}
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ game.video_url_ogv }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				{% endif %}
+				{% if game.video_url_mp4 %}
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ game.video_url_mp4 }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				{% endif %}
+				<!--<video width="320" height="240" controls>
 					{% if game.video_url_ogv %}
 					<source src="{{ game.video_url_ogg }}" type="video/ogg" />
 					{% endif %}
 					{% if game.video_url_mp4 %}
 					<source src="{{ game.video_url_mp4 }}" type="video/mp4" />
 					{% endif %}
-				</video>
+				</video>-->
             </div>
 			{% endif %}
 			<div><small>{{ game.create_date }}</small></div>
