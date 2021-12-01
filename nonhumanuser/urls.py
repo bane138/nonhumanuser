@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^media/actual_play/', include('actual_play.urls')),
     url(r'^actual_play/', include('actual_play.urls')),
     url(r'^members/', include('django.contrib.auth.urls')),
-    url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'accounts/', include('registration.backends.simple.urls')),
     url(r'^accounts/profile/(?P<slug>[\-\w]+)/$', ProfileView.as_view(), 
         name='update_user'),
     url(r'^search/(?P<q>.*)$', SearchView.as_view(), name='search'),
