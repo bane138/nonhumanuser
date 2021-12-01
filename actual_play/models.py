@@ -132,10 +132,15 @@ class Game(models.Model):
 
 
 class GameComment(models.Model):
-    game = models.ForeignKey(Game, related_name='comments')
+    game = models.ForeignKey(Game, 
+        on_delete=models.PROTECT, 
+        related_name='comments')
     comment = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(User, related_name='actual_play_user',
-        null=True, blank=True)
+    user = models.ForeignKey(User, 
+        on_delete=models.PROTECT, 
+        related_name='actual_play_user',
+        null=True, 
+        blank=True)
     name = models.CharField(max_length=30, null=True, blank=True)
     created_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)

@@ -76,9 +76,13 @@ class Item(models.Model):
 
 
 class ItemComment(models.Model):
-	item = models.ForeignKey(Item, related_name='comments')
+	item = models.ForeignKey(Item,
+		on_delete=models.PROTECT,
+		related_name='comments')
 	comment = models.TextField()
-	user = models.ForeignKey(User, related_name='library_user', 
+	user = models.ForeignKey(User,
+		on_delete=models.PROTECT,  
+		related_name='library_user', 
 		null=True, blank=True)
 	created_date = models.DateTimeField(auto_now=True)
 	approved = models.BooleanField(default=False)

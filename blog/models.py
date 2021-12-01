@@ -18,7 +18,8 @@ class Blog(models.Model):
 
 class Entry(models.Model):
     author = models.CharField(max_length=30, null=True, blank=True)
-    blog = models.ForeignKey(Blog)
+    blog = models.ForeignKey(Blog, 
+        on_delete=models.PROTECT)
     title = models.CharField(max_length=250)
     body = models.TextField()
     slug = models.SlugField(editable=False)
@@ -27,8 +28,10 @@ class Entry(models.Model):
     created_date = models.DateTimeField('created date')
     modified_date = models.DateTimeField()
     publish_date = models.DateTimeField(null=True, blank=True, default=None)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT,
-	blank=True, null=True)
+    category = models.ForeignKey('Category', 
+        on_delete=models.PROTECT,
+        blank=True, 
+        null=True)
     number_views = models.IntegerField(default=0)
     number_comments = models.IntegerField(default=0)
     thumbnail = models.ImageField(upload_to='entry/%Y/%m/%d', blank=True, null=True)
@@ -67,9 +70,14 @@ class Entry(models.Model):
 
 
 class EntryComment(models.Model):
-    entry = models.ForeignKey(Entry, related_name='comments')
+    entry = models.ForeignKey(Entry,
+        on_delete=models.PROTECT, related_name='comments')
     comment = models.TextField(null=True, blank=True)
-    user = models.ForeignKey(User, related_name='blog_user', null=True, blank=True)
+    user = models.ForeignKey(User,
+        on_delete=models.PROTECT, 
+        related_name='blog_user', 
+        null=True, 
+        blank=True)
     name = models.CharField(max_length=30, null=True, blank=True)
     created_date = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
