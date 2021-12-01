@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'actual_play',
     'django_extensions',
     'bootstrap3',
+    'registration',
 ]
 
 MIDDLEWARE_CLASSES = [
