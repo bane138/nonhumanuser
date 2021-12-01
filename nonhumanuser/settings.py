@@ -135,7 +135,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#TODO Eventually change this to True and use django.utils.timezone.now() instead of datetime.datetime.now() everywhere
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
