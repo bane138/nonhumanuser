@@ -11,6 +11,26 @@
 		<ul class="content-list">
 			<li class="content-list-item">
 				<div class="content-box">
+					<h1>Articles</h1>
+					<a href="articles/{{ article.slug }}">
+					{% if article.image %}
+					<img src="{{ article.image.url }}" alt="{{ article.title }}" />
+					{% endif %}
+					<h3><a class="lg_icon_class_articles" href="articles/{{ article.slug }}">{{ article.title }}</a></h3>
+					</a>
+					<div>
+					{% with description=article.description|safe %}
+					{{ description|smart_truncate_chars:300 }}
+					{% endwith %}
+					{% if article %}
+						<span><a class="sm_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span>
+					{% endif %}
+					</div>
+					<div class="date">{{ article.created_date }}</div>
+				</div>
+			</li>		
+			<li class="content-list-item">
+				<div class="content-box">
 					<h1>Stories</h1>
 					<a href="stories/{{ story.slug }}">
 					{% if story.image %}
@@ -47,26 +67,6 @@
 					{% endif %}
 					</div>
 					<div class="date">{{ game.created_date }}</div>
-				</div>
-			</li>		
-			<li class="content-list-item">
-				<div class="content-box">
-					<h1>Articles</h1>
-					<a href="articles/{{ article.slug }}">
-					{% if article.image %}
-					<img src="{{ article.image.url }}" alt="{{ article.title }}" />
-					{% endif %}
-					<h3><a class="lg_icon_class_articles" href="articles/{{ article.slug }}">{{ article.title }}</a></h3>
-					</a>
-					<div>
-					{% with description=article.description|safe %}
-					{{ description|smart_truncate_chars:300 }}
-					{% endwith %}
-					{% if article %}
-						<span><a class="sm_icon_class_articles" href="articles/{{ article.slug }}">Read more...</a></span>
-					{% endif %}
-					</div>
-					<div class="date">{{ article.created_date }}</div>
 				</div>
 			</li>
 			<li class="content-list-item">
