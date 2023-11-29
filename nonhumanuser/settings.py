@@ -152,7 +152,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Markdown
-MARKDOWN_EDITOR_SKIN = 'simple'
+#MARKDOWN_EDITOR_SKIN = 'simple'
 
 # Registration
 AUTH_PROFILE_MODULE = "app.Profile"
