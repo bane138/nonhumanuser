@@ -1,0 +1,1030 @@
+/*! HTML5 Boilerplate v5.3.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+    height: 100%;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Custom h3 for nonhumanuser.com
+ */
+h3 {
+    height: 60px;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+    color: #555;
+    font-family: Helvetica Neue, Helvetica, Arial, Sans-serif;
+    font-size: 1.05em;
+    line-height: 1.25em;
+}
+
+a {
+    color: #4C9CF1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #444;
+}
+
+a:visited, a:active {
+    color: #2A5DB0;
+}
+
+header {
+    background: #fff;
+    width: 100%;
+    height: 115px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    border-bottom: 4px solid #efefef;
+    z-index: 100;
+}
+
+#logo {
+    float: left;
+    margin-left: 5px;
+    margin-top: 0;
+    width: 320px;
+    height: 100px;
+    background: url(../images/logo.png) no-repeat center;
+    display: block;
+}
+
+section {
+    position: relative;
+    margin: 0 auto 40px;
+    max-width: 1020px;
+    padding: 20px 0;
+}
+
+/* ==========================================================================
+    Navigation 
+   ========================================================================== */
+    
+nav {
+    float: right;
+    padding: 0 0 0 0;
+}
+
+.menu-icon {
+    display: hidden;
+    width: 40px;
+    height: 40px;
+    background: #666 url(../images/menu-icon.svg) center;
+}
+
+a:hover#menu-icon {
+    background-color: #444;
+    border-radius: 4px 4px 0 0;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+    padding: 10px;
+}
+
+/* ==========================================================================
+    Section
+   ========================================================================== */
+
+/*  SECTIONS  */
+
+/*  COLUMN SETUP  */
+.col {
+    display: block;
+    float:left;
+    margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+
+.section-header {
+    font-size: 52px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+/* ==========================================================================
+    Content
+   ========================================================================== */
+
+.accounts {
+    position: relative;
+    margin-top: 120px;
+}
+
+.accounts-container {
+    width: 600px;
+    height: 530px;
+    margin: 0 auto;
+    background-image: url('../images/elder_sign_lg.png');
+    background-repeat: no-repeat;
+}
+
+.accounts-form {
+    width: 320px;
+    margin: 0 auto;
+    background: none;
+}
+
+.search-container {
+    float: right;
+    width: 300px;
+}
+
+.search-input {
+    float: right;
+    width: 200px !important;
+}
+
+.search-btn {
+    float: right;
+}
+
+.content-main {
+    width: 70%;
+    padding: 0;
+    margin-right: 0px;
+    display: inline-block;
+}
+
+.content {
+    width: 70%;
+    padding: 0 20px;
+    margin-right: 0px;
+    display: inline-block;
+}
+
+.frontpage {
+    margin-top: 120px;
+}
+
+.profile {
+    position: relative;
+    margin-top: 100px;
+}
+
+.content-list {
+    background: #fff;
+    margin: 0;
+    padding: 0px;
+}
+
+.content-list-item {
+    display: inline-block;
+    width: 49%;
+    background: #fff;
+    vertical-align: top;
+}
+
+.content-box {
+    width: 300px;
+}
+
+.content-box img {
+    width: 300px;
+}
+
+.content-image {
+    width: 100%;
+}
+
+.comment {
+    margin: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-block-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 0;
+}
+
+.comment-block-list-item-left {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    width: 80px;
+}
+
+.comment-block-list-item-right {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+.comment-image {
+    width: 80px;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.comment-date {
+    font-size: .5em;
+}
+
+.library-stacks {
+    padding: 3px 10px;
+    border-right: 1px solid #000;
+    line-height: 12px;
+}
+
+.sidebar {
+    display: inline-block;
+    width: 29%;
+    padding: 0 0 0 20px;
+    vertical-align: top;
+}
+
+.sidebar-list {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-list-item {
+    display: block;
+    height: 40px;
+}
+
+.sidebar-links {
+    display: block;
+
+}
+
+.sidebar-patron-list-item {
+    height: 50px;
+}
+
+.patron-link {
+    padding: 20px 25px;
+    background-color: #e6461a;
+    color: #fff !important;
+    border-radius: 5px;
+    line-height: 40px;
+}
+
+.patron-link:hover {
+    padding: 20px 25px;
+    background-color: #ccc;
+    color: #000;
+    border-radius: 5px;
+    line-height: 40px;
+}
+
+.sidebar-offsite-links {
+    display: block;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.lg_icon_class_actual_play {
+    background-image: url('../images/ap.png');
+    background-repeat: no-repeat;
+    padding-left: 32px;
+    line-height: 30px;
+}
+
+.lg_icon_class_articles {
+    background-image: url('../images/sa.png');
+    background-repeat: no-repeat;
+    padding-left: 32px;
+    line-height: 30px;
+}
+
+.lg_icon_class_library {
+    background-image: url('../images/l.png');
+    background-repeat: no-repeat;
+    padding-left: 32px;
+    line-height: 30px;
+}
+
+.lg_icon_class_stories {
+    background-image: url('../images/sa.png');
+    background-repeat: no-repeat;
+    padding-left: 32px;
+    line-height: 30px;
+}
+
+.sm_icon_class_actual_play {
+    background-image: url('../images/ap_sm.png');
+    background-repeat: no-repeat;
+    padding-left: 22px;
+    line-height: 20px;
+}
+
+.sm_icon_class_articles {
+    background-image: url('../images/sa_sm.png');
+    background-repeat: no-repeat;
+    padding-left: 22px;
+    line-height: 20px;
+}
+
+.sm_icon_class_library {
+    background-image: url('../images/l_sm.png');
+    background-repeat: no-repeat;
+    padding-left: 22px;
+    line-height: 20px;
+}
+
+.sm_icon_class_stories {
+    background-image: url('../images/sa_sm.png');
+    background-repeat: no-repeat;
+    padding-left: 22px;
+    line-height: 20px;
+}
+
+/* ==========================================================================
+    Article
+   ========================================================================== */
+   
+
+article {
+    width: 100%;
+    padding: 10px;
+}
+
+/* ==========================================================================
+    Aside
+   ========================================================================== */
+   
+
+aside {
+    width: 100%;
+}
+
+/* ==========================================================================
+    Footer
+   ========================================================================== */
+   
+footer {
+    position: relative;
+    width: 100%;
+    background: #fefefe;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #efefef;
+}
+
+.nav-center {
+    position: relative;
+    width: 600px;
+    margin: 0 auto 15px;
+}
+
+.footer-nav {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav li {
+    width: 21%;
+    text-align: center;
+}
+
+.copyright {
+    text-align: center;
+    padding: 15px;
+}
+
+.section-heading {
+    position: relative;
+    width: 1020px;
+    margin: 100px 0 20px;
+    border-bottom: 3px solid #eee;
+}
+
+.section-heading img {
+    position: relative;
+    left: 0
+    width: 100%;
+}
+
+.center {
+    margin: 0 auto 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+}
+
+.grid-center {
+    height: 220px;
+    margin: 0 auto 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+}
+
+/*  GRID OF TWELVE  */
+.span_12_of_12 {
+    width: 100%;
+}
+
+.span_11_of_12 {
+    width: 91.53%;
+}
+.span_10_of_12 {
+    width: 83.06%;
+}
+
+.span_9_of_12 {
+    width: 74.6%;
+}
+
+.span_8_of_12 {
+    width: 66.13%;
+}
+
+.span_7_of_12 {
+    width: 57.66%;
+}
+
+.span_6_of_12 {
+    width: 49.2%;
+}
+
+.span_5_of_12 {
+    width: 40.73%;
+}
+
+.span_4_of_12 {
+    width: 32.26%;
+}
+
+.span_3_of_12 {
+    width: 23.8%;
+}
+
+.span_2_of_12 {
+    width: 15.33%;
+}
+
+.span_1_of_12 {
+    width: 6.866%;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .section-heading {
+        position: relative;
+        width: 100%;
+        margin: 170px 0 20px;
+        border-bottom: 3px solid #eee;
+    }
+
+    .content {
+        padding-top: 0;
+    }
+
+    .content-list {
+        padding-top: 0;
+    }
+
+    .content-list-item {
+        display: block;
+        width: 100%;
+        background: #fff;
+        vertical-align: top;
+        padding-top: 0;
+    }
+
+    .content-box {
+        width: 100%;
+    }
+
+    .content-box img {
+        width: 100%;
+    }
+
+    .sidebar {
+        padding-top: 10px;
+    }
+
+    .content-image {
+        width: 100%;
+    }
+
+    .post-image {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width : 850px) {
+
+    .content {
+        width: 100%;
+        padding: 10px;
+        display: inline-block;
+    }
+
+    .section-heading {
+        position: relative;
+        width: 100%;
+        margin: 170px 0 20px;
+        border-bottom: 3px solid #eee;
+    }
+
+    .content-main {
+        width: 100%;
+        padding: 10px;
+        display: inline-block;
+    }
+
+    nav {
+
+    }
+
+    .nav-center {
+        width: 400px;
+    }
+
+    .footer-nav li {
+        width: 21%;
+        text-align: center;
+        font-size: .8em;
+        padding: 5px;
+    }
+
+    .copyright {
+        font-size: .8em;
+    }
+
+    nav ul, nav:active ul { 
+        display: none;
+        position: absolute;
+        padding: 20px 0;
+        background: none;
+        right: 0px;
+        top: 100px;
+        width: 30%;
+        border-radius: 4px 0 4px 4px;
+    }
+
+    nav li {
+        background: #fff;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 2px solid #ccc;
+    }
+
+    nav li:first-child {
+        background: #fff;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 2px solid #ccc;
+    }
+
+    nav:hover ul {
+        display: block;
+    }
+
+    .menu-icon {
+        display:inline-block;
+        position: absolute;
+        top: 71px;
+        right: 0px;
+    }
+
+    .sidebar {
+        display: block;
+        width: 100%;
+        vertical-align: top;
+    }
+
+    .sidebar-list {
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar-list-item {
+        display: block;
+        height: 1.5em;
+        font-size: 1.5em;
+    }
+
+    .content-image {
+        width: 100%;
+    }
+
+}
+
+@media only screen and (max-width : 660px) {
+
+    header {
+        position: absolute;
+    }
+
+    #menu-icon {
+        display:inline-block;
+    }
+
+    nav ul, nav:active ul { 
+        display: none;
+        position: absolute;
+        padding: 20px 0;
+        background: none;
+        right: 0px;
+        top: 100px;
+        width: 30%;
+        border-radius: 4px 0 4px 4px;
+    }
+
+    nav li {
+        background: #fff;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 2px solid #ccc;
+    }
+
+    nav li:first-child {
+        background: #fff;
+        text-align: center;
+        width: 100%;
+        padding: 10px 0;
+        margin: 0;
+        border-bottom: 2px solid #ccc;
+    }
+
+    nav:hover ul {
+        display: block;
+    }
+
+    .section-heading img {
+        width: 100%;
+    }
+
+    .content-image {
+        width: 100%;
+    }
+
+    .accounts-container {
+        width: 320px;
+        height: 480px;
+        margin: 170px auto 0;
+        background-image: url('../images/elder_sign_sm.png');
+        background-repeat: no-repeat;
+    }
+
+    .search-container {
+        float: none;
+        position: relative;
+        width: 300px;
+        top: 20px;
+        margin: 0 auto;
+    }
+
+    .sidebar-list-item {
+        height: 3em;
+    }
+
+    .sidebar-links {
+        display: block;
+        line-height: 30px;
+    }
+
+    .sidebar-offsite-links {
+        display: block;
+        font-size: 0.9em;
+        line-height: 30px;
+        padding-top: 2px;
+    }
+
+    .sm_icon_class_actual_play {
+        background-image: url('../images/ap_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_articles {
+        background-image: url('../images/sa_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_library {
+        background-image: url('../images/l_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+
+    .sm_icon_class_stories {
+        background-image: url('../images/sa_sm.png');
+        background-repeat: no-repeat;
+        background-position-y: 5px;
+        padding-left: 22px;
+    }
+}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+    .col {  margin: 1% 0 1% 0%; }
+    
+    .span_1_of_12, .span_2_of_12, .span_3_of_12, .span_4_of_12, .span_5_of_12, .span_6_of_12, .span_7_of_12, .span_8_of_12, .span_9_of_12, .span_10_of_12, .span_11_of_12, .span_12_of_12 {
+    width: 100%; 
+    }
+
+    .accounts-container {
+        width: 320px;
+        height: 480px;
+        margin: 170px auto 0;
+        background-image: url('../images/elder_sign_sm.png');
+        background-repeat: no-repeat;
+    }
+
+    .content-box {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content-box img {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after,
+    *:first-letter,
+    *:first-line {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

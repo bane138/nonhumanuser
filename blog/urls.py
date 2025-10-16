@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 from blog.views import IndexView, StoriesView, StoryView, ArticleView, ArticleView
 
 urlpatterns = [
-	url(r'^$', IndexView.as_view(), name='index'),
+	path('', IndexView.as_view(), name='index'),
 ]

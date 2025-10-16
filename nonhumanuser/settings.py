@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+from dotenv import load_dotenv
 import os
-import dj_database_url
+#import dj_database_url
+load_dotenv()  # Load environment variables from .env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'actual_play',
     'django_extensions',
     'bootstrap3',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -87,13 +90,15 @@ WSGI_APPLICATION = 'nonhumanuser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nonhumanuser',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'USER': 'webboss',
-        'PASSWORD': 'NHU#lanfear138',
+        'NAME': os.environ.get('POSTGRES_DB', 'nonhumanuser'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        'USER': os.environ.get('POSTGRES_USER', 'webboss'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'NHU#lanfear138'),
     }
- }
+}
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DB_ENV = {
     'default': 'NHU_DATABASE',
@@ -141,15 +146,18 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = BASE_DIR
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/nhu-media/'
+
 # Media files (images, videos, PDFs)
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
 
 # Markdown
 #MARKDOWN_EDITOR_SKIN = 'simple'
