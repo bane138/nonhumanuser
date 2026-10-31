@@ -15,12 +15,15 @@ Including another URLconf
 """
 from django.urls import include, path, re_path
 from django.contrib import admin
-from django.views.static import serve
 from app.views import IndexView, ProfileView, SearchView
 from blog.views import StoriesView, StoryView, StoryArchiveView, ArticleView, ArticlesView, ArticleArchiveView,\
 ArticlesCommentView, StoriesCommentView
 
-from nonhumanuser import settings
+from django.conf import settings
+from django.conf.urls.static import static
+
+admin.autodiscover()
+admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -47,14 +50,6 @@ urlpatterns = [
     re_path(r'^search/(?P<q>.*)$', SearchView.as_view(), name='search'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += [
-        re_path(r'^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT
-            }),
-        ]
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    urlpatterns += static(settings.STATIC_URL,
-        document_root=settings.STATIC_ROOT)
+# Dev: serve local media first, ahead of the /media/library/ and /media/actual_play/ redirects.
+if settings.DEBUG and not settings.AWS_STORAGE_BUCKET_NAME:
+    urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + urlpatterns

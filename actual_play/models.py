@@ -16,11 +16,11 @@ class GameGroup(models.Model):
     status = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
 
-        super(GameGroup, self).save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -39,11 +39,11 @@ class GameType(models.Model):
     modified_date = models.DateTimeField('modified date')
     slug = models.SlugField(blank=True, null=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
 
-        super(GameType, self).save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -53,11 +53,11 @@ class GameEra(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.name)
 
-        super(GameEra, self).save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -121,11 +121,11 @@ class Game(models.Model):
         return reverse('game', kwargs={'game_type': self.get_game_type(),
             'slug': self.slug})
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
 
-        super(Game, self).save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

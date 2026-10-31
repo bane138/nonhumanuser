@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="section-heading">
-	<img src="{% static "images/" %}{{ section.name }}.png" />
+	<img src="{% static "images/"|add:section.name|add:".png" %}" />
 </div>
 {% for entry in blog %}
 <div class="content">

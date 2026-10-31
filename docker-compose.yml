@@ -1,46 +1,49 @@
-version: '3'
+# Production stack: Postgres + Django/Gunicorn + Caddy (automatic HTTPS).
 services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   web:
-    build: ./docker
-    container_name: nhu
-    volumes:
-    - .:/code
-    - static:/code/static_cdn
-    - media:/code/media_cdn
-    depends_on:
-      - postgres
-    expose:
-      - 8080
-    command: bash -c 'python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 nonhumanuser.wsgi -b 0.0.0.0:8080'
-
-  postgres:
-    build: ./docker/postgres
+    build: .
     restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    depends_on:
+      db:
+        condition: service_healthy
     expose:
-      - '5432'
-    environment:  # used by init script
-      LC_ALL: C.UTF-8
-      POSTGRES_USER: webboss
-      POSTGRES_PASSWORD: NHU#lanfear138
-      POSTGRES_DB: nonhumanuser
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - "8000"
 
-  nginx:
-    restart: always
-    build: ./docker/nginx
-    volumes:
-      - ./nginx/:/etc/nginx/conf.d
-      - ./logs/:/code/logs
-      - static:/code/static_cdn
-      - media:/code/media_cdn
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${DOMAIN}
     ports:
-      - '1221:80'
-    links:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
       - web
 
 volumes:
-  pgdata:
-  media:
-  static:
+  postgres_data:
+  caddy_data:
+  caddy_config:

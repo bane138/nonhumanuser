@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="section-heading">
-	<img src="{% static "images/" %}{{ section.name }}.png" />
+	<img src="{% static "images/"|add:section.name|add:".png" %}" />
 </div>
 <div class="content">
 	{% for stack in stacks %}
@@ -21,7 +21,7 @@
 			<h2 class="{{ icon_class }}">{{ item.title }}</h2>
 			<div>{{ item.body|safe }}</div>
 			{% if item.resource %}
-				<div><a href="/media/{{ item.resource.name }}" class="btn btn-primary">View / Download {{ item.title }}</a></div>
+				<div><a href="{{ item.resource.url }}" class="btn btn-primary">View / Download {{ item.title }}</a></div>
 			{% endif %}
 			<div><small>{{ item.created_date }}</small></div>
 		</div>

@@ -44,11 +44,11 @@ class Entry(models.Model):
         else:
             return 'sm_icon_class_articles'
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.title)
 
-        super(Entry, self).save()
+        super().save(*args, **kwargs)
 
     def get_category_name(self):
         name = 'blog'
