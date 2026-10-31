@@ -19,7 +19,7 @@ Without `AWS_*` settings, uploads are stored in `./media`.
 ## Deploying to a DigitalOcean droplet
 
 ### 1. AWS S3 bucket (for media)
-1. Create a bucket, e.g. `nonhumanuser-media`, in `us-east-2` (any region works; set `AWS_S3_REGION_NAME` to match).
+1. Create a bucket, e.g. `nonhumanuser-media`, in `us-west-2` (any region works; set `AWS_S3_REGION_NAME` to match).
 2. Under **Permissions → Block public access**, turn off "Block public access to buckets and objects granted through *new/any public bucket policies*". Leave the ACL blocks on.
 3. Add this bucket policy so media can be viewed publicly:
    ```json
