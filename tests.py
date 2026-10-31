@@ -78,3 +78,14 @@ def test_old_media_links_redirect_to_storage(client, settings, old_url, name):
 
 def test_models_match_migrations():
     call_command("makemigrations", "--check", "--dry-run", verbosity=0)
+
+
+def test_youtube_embed_sends_referrer(client, content):
+    # YouTube refuses to play embeds that arrive without a referrer ("Watch on YouTube" only),
+    # and the site-wide Referrer-Policy is same-origin, so the iframe must opt in.
+    game = content["game"]
+    game.video_url_ogv = "0zk2VG8GlPE"
+    game.save()
+    body = client.get(game.get_absolute_url()).content.decode()
+    assert 'src="https://www.youtube.com/embed/0zk2VG8GlPE"' in body
+    assert 'referrerpolicy="strict-origin-when-cross-origin"' in body
