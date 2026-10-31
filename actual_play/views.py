@@ -5,13 +5,9 @@ from django.utils import timezone
 from actual_play.models import GameGroup, Game, GameType
 from actual_play.forms import GameCommentForm
 from nonhumanuser.utils import *
-from nonhumanuser import settings
-from wsgiref.util import FileWrapper
-from django.utils.encoding import smart_str
+from django.core.files.storage import default_storage
 from actual_play.models import GameComment
-import mimetypes
 import datetime
-import os
 
 # Create your views here.
 class IndexView(View):
@@ -145,25 +141,11 @@ class GameView(View):
 
 
 class GameResourceView(View):
+        """Old /media/actual_play/audio|video/... links: redirect to the file in media storage."""
         def get(self, request, *args, **kwargs):
-                if 'mp3' in self.kwargs['filename'] or 'ogg' in self.kwargs['filename']:
-                        _type = 'audio/'
-                else:
-                        _type = 'video/'
-
-                # TODO: Add S3 path
-                file_path = settings.MEDIA_ROOT + '/actual_play/' + _type + '/' \
-                + self.kwargs['year'] + '/' + self.kwargs['month'] + '/'\
-                 + self.kwargs['day'] + \
-                '/' + self.kwargs['filename']
-                file_wrapper = FileWrapper(open(file_path, 'rb'))
-                file_mimetype = mimetypes.guess_type(file_path)
-                response = HttpResponse(file_wrapper, content_type=file_mimetype)
-                response['X-Sendfile'] = file_path
-                response['Content-Length'] = os.stat(file_path).st_size
-                response['Content-Diposition'] = 'attachment; filename=%s'\
-                 % smart_str(self.kwargs['filename'])
-                return response
+                kind = 'audio' if self.kwargs['filename'].endswith(('.mp3', '.ogg')) else 'video'
+                name = 'actual_play/{kind}/{year}/{month}/{day}/{filename}'.format(kind=kind, **self.kwargs)
+                return HttpResponseRedirect(default_storage.url(name))
 
 
 class GameCommentView(View):

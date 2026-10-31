@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
 from django.utils.decorators import method_decorator
@@ -160,5 +159,4 @@ class SearchView(View):
 
         context['query_string'] = query_string
         context['found_entries'] = found_entries
-        return render(request, self.template, 
-            context, context_instance=RequestContext(request))
+        return render(request, self.template, context)

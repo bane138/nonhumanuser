@@ -2,12 +2,8 @@ from django.shortcuts import render
 from django.views.generic import View
 from library.models import Item, Stack, ItemComment
 from library.forms import ItemCommentForm
-from nonhumanuser import settings
-import os
-import mimetypes
+from django.core.files.storage import default_storage
 from django.http import HttpResponse, HttpResponseRedirect
-from wsgiref.util import FileWrapper
-from django.utils.encoding import smart_str
 from nonhumanuser.utils import *
 import datetime
 
@@ -98,21 +94,10 @@ class ItemView(View):
 
 
 class ItemResourceView(View):
+	"""Old /media/library/item/... links: redirect to the file in media storage."""
 	def get(self, request, *args, **kwargs):
-		if not 'HTTP_USER_AGENT' in request.META \
-		or u'WebKit' in request.META['HTTP_USER_AGENT']:
-			pass
-		file_path = settings.MEDIA_ROOT + '/library/item/' + self.kwargs['year'] + \
-		'/' + self.kwargs['month'] + '/' + self.kwargs['day'] + '/' + \
-		self.kwargs['filename']
-		file_wrapper = FileWrapper(open(file_path, 'rb'))
-		file_mimetype = mimetypes.guess_type(file_path)
-		response = HttpResponse(file_wrapper, content_type=file_mimetype)
-		response['X-Sendfile'] = file_path
-		response['Content-Length'] = os.stat(file_path).st_size
-		response['Content-Diposition'] = 'attachment; filename="%s"' \
-		% smart_str(self.kwargs['filename'])
-		return response
+		name = 'library/item/{year}/{month}/{day}/{filename}'.format(**self.kwargs)
+		return HttpResponseRedirect(default_storage.url(name))
 
 
 class ItemCommentView(View):

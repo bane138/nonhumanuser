@@ -14,11 +14,11 @@ class Stack(models.Model):
 	modified_date = models.DateTimeField()
 	slug = models.SlugField(blank=True, null=True)
 
-	def save(self):
+	def save(self, *args, **kwargs):
 		if not self.id:
 			self.slug = slugify(self.name)
 
-		super(Stack, self).save()
+		super().save(*args, **kwargs)
 
 	def __str__(self):
 		return self.name
@@ -50,11 +50,11 @@ class Item(models.Model):
 	resource = models.FileField(upload_to='library/item/%Y/%m/%d', blank=True, 
 		null=True)
 
-	def save(self):
+	def save(self, *args, **kwargs):
 		if not self.id:
 			self.slug = slugify(self.title)
 
-		super(Item, self).save()
+		super().save(*args, **kwargs)
 
 	@property
 	def sidebar_icon_class(self):

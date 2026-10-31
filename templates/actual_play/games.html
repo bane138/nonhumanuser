@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="section-heading">
-	<img src="{% static "images/" %}{{ section.name }}.png" />
+	<img src="{% static "images/"|add:section.name|add:".png" %}" />
 </div>
 <section class="content">
 <h1>{{ game_type }} Games</h1>

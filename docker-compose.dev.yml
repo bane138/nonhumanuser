@@ -1,0 +1,41 @@
+# Local development: live-reloading runserver, local media storage, no Caddy.
+# Usage: docker compose -f docker-compose.dev.yml up --build
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: nonhumanuser
+      POSTGRES_USER: nonhumanuser
+      POSTGRES_PASSWORD: devpassword
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nonhumanuser -d nonhumanuser"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: .
+      args:
+        REQUIREMENTS: requirements-dev.txt
+    command: python manage.py runserver 0.0.0.0:8000
+    # Optional .env supplies AWS_* settings so dev uploads go to S3; the values below take precedence.
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DEBUG: "1"
+      DATABASE_URL: postgres://nonhumanuser:devpassword@db:5432/nonhumanuser
+      ALLOWED_HOSTS: "*"
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_dev_data:
