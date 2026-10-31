@@ -147,6 +147,7 @@ USE_L10N = True
 #TODO Eventually change this to True and use django.utils.timezone.now() instead of datetime.datetime.now() everywhere
 USE_TZ = False
 
+<<<<<<< Updated upstream
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -165,6 +166,40 @@ MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaw
 
 # Markdown
 #MARKDOWN_EDITOR_SKIN = 'simple'
+=======
+# Static files are baked into the image and served by WhiteNoise.
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Uploaded media goes to S3 when a bucket is configured, otherwise to local disk (dev).
+AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME", default="")
+if AWS_STORAGE_BUCKET_NAME:
+    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+    AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME", default="us-east-1")
+    # Link to the bucket's regional endpoint (or a CloudFront domain); the global
+    # bucket.s3.amazonaws.com address redirects for buckets outside us-east-1.
+    AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN", default="") or (
+        f"{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com"
+    )
+    AWS_LOCATION = "media"
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "public, max-age=31536000"}
+    DEFAULT_STORAGE_BACKEND = "storages.backends.s3.S3Storage"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"
+else:
+    DEFAULT_STORAGE_BACKEND = "django.core.files.storage.FileSystemStorage"
+    MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+STORAGES = {
+    "default": {"BACKEND": DEFAULT_STORAGE_BACKEND},
+    "staticfiles": {"BACKEND": "nonhumanuser.storage.LenientManifestStaticFilesStorage"},
+}
+>>>>>>> Stashed changes
 
 # Registration
 AUTH_PROFILE_MODULE = "app.Profile"
